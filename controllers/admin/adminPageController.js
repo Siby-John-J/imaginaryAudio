@@ -31,13 +31,28 @@ module.exports.customers = (req, res) => {
 }
 
 module.exports.products = (req, res) => {
+    let totalProd = 0
+    let outofStock = 0
+    let category = 0
+
     console.log(req.body)
     if(!isadminlogin) {
         res.redirect('/admin/login')
     } else {
         itemmodel.find({}).then(data => {
-            res.render('pages/admin/mainpage', {page: "products", data: data})
+            calculate().then(data1 => {
+                console.log(data)
+                res.render('pages/admin/mainpage', {page: "products", data: data, countes: data1})
+            })
         })
+    }
+    // calculate()
+
+    async function calculate() {
+        let totalProd = await itemmodel.find({}).count()
+        let category = await categorymodel.find({}).count()
+
+        return [totalProd, category]
     }
 }
 

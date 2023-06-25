@@ -1,6 +1,7 @@
 const { Router } = require('express')
 const { adminLogin, adminAuth, adminLogout } = require('../controllers/admin/adminLoginController')
 const { dashboard, customers, products, category, addProduct, authProduct, setCategory } = require('../controllers/admin/adminPageController')
+const { deleteProduct } = require('../controllers/admin/productController')
 // const dashboardRoute = require('./dashboardRoute')
 const router = Router()
 
@@ -28,5 +29,7 @@ router.post('/setcat', setCategory)
 router.post('/authproduct', authProduct)
 
 router.post('/products', products)
+
+router.post('/deleteproduct', deleteProduct)
 
 module.exports = router

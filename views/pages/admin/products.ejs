@@ -14,7 +14,7 @@
             <div class="all-info">
                 <div class="total">
                     <label class="tl">total products</label>
-                    <label class="ct">12</label>
+                    <label class="ct"><%= countes[0]%></label>
                 </div>
                 <div class="stock">
                     <label class="tl">out of stock</label>
@@ -22,15 +22,13 @@
                 </div>
                 <div class="cat">
                     <label class="tl">catagories</label>
-                    <label class="ct">4</label>
+                    <label class="ct"><%= countes[1]%></label>
                 </div>
             </div>
             <div class="edit-options">
                 <a href="/admin/addproduct">add product</a>
-                <form action="/admin/products" method="post">
-                    <!-- <input type="checkbox" value="select" name="check" id="cBox"> -->
-                    <button type="submit">delete product</button>
-                </form>
+                <!-- <input type="checkbox" value="select" name="check" id="cBox"> -->
+                <!-- <button type="submit">delete product</button> -->
             </div>
         </div>
         <div class="search-and-filter">
@@ -72,20 +70,23 @@
                 <label>Price</label>
                 <label>Inventory</label>
                 <label>Status</label>
-                <label>Date-Added</label>
+                <label>Date-Added</la   bel>
             </div>
-            <% for(let i = 0; i < data.length; i++) { %>
-                <div class="users-list-content">
-                    <input type="checkbox" value="select" name="check" id="cBox">
-                    <label class="p-name"><%= data[i].name %></label>
-                    <label class="p-cat"><%= data[i].category %></label>
-                    <label class="p-price"><%= '$' + data[i].price %></label>
-                    <label><%= data[i].stock %></label>
-                    <label class="p-stat"><%= data[i].status %></label>
-                    <label><%= data[i].date %></label>
-                </div>
-            <% } %>
+            <form action="/admin/deleteproduct" method="post">
+                <button type="submit">delete product</button>
+                <% for(let i = 0; i < data.length; i++) { %>
+                    <div class="users-list-content">
+                        <input type="checkbox" value="<%= data[i].name %>" name="check" id="cBox">
+                        <label class="p-name"><%= data[i].name %></label>
+                        <label class="p-cat"><%= data[i].category %></label>
+                        <label class="p-price"><%= '$' + data[i].price %></label>
+                        <label><%= data[i].stock %></label>
+                        <label class="p-stat"><%= data[i].status %></label>
+                        <label><%= data[i].date %></label>
+                    </div>
+                    <% } %>
+                </form>
+            </div>
         </div>
-    </div>
-</body>
-</html>
+    </body>
+    </html>

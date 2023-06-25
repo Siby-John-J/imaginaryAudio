@@ -154,3 +154,9 @@ input[type="checkbox"] {
     right: 20px;
 }
 
+
+form button {
+    position: relative;
+    bottom: 13em;
+    left: 71em;
+}
