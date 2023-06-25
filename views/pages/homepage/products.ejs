@@ -16,14 +16,15 @@
             <a href="">monitors</a>
         </div>
         <div class="products">
-            <% for(let i = 0; i < 3; i++) { %>
+            <% for(let i in data) { %>
                 <div class="session-1">
-                    <% for(let j = 0; j < 5; j++) { %>
+                    <% for(let j of data[i]) { %>
                         <div class="pro">
-                            <a href="/">
-                                <img class="pro-img" src="/img/products/Beyerdynamic-DT-990-Pro.jpg" alt="">
-                                <label class="name">Beyerdymamic-DT-990-Pro</label>
-                                <label class="pr">$190</label>
+                            <a href="/home" class="prod-content">
+                                <img class="pro-img"
+                                src="/img/products/<%= j['image'] %>" alt="no img found">
+                                <label class="name"><%= j['name'] %></label>
+                                <label class="pr"><%= '$' + j['price'] %></label>
                             </a>
                         </div>
                     <% } %>

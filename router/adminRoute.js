@@ -27,4 +27,6 @@ router.get('/logout', adminLogout)
 router.post('/setcat', setCategory)
 router.post('/authproduct', authProduct)
 
+router.post('/products', products)
+
 module.exports = router

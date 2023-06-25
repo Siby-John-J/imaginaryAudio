@@ -25,14 +25,13 @@ module.exports.customers = (req, res) => {
         res.redirect('/admin/login')
     } else {
         usermodel.find({}, {}).then(data => {
-            // console.log(data)
             res.render('pages/admin/mainpage', {page: "customers", content: data})
         })
     }
 }
 
 module.exports.products = (req, res) => {
-    console.log(isadminlogin)
+    console.log(req.body)
     if(!isadminlogin) {
         res.redirect('/admin/login')
     } else {
@@ -60,7 +59,6 @@ module.exports.addProduct = (req, res) => {
 }
 
 module.exports.setCategory = (req, res) => {
-    console.log(req.body)
     if(req.body.addcat === '') {
         // res.redirect('/admin/category')
     } else if(req.body.action || req.body.control) {
@@ -130,11 +128,13 @@ module.exports.authProduct = (req, res) => {
         res.redirect('/admin/products')
     }
     accessToimg(formats)
+    // console.log(req.body)
 
     itemmodel.insertMany([{
         name: req.body.pname,
         price: Number(req.body.pprice),
         category: req.body.pcat,
+        image: req.body.imageUpload,
         description: req.body.pdesc,
         date: newdate,
         stock: req.body.pstock,

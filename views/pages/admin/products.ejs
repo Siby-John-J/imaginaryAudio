@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/admin/productStyle.css">
+    <script defer src="/js/deleteProduct.js"></script>
     <title>products</title>
 </head>
 <body>
@@ -26,7 +27,10 @@
             </div>
             <div class="edit-options">
                 <a href="/admin/addproduct">add product</a>
-                <a href="">delete product</a>
+                <form action="/admin/products" method="post">
+                    <!-- <input type="checkbox" value="select" name="check" id="cBox"> -->
+                    <button type="submit">delete product</button>
+                </form>
             </div>
         </div>
         <div class="search-and-filter">
@@ -72,7 +76,7 @@
             </div>
             <% for(let i = 0; i < data.length; i++) { %>
                 <div class="users-list-content">
-                    <input type="checkbox" name="" id="">
+                    <input type="checkbox" value="select" name="check" id="cBox">
                     <label class="p-name"><%= data[i].name %></label>
                     <label class="p-cat"><%= data[i].category %></label>
                     <label class="p-price"><%= '$' + data[i].price %></label>
