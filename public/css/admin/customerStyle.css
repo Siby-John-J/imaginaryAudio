@@ -1,0 +1,138 @@
+
+
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.join {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+input[type="text"] {
+    padding-right: 40px;
+    height: 42px;
+    width: 27em;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 1px 6px 9px 0px #818181;
+    outline: none;
+}
+
+button {
+    position: absolute;
+    top: 85px;
+    right: 17.6em;
+    height: 29%;
+    padding: 6px 33px;
+    border-radius: 10px;
+    border: none;
+    background-color: black;
+    color: blue;
+    font-size: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.users-list {
+    height: 80vh;
+    width: 79vw;
+    /* background-color: rgb(106, 56, 56); */
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+.search {
+    margin-left: 30em;
+}
+
+.title {
+    width: 90%;
+    height: 4em;
+    background-color: rgb(138, 138, 138);
+    margin-top: 35px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.users {
+    /* background-color: red; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.user1 {
+    border: 1px solid black;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: white;
+    margin-top: 40px;
+    width: 72vw;
+}
+
+.user1:hover {
+    color: white;
+    background-color: blue;
+    border: none;
+    box-shadow: 1px 4px 14px 0px black;
+    cursor: pointer;
+}
+
+.a1 {
+    flex-grow: 1;
+    margin-left: 78px;
+}
+
+.a2, .a3, .a4, .a5 {
+    flex-grow: 1;
+}
+
+.a3 {
+    flex-grow: 2;
+    margin-left: 20px;
+}
+
+.a5 {
+    /* flex-grow: ; */
+    margin-left: 20px;
+    position: relative;
+    left: 26px;
+}
+
+.a6 {
+    flex-grow: 2;
+}
+
+.pp {
+    flex-grow: 1;
+    margin-left: 78px;
+}
+
+.pb {
+    flex-grow: 1;
+    /* margin-left: 78px; */
+}
+
+.p-l {
+    flex-grow: 2;
+}
+
+/* .customers-main {
+    display: flex;
+    flex-direction: column;
+} */
+
+label {
+    font-weight: 600;
+}

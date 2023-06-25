@@ -1,0 +1,156 @@
+
+
+body {
+    font-family: sans-serif;
+}
+
+h1 {
+    font-size: 37px;
+    margin-left: 107px;
+}
+
+.all-info {
+    /* background-color: gray; */
+    height: 6em;
+    width: 60vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 3em;
+}
+
+.total, .stock, .cat {
+    border-right: 2px solid rgb(126, 126, 126);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    padding-right: 153px;
+}
+
+.cat {
+    border: none;
+}
+
+.tl {
+    font-size: 24px;
+}
+
+.ct {
+    font-size: 3em;
+    color: blue;
+}
+
+.edit-options {
+    /* background-color: green; */
+    height: 10em;
+    width: 10em;
+    display: flex;
+    flex-direction: column;
+}
+
+.edits-titles {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.edit-options a {
+    font-size: 18px;
+    background-color: blue;
+    border-radius: 31px;
+    padding: 13px;
+}
+
+/* search and filter */
+
+.search-and-filter {
+    height: 60px;
+    width: 73vw;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+input, select {
+    border-radius: 20px;
+    border: none;
+    height: 2em;
+    outline: none;
+}
+
+select {
+    box-shadow: 1px 1px 3px 0px;
+    background-color: white;
+    padding: 0 12px;
+    margin-left: 10px;
+}
+
+.search-main input {
+    width: 20vw;
+    border: 1px solid black;
+    padding-left: 10px;
+}
+
+/* users list */
+
+.users-list-main {
+    /* background-color: rgb(185, 186, 187); */
+    width: 68vw;
+    height: 58vh;
+    margin-left: 59px;
+}
+
+.users-list-title {
+    background-color: blue;
+    width: 100%;
+    height: 63px;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    color: white;
+    font-size: 1.2em;
+}
+
+.users-list-content {
+    box-shadow: 2px 1px 9px 0px gray;
+    height: 53px;
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.users-list-content:hover {
+    border-left: 5px solid blue;
+    width: 99.5%;
+    /* transform: scale(2); */
+}
+
+.users-list-content label{
+    flex-grow: 2;
+}
+
+input[type="checkbox"] {
+    flex-grow: 1;
+}
+
+.p-name {
+    margin-left: 20px;
+}
+
+.p-price {
+    position: relative;
+    right: 30px;
+}
+
+.p-cat {
+    position: relative;
+    right: 20px;
+}
+

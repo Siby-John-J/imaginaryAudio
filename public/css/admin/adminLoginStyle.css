@@ -1,0 +1,48 @@
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: rgb(61, 60, 60);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30vh;
+}
+
+form {
+    width: 34em;
+    height: 20em;
+    display: flex;
+    background-color: rgb(0, 61, 184);
+    border-radius: 10px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.inps {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    margin-bottom: 35px;
+    border: none;
+    outline: none;
+    height: 30px;
+    width: 23em;
+    padding-left: 15px;
+}
+
+button {
+    background-color: black;
+    color: blue;
+    font-size: 23px;
+    height: 51px;
+    width: 8em;
+    border: none;
+    border-radius: 15px;
+    margin-bottom: 30px;
+}

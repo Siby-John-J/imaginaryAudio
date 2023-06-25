@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/admin/addproductStyle.css">
+    <title>add category</title>
+</head>
+<body>
+    <h1>Create Product</h1>
+    <form action="/admin/authproduct" method="post">
+        <div class="addproduct-main">
+            <div class="image-field">
+                <div class="main-img">
+                    <button class="btn">upload img</button>
+                    <input type="file" name="imageUpload">
+                </div>
+                <div class="button-container">
+                    <div class="upload-btn-wrapper">
+                      <button class="btn upload-btn">Upload 1</button>
+                      <input type="file" name="myfile1" id="myfile1" />
+                    </div>
+                    <div class="upload-btn-wrapper">
+                      <button class="btn upload-btn">Upload 2</button>
+                      <input type="file" name="myfile2" id="myfile2" />
+                    </div>
+                    <div class="upload-btn-wrapper">
+                      <button class="btn upload-btn">Upload 3</button>
+                      <input type="file" name="myfile3" id="myfile3" />
+                    </div>
+                    <div class="upload-btn-wrapper">
+                      <button class="btn upload-btn">Upload 4</button>
+                      <input type="file" name="myfile4" id="myfile4" />
+                    </div>
+                  </div>
+            </div>
+            <input type="text" name="pname" placeholder="Product name">
+            <!-- <input type="text" name="pcat" placeholder="Product category"> -->
+            <select name="pcat">
+              <% for(let i = 0; i < data.length; i++) { %>
+                <% let name = data[i].name %> 
+                <option value="<%= name %>"><%= name %></option>
+              <% } %>
+            </select>
+            <input type="text" name="pprice" placeholder="Product price">
+            <input type="text" name="pstock" placeholder="Stock">
+            <input class="desc" type="text" name="pdesc" placeholder="Description">
+            <div class="btns">
+                <form action="">
+                    <button>Create</button>
+                    <button>Cancel</button>
+                </form>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

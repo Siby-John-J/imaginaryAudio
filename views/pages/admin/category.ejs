@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/admin/categoryStyle.css">
+    <!-- <script src="/js/addCategoryPopup.js"></script> -->
+    <title>Category</title>
+</head>
+<body>
+    <div class="cat-top">
+        <h1>Category</h1>
+        <div>
+            <form action="/admin/setcat" method="post">
+                <!-- <a id="click" href="/admin/category" value="addCategory">Add Category</a> -->
+                <input type="text" name="addcat">
+                <button value="adding">Add category</button>
+                <!-- <input type="text" value=""> -->
+            </form>
+        </div>
+    </div>
+    <div class="category-main">
+        <div class="category-title">
+            <label>#</label>
+            <label>Name</label>
+            <label>Total items</label>
+            <label>Status</label>
+            <label>Actions</label>
+        </div>
+        <% for(let i = 0; i < data.length; i++) { %>
+            <div class="category-lists">
+                <label><%= i %></label>
+                <label style="position: relative; right: 30px;"><%= data[i].name %></label>
+                <div class="stock-control">
+                    <form action="/admin/setcat" method="post">
+                        <button name="action" value="<%= [data[i].name,'min'] %>" value="min">-</button>
+                        <label><%= data[i].stock %></label>
+                        <button name="action" value="<%= [data[i].name, 'max'] %>">+</button>
+                    </form>
+                </div>
+                <label>
+                    <% if(data[i].active) { %>
+                        <%= 'enable' %>
+                    <% } else { %>
+                        <%= 'disable' %>
+                    <% } %>
+                </label>
+                <label class="actions">
+                    <form action="/admin/setcat" method="post">
+                        <button name="control" value="<%= [data[i].name, 'edit'] %>" 
+                            class="cat-edit" style="font-size: 15px;">edit</button>
+                        <button name="control" value="<%= [data[i].name, 'delete'] %>" 
+                            class="cat-del" style="font-size: 15px;">del</button>
+                    </form>
+                    <!-- edit -->
+                </label>
+            </div>
+        <% } %>
+    </div>
+    <!-- <script defer>
+        const a = document.getElementById('click')
+
+        function popup() {
+            alert('hello world')
+        }
+    </script> -->
+</body>
+</html>

@@ -1,0 +1,126 @@
+
+
+body {
+    font-family: sans-serif;
+}
+
+.cat-top {
+    width: 79.2vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 2em;
+}
+
+.cat-top a {
+    font-size: 29px;
+    font-family: sans-serif;
+    background-color: blue;
+    color: white;
+    padding: 13px;
+    border-radius: 15px;
+}
+
+.cat-top div {
+    margin-right: 50px;
+}
+
+.cat-top h1 {
+    margin-left: 50px;
+}
+
+.category-main {
+    width: 70vw;
+    height: 74vh;
+    margin-left: 4.4em;
+}
+
+.category-title {
+    background-color: rgb(81, 81, 92);
+    width: 100%;
+    height: 4em;
+    margin-top: 2em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+}
+
+.category-title label {
+    color: white;
+    font-size: 1.6em;
+}
+
+.category-lists {
+    width: 100%;
+    height: 4em;
+    /* background-color: royalblue; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 2px solid black;
+}
+
+.category-lists:hover {
+    border-color: blue;
+}
+
+.category-lists .actions {
+    width: 4em;
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.cat-del {
+    background-color: red;
+}
+
+.cat-edit {
+    background-color: rgb(0, 255, 0);
+}
+
+.cat-del, .cat-edit {
+    height: 22px;
+    width: 49px;
+    border-radius: 20px;
+}
+
+/* plus and min stock */
+
+.stock-control {
+    /* background-color: red; */
+    display: flex;
+    flex-direction: row;
+    height: 37px;
+    width: 92px;
+    justify-content: space-evenly;
+}
+
+.stock-control label {
+    color: black;
+    position: relative;
+    top: 5px;
+    left: -2px;
+}
+
+.stock-control button {
+    font-size: 20px;
+    position: relative;
+    color: black;
+    top: 5px;
+    height: 27px;
+    width: 25px;
+    border-radius: 9px;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.stock-control button:hover {
+    box-shadow: 2px 2px 2px 2px rgb(166, 172, 240);
+}

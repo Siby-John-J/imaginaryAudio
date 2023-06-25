@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/home/productStyle.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="full-prod">
+        <div class="types">
+            <a href="">monitors</a>
+            <a href="">monitors</a>
+            <a href="">monitors</a>
+            <a href="">monitors</a>
+            <a href="">monitors</a>
+        </div>
+        <div class="products">
+            <% for(let i = 0; i < 3; i++) { %>
+                <div class="session-1">
+                    <% for(let j = 0; j < 5; j++) { %>
+                        <div class="pro">
+                            <a href="/">
+                                <img class="pro-img" src="/img/products/Beyerdynamic-DT-990-Pro.jpg" alt="">
+                                <label class="name">Beyerdymamic-DT-990-Pro</label>
+                                <label class="pr">$190</label>
+                            </a>
+                        </div>
+                    <% } %>
+                </div>
+            <% } %>
+        </div>
+        <div>
+            <button class="show-more">Show More</button>
+        </div>
+    </div>
+</body>
+</html>

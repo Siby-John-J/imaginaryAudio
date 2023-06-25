@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/loginStyle.css">
+    <title>login</title>
+</head>
+<body>
+    <form action="/auth" method="post">
+        <% if(type === 'otp') { %>
+            <h1>Enter your phone number</h1>
+            <label for="" style="position: relative; bottom: 20px;">
+                We will send to a four digit verification code
+            </label>
+            <input type="text" name="phoneNum" placeholder="phonenumber">
+            <button>Generate OTP</button>
+            <a href="/">Login with email</a>
+
+        <% } else if(type === 'email') { %>
+            <h1>Welcome Back</h1>
+            <input type="email" name="email" placeholder="Email">
+            <input type="password" name="password" placeholder="Password">
+            <a href="/enter_email" class="forget-p">forgot Password?</a>
+            <button>Login</button>
+            <a href="/otp_auth">Login with OTP?</a>
+            
+        <% } else if(type === 'email-send') { %>
+            <h1>Enter email</h1>
+            <input type="email" name="email" placeholder="Email">
+            <label for="">Were send a link in your email</label>
+            <button>Send</button>
+        <a href="/otp_auth">Login with OTP?</a>
+        
+        <% } else if(type === 'enter-otp' || type === 'otp-resend') { %>
+            <h1>Enter the OTP</h1>
+            <!-- <input type="email" name="email" placeholder="Email"> -->
+            <% if(type === 'otp-resend') { %>
+                <label for="" style="margin-bottom: 10px;">
+                    <label id="countdown-title">OTP will be expired in</label>
+                    <label id="countdown" style="color: rgb(94, 94, 215);"></label>
+                </label>
+            <% } %>
+            
+            <label for="">Enter the otp were send to
+                <em><%= ph %></em>
+            </label>
+            
+            <input id="otpEnter" type="text" name="otp" placeholder="Enter OTP">
+            <button>Verify</button>
+            <label>Didn't get OTP?
+                <a href="/otp_resend">Resend</a>
+            </label>
+
+        <% } else if(type === 'check-email') { %>
+            <h1>Email sended</h1>
+            <label for="">Please check your email <%= email%></label>
+            <label for="">didn't get the email?
+                <a href="/email_resend">Resend</a> <!-- add the right router in href -->
+            </label>
+        <% } else { %>
+            <h1>Enter new Password</h1>
+            <!-- <input type="email" name="email" placeholder="Email"> -->
+            <input type="password" name="password" placeholder="Enter Password">
+            <input type="password" name="password" placeholder="Config Password">
+            <!-- <a href="/" class="forget-p">forgot Password?</a> -->
+            <button>Reset</button>
+        <% } %>
+        <label for="">Dont have an Account?
+            <a href="/signup">Sign up</a>
+        </label>
+    </form>
+    <script>
+        function countdown(seconds) {
+            if (seconds < 0) {
+                document.getElementById("countdown").textContent = "otp expired"
+                document.getElementById("countdown-title").textContent = ""
+                return
+            }
+            
+            document.getElementById("countdown").textContent = '0:' + seconds
+            setTimeout(() => countdown(seconds - 1), 1000)
+        }
+        
+        // document.getElementById('')
+        countdown(59)
+    </script>
+    <!-- <script defer href="/js/otpCountDown.js"></script> -->
+</body>
+</html>

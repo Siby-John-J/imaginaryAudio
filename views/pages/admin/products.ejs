@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/admin/productStyle.css">
+    <title>products</title>
+</head>
+<body>
+    <div class="main-products">
+        <h1>Product inventory</h1>
+        <div class="edits-titles">
+            <div class="all-info">
+                <div class="total">
+                    <label class="tl">total products</label>
+                    <label class="ct">12</label>
+                </div>
+                <div class="stock">
+                    <label class="tl">out of stock</label>
+                    <label class="ct">3</label>
+                </div>
+                <div class="cat">
+                    <label class="tl">catagories</label>
+                    <label class="ct">4</label>
+                </div>
+            </div>
+            <div class="edit-options">
+                <a href="/admin/addproduct">add product</a>
+                <a href="">delete product</a>
+            </div>
+        </div>
+        <div class="search-and-filter">
+            <div class="cat-main">
+                <label for="">Catagory</label>
+                <!-- <input type="submit"> -->
+                <select>
+                    <option value="option1">Option 1</option>
+                    <option value="option2">Option 2</option>
+                    <option value="option3">Option 3</option>
+                </select>
+            </div>
+            <div class="price-main">
+                <label for="">Price</label>
+                <!-- <input type="submit"> -->
+                <select>
+                    <option value="option1">Option 1</option>
+                    <option value="option2">Option 2</option>
+                    <option value="option3">Option 3</option>
+                </select>
+            </div>
+            <div class="search-main">
+                <input type="search">
+            </div>
+            <div class="sort-main">
+                <label for="">Sort</label>
+                <!-- <input type="submit"> -->
+                <select>
+                    <option value="option1">Option 1</option>
+                    <option value="option2">Option 2</option>
+                    <option value="option3">Option 3</option>
+                </select>
+            </div>
+        </div>
+        <div class="users-list-main">
+            <div class="users-list-title">
+                <label>Product name</label>
+                <label>Category</label>
+                <label>Price</label>
+                <label>Inventory</label>
+                <label>Status</label>
+                <label>Date-Added</label>
+            </div>
+            <% for(let i = 0; i < data.length; i++) { %>
+                <div class="users-list-content">
+                    <input type="checkbox" name="" id="">
+                    <label class="p-name"><%= data[i].name %></label>
+                    <label class="p-cat"><%= data[i].category %></label>
+                    <label class="p-price"><%= '$' + data[i].price %></label>
+                    <label><%= data[i].stock %></label>
+                    <label class="p-stat"><%= data[i].status %></label>
+                    <label><%= data[i].date %></label>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/admin/mainpageStyle.css">
+    <title>dashboard</title>
+</head>
+<body>
+    <div class="main-body">
+        <div class="content-list">
+            <a href="/admin/dashboard">Dashboard</a>
+            <a href="/admin/customers">Customers</a>
+            <a href="/admin/products">Products</a>
+            <a href="/admin/category">Category</a>
+            <a href="">Orders</a>
+            <a href="">Coupon</a>
+            <a href="">Settings</a>
+            <a href="/admin/logout" style="color: red;">Logout</a>
+            <!-- <a href="">dashboard</a> -->
+        </div>
+        
+        <% if(page === "dashboard") { %>
+            <div class="dashboard-page">
+                <%- include('./dashboard') %>
+            </div>
+        <% } else if(page === "customers") { %>
+            <div class="customers-page">
+                <%- include('./customers') %>
+            </div>
+        <% } else if(page === "products") { %>
+            <div class="products-page">
+                <%- include('./products') %>
+            </div>
+        <% } else if(page === "category") { %>
+            <div class="category-page">
+                <%- include('./category') %>
+            </div>
+        <% } %>
+    </div>
+</body>
+</html>
