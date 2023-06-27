@@ -124,3 +124,9 @@ body {
 .stock-control button:hover {
     box-shadow: 2px 2px 2px 2px rgb(166, 172, 240);
 }
+
+.status a {
+    padding: 5px;
+    color: black;
+    font-size: 16px;
+}

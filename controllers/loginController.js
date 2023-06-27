@@ -31,7 +31,6 @@ module.exports.forgetPassword = (req, res) => {
 
 module.exports.resendOtp = (req, res) => {
     sendSMS(ph, otp + ' is your otp from imaginaryAudio')
-    console.log(otp)
 
     expired = false
     function countdown(seconds) {
@@ -49,7 +48,6 @@ module.exports.resendOtp = (req, res) => {
 
 module.exports.checkEmail = (req, res) => {
     authEmail(email, subject, html)
-    console.log('resended..')
     res.render('pages/login', {type: 'check-email', email: email})
 }
 
@@ -69,7 +67,8 @@ module.exports.auth = (req, res) => {
         email = req.body.email
         subject = 'Password reset link from imaginaryAudio'
         html = 'click here to reset password http://localhost:2000/reset_password'
-        // authEmail(email, subject, html)
+
+        authEmail(email, subject, html)
         
         res.render('pages/login', {type: 'check-email', email: req.body.email})
     } else if('password' in req.body && typeof req.body.password === 'object'){

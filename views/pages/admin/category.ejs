@@ -33,17 +33,22 @@
                 <label style="position: relative; right: 30px;"><%= data[i].name %></label>
                 <div class="stock-control">
                     <form action="/admin/setcat" method="post">
-                        <button name="action" value="<%= [data[i].name,'min'] %>" value="min">-</button>
+                        <!-- <button name="action" value="<%= [data[i].name,'min'] %>" value="min">-</button> -->
                         <label><%= data[i].stock %></label>
-                        <button name="action" value="<%= [data[i].name, 'max'] %>">+</button>
+                        <!-- <button name="action" value="<%= [data[i].name, 'max'] %>">+</button> -->
                     </form>
                 </div>
-                <label>
-                    <% if(data[i].active) { %>
-                        <%= 'enable' %>
-                    <% } else { %>
-                        <%= 'disable' %>
-                    <% } %>
+                <label for="" class="staus">
+                        <a style="border-radius: 10px; padding: 5px; color: rgb(255, 255, 255); 
+                            font-size: 16px; background-color: <%= color%>;" 
+                            href="/admin/category?color=<%= color %>">
+                            <% if(color === 'green') { %>
+                                <%= 'enable' %>
+                            <% } else { %>
+                                <%= 'disable' %>
+                            <% } %>
+                        </a>
+                    <!-- <%  %> -->
                 </label>
                 <label class="actions">
                     <form action="/admin/setcat" method="post">

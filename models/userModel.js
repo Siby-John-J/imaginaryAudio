@@ -6,6 +6,7 @@ let UserSchema = mongoose.Schema({
     email: String,
     password: String,
     phone: Number,
+    status: Boolean,
     address: Array,
     wishlist: Array,
     cart: Array

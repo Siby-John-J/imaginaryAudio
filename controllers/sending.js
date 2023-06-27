@@ -1,5 +1,5 @@
 const { createTransport } = require('nodemailer')
-const twilo = require('twilio')('ACdddd60fd70a954677bea5dc34032a466', '06a43e9535e53a109122a7c12414563e')
+const twilo = require('twilio')('ACdddd60fd70a954677bea5dc34032a466', '18e28059f06ec6e86ff2793c14d7a534')
 
 const transport = createTransport({
     host: 'smtp-relay.sendinblue.com',
@@ -25,4 +25,5 @@ module.exports.sendSMS = (number, message) => {
         from: '+14178052162',
         to: '+91' + number
     })
+    // console.log(typeof number, message)
 }

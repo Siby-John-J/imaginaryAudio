@@ -22,7 +22,9 @@ router.get('/dashboard', dashboard)
 router.get('/customers', customers)
 router.get('/products', products)
 router.get('/addproduct', addProduct)
+
 router.get('/category', category)
+
 router.get('/logout', adminLogout)
 
 router.post('/setcat', setCategory)

@@ -21,6 +21,7 @@ module.exports.dashboard = (req, res) => {
 }
 
 module.exports.customers = (req, res) => {
+    console.log(req.query)
     if(!isadminlogin) {
         res.redirect('/admin/login')
     } else {
@@ -31,41 +32,105 @@ module.exports.customers = (req, res) => {
 }
 
 module.exports.products = (req, res) => {
-    let totalProd = 0
-    let outofStock = 0
-    let category = 0
-
-    console.log(req.body)
+    // console.log('here man')
     if(!isadminlogin) {
         res.redirect('/admin/login')
     } else {
         itemmodel.find({}).then(data => {
             calculate().then(data1 => {
-                console.log(data)
+                // console.log(data)
                 res.render('pages/admin/mainpage', {page: "products", data: data, countes: data1})
             })
         })
     }
-    // calculate()
-
+    calculate()
+    
     async function calculate() {
         let totalProd = await itemmodel.find({}).count()
         let category = await categorymodel.find({}).count()
-
+        
         return [totalProd, category]
     }
 }
 
-module.exports.category = (req, res) => {
-    let datas = []
-    if(!isadminlogin) {
-        res.redirect('/admin/login')
+module.exports.category = async (req, res) => {
+    let ar = [];
+  
+    if (!isadminlogin) {
+      res.redirect('/admin/login')
     } else {
-        categorymodel.find({}).then(data => {
-            res.render('pages/admin/mainpage', {page: "category", data: data})
-        })
+      try {
+        const catPromise = categorymodel.find({})
+        const itemPromise = itemmodel.aggregate([
+          { $group: { _id: '$category', totalStock: { $sum: '$stock' } } },
+          { $project: { _id: 0, totalStock: 1 } }
+        ])
+  
+        const [cat, item] = await Promise.all([catPromise, itemPromise])
+        
+        let j = 0;
+        await render();
+
+        async function render() {
+          for (let i of cat) {
+            console.log(item)
+            // categorymodel.findOneAndUpdate(
+            //   { name: i.name },
+            //   { $set: { stock: item[j].stock } }
+            // )
+            j++;
+          }
+        }
+  
+        const model = await categorymodel.find({});
+  
+        if (req.query.color === 'green') {
+          res.render('pages/admin/mainpage', { page: "category", data: model, color: 'red' });
+        } else {
+          res.render('pages/admin/mainpage', { page: "category", data: model, color: 'green' });
+        }
+      } catch (error) {
+        console.error(error);
+        // Handle the error accordingly, such as displaying an error page or sending an error response
+      }
     }
-}
+  }
+  
+
+// module.exports.category = async(req, res) => {
+//     let ar = [];
+
+//     if (!isadminlogin) {
+//         res.redirect('/admin/login');
+//     } else {
+//         const catPromise = categorymodel.find({});
+        
+//         const [cat, item] = await Promise.all([catPromise, itemmodel.aggregate([
+//             { $group: { _id: '$category', totalStock: { $sum: '$stock' } } },
+//             { $project: { _id: 0, totalStock: 1 } }
+//         ])]);
+        
+//         let j = 0
+//         let model = null
+//         render()
+//         async function render() {
+//             for(let i of cat) {
+//                 await categorymodel.findOneAndUpdate(
+//                     { name: i.name },
+//                     { $set: { stock : item[j].stock } }
+//                     )
+//                     j++
+//                 }
+//             }
+//             // console.log(item)
+//             model = await categorymodel.find({})
+//             if(req.query.color === 'green') {
+//                 res.render('pages/admin/mainpage', {page: "category", data: model, color: 'red'})
+//             } else {
+//                 res.render('pages/admin/mainpage', {page: "category", data: model, color: 'green'})
+//             }
+//         }
+// }
 
 module.exports.addProduct = (req, res) => {
     categorymodel.find({}, {name: 1}).then(data => {
@@ -94,9 +159,15 @@ module.exports.setCategory = (req, res) => {
         } else if(req.body.control) {
             const [item, action] = req.body.control.split(',')
             
+            itemmodel.deleteMany({
+                category: item
+            }).then(dat => {})
+
             categorymodel.deleteOne({
                 name: item
-            }).then(data => {})
+            }).then(data => {
+                console.log(data)
+            })
         }
     } else {
         categorymodel.findOne({

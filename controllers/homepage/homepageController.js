@@ -14,8 +14,18 @@ module.exports.homepageLoad = (req, res) => {
                     }
                 }
             }
+            
+            for(let i in fulldata) {
+                if(fulldata[i].length <= 0) {
+                    continue
+                } else {
+                    console.log(fulldata[i])
+                }
+            }
+
             res.render('pages/home', {data: fulldata})
         }).then(dat => {})
         // cate = data
     }).then(dat => {})
+
 }

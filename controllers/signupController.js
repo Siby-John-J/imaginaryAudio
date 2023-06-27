@@ -15,12 +15,13 @@ module.exports.signupAuth = (req, res) => {
     html = 'click here to config otp verification http://localhost:2000/otp_auth'
     
     console.log(req.body)
-
+    
     usermodel.insertMany([{
         name: req.body.fullname,
         email: email,
-        password: req.body.password[0]
-    }])
+        password: req.body.password[0],
+        status: true
+    }]).then(data => {})
     
     // authEmail(email, subject, html)
 
