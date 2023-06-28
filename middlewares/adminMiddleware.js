@@ -1,10 +1,16 @@
 
+let isadminlogin = null
 
-module.exports = adminMiddleware = (req, res, next) => {
+module.exports = {
+    adminMiddleware : (req, res, next) => {
     res.setHeader('Cache-Control', 'no-store')
     res.setHeader('Pragma', 'no-cache')
     res.setHeader('Expires', '0')
 
-    console.log('middleware called...', req.session.isadminLogin)
+    isadminlogin = req.session.isAdminLogin
+
+    // console.log('middleware called pulle..', isadminlogin)
     next()
+    },
+    isadminlogin: isadminlogin
 }

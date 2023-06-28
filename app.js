@@ -6,7 +6,7 @@ const loginRouter = require('./router/loginRoute')
 const signupRoute = require('./router/signupRoute')
 const homepageRoute = require('./router/homepage/homePageRoute')
 
-const adminMiddleware = require('./middlewares/adminMiddleware')
+const {adminMiddleware} = require('./middlewares/adminMiddleware')
 const userMiddleware = require('./middlewares/userMiddleware')
 
 const app = express()
@@ -21,8 +21,8 @@ app.use(session({
     saveUninitialized: false
 }))
 
-// app.use(adminMiddleware)
-app.use(userMiddleware)
+app.use(adminMiddleware)
+// app.use(userMiddleware)
 
 app.use('/', loginRouter)
 app.use('/', signupRoute)
