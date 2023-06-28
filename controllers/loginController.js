@@ -11,7 +11,13 @@ let expired = false
 let cd = 10
 
 module.exports.loginEmailControl = (req, res) => {
-    res.render('pages/login', {type: 'email'})
+    console.log(req.session.isUserLogin)
+    if(!req.session.isUserLogin) {
+        res.render('pages/login', {type: 'email'})
+        // res.redirect('/')
+    } else {
+        res.redirect(`/${req.session.username}/home`)
+    }
 }
 
 module.exports.loginOTPControl = (req, res) => {
@@ -60,7 +66,9 @@ module.exports.auth = (req, res) => {
             if(data === null) {
                 res.redirect('/')
             } else {
-                res.redirect('/home')
+                req.session.isUserLogin = true
+                req.session.username = data.name
+                res.redirect(`/${data.name}/home`)
             }
         })
     } else if(req.body.email) {
@@ -105,4 +113,9 @@ module.exports.auth = (req, res) => {
     } else {
         res.send('this password is not existed..')
     }
+}
+
+module.exports.logout = (req, res) => {
+    req.session.isUserLogin = false
+    res.redirect('/')
 }

@@ -1,6 +1,12 @@
 const { itemmodel, categorymodel } = require('../../models/productsModel')
 
+// All about the user page
+
 module.exports.homepageLoad = (req, res) => {
+    if(!req.session.isUserLogin) {
+        res.redirect('/')
+        return
+    }
     let fulldata = {}
 
     categorymodel.find({}).then(data1 => {
@@ -18,14 +24,11 @@ module.exports.homepageLoad = (req, res) => {
             for(let i in fulldata) {
                 if(fulldata[i].length <= 0) {
                     continue
-                } else {
-                    console.log(fulldata[i])
                 }
             }
-
+            
             res.render('pages/home', {data: fulldata})
         }).then(dat => {})
         // cate = data
     }).then(dat => {})
-
 }

@@ -2,9 +2,9 @@ const express = require('express')
 const session = require('express-session')
 
 const adminRouter = require('./router/adminRoute')
+const userRoute = require('./router/homepage/userRoute')
 const loginRouter = require('./router/loginRoute')
 const signupRoute = require('./router/signupRoute')
-const homepageRoute = require('./router/homepage/homePageRoute')
 
 const adminMiddleware = require('./middlewares/adminMiddleware')
 // const userMiddleware = require('./middlewares/userMiddleware')
@@ -27,7 +27,7 @@ app.use(adminMiddleware)
 app.use('/', loginRouter)
 app.use('/', signupRoute)
 
-app.use('/home', homepageRoute)
+app.use('/:id', userRoute)
 app.use('/admin', adminRouter)
 
 app.listen(2000)

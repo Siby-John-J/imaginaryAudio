@@ -10,7 +10,7 @@ const transport = createTransport({
     }
 })
 
-module.exports.authEmail = async (email, subject, html) => {
+module.exports.authEmail = async(email, subject, html) => {
     await transport.sendMail({
         from: 'sibyswift@gmail.com',
         to: email,
