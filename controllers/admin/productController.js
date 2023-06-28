@@ -2,19 +2,15 @@
 const { categorymodel, itemmodel } = require('../../models/productsModel')
 
 module.exports.products = (req, res) => {
-    // let isadminlogin = req.session.isadminlogin
-    // console.log(isadminlogin)
-    // // console.log('here man')
-    // if(!isadminlogin) {
-    //     res.redirect('/admin/login')
-    // } else {
-    // }
-    itemmodel.find({}).then(data => {
-        calculate().then(data1 => {
-            // console.log(data)
-            res.render('pages/admin/mainpage', {page: "products", data: data, countes: data1})
+    if(req.session.isadminlogin) {
+        res.redirect('/admin/login')
+    } else {
+        itemmodel.find({}).then(data => {
+            calculate().then(data1 => {
+                res.render('pages/admin/mainpage', {page: "products", data: data, countes: data1})
+            })
         })
-    })
+    }
     calculate()
     
     async function calculate() {
@@ -29,6 +25,10 @@ module.exports.addProduct = (req, res) => {
     categorymodel.find({}, {name: 1}).then(data => {
         res.render('pages/admin/addProduct', {data: data})
     })
+}
+
+module.exports.editProduct = (req, res) => {
+    res.send('edit product')
 }
 
 module.exports.deleteProduct = (req, res) => {

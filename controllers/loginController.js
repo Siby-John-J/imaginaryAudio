@@ -12,9 +12,9 @@ let cd = 10
 
 module.exports.loginEmailControl = (req, res) => {
     console.log(req.session.isUserLogin)
+    
     if(!req.session.isUserLogin) {
         res.render('pages/login', {type: 'email'})
-        // res.redirect('/')
     } else {
         res.redirect(`/${req.session.username}/home`)
     }

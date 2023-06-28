@@ -14,8 +14,6 @@ module.exports.signupAuth = (req, res) => {
     subject = 'link for otp verification from imaginaryAudio'
     html = 'click here to config otp verification http://localhost:2000/otp_auth'
     
-    console.log(req.body)
-    
     usermodel.insertMany([{
         name: req.body.fullname,
         email: email,

@@ -1,6 +1,5 @@
 
 const usermodel = require('../../models/userModel')
-// const adminmiddlware = require('../../middlewares/adminMiddleware')
 const { categorymodel, itemmodel } = require('../../models/productsModel')
 
 module.exports.mainpage = (req, res) => {
@@ -8,30 +7,15 @@ module.exports.mainpage = (req, res) => {
 }
 
 module.exports.dashboard = (req, res) => {
-    // adminMiddleware()
-    isadminlogin = req.session.isAdminLogin
-    
-    if(!isadminlogin) {
+    if(!req.session.isAdminLogin) {
         res.redirect('/admin/login')
     } else {
         res.render('pages/admin/mainpage', {page: "dashboard"})
     }
 }
 
-module.exports.customers = (req, res) => {
-    // console.log(req.query)
-    if(!req.session.isAdminlogin) {
-        res.redirect('/admin/login')
-    } else {
-        usermodel.find({}, {}).then(data => {
-            res.render('pages/admin/mainpage', {page: "customers", content: data})
-        })
-    }
-}
-
-module.exports.category = async (req, res) => {
-  
-    if (!req.session.isAdminlogin) {
+module.exports.category = async(req, res) => {
+    if (req.session.isAdminlogin) {
         res.redirect('/admin/login')
     } else {
         try {
@@ -56,21 +40,34 @@ module.exports.category = async (req, res) => {
                 j++;
               }
             }
+
+            
+            categorymodel.find({}).then(data => {
+                res.render('pages/admin/mainpage', { page: "category", data: data})
+            })
       
-            const model = await categorymodel.find({});
-      
-            if (req.query.color === 'green') {
-              res.render('pages/admin/mainpage', { page: "category", data: model, color: 'red' });
-            } else {
-              res.render('pages/admin/mainpage', { page: "category", data: model, color: 'green' });
-            }
           } catch (error) {
             // console.error(error)
             // Handle the error accordingly, such as displaying an error page or sending an error response
-          }
+        }
+    }
+}
+
+module.exports.blockCategory = (req, res) => {
+    if(req.query.active === 'enable') {
+        categorymodel.findOneAndUpdate(
+            { name: req.query.name },
+            { $set: { active: false } }
+            ).then(dat => {})
+    } else if(req.query.active === 'disable'){
+        categorymodel.findOneAndUpdate(
+            { name: req.query.name },
+            { $set: { active: true } }
+        ).then(dat => {})
     }
 
-  }
+    res.redirect('/admin/category')
+}
 
 module.exports.setCategory = (req, res) => {
     if(req.body.addcat === '') {

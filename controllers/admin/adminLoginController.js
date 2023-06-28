@@ -2,16 +2,14 @@
 const adminLoginModel = require('../../models/adminModel')
 
 module.exports.adminLogin = (req, res) => {
-    if(req.session.isAdminLogin === false || req.session.isAdminLogin === undefined) {
-        // res.render('login')
-        res.render('pages/admin/adminLogin')
-    } else {
+    if(req.session.isAdminLogin) {
         res.redirect('/admin/dashboard')
+    } else {
+        res.render('pages/admin/adminLogin')
     }
 }
 
 module.exports.adminAuth = (req, res) => {
-    console.log(req.session.isAdminLogin, 'auth')
     adminLoginModel.findOne({
         email: req.body.email,
         password: req.body.password

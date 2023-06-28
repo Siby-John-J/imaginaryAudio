@@ -86,7 +86,7 @@ h1 {
     background-color: blue;
     border: none;
     box-shadow: 1px 4px 14px 0px black;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
 .a1 {
@@ -135,4 +135,10 @@ h1 {
 
 label {
     font-weight: 600;
+}
+
+.user1 a {
+    background-color: green;
+    border-radius: 10px;
+    padding: 8px;
 }

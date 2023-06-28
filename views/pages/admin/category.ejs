@@ -38,17 +38,21 @@
                         <!-- <button name="action" value="<%= [data[i].name, 'max'] %>">+</button> -->
                     </form>
                 </div>
-                <label for="" class="staus">
-                        <a style="border-radius: 10px; padding: 5px; color: rgb(255, 255, 255); 
-                            font-size: 16px; background-color: <%= color%>;" 
-                            href="/admin/category?color=<%= color %>">
-                            <% if(color === 'green') { %>
-                                <%= 'enable' %>
-                            <% } else { %>
-                                <%= 'disable' %>
-                            <% } %>
+                <label class="staus">
+                    <% let status = '' %>
+                    <% let color = '' %>
+
+                    <% if(data[i].active) { %>
+                        <% status = 'enable' %>
+                        <% color = 'green' %>
+                    <% } else { %>
+                        <% status = 'disable' %>
+                        <% color = 'red' %>
+                    <% } %>
+                        <a style="border-radius: 10px; padding: 5px; color: white; font-size: 16px; background-color: <%= color%>;" 
+                            href="/admin/category/block?name=<%= data[i].name%>&active=<%= status %>">
+                            <%= status %>
                         </a>
-                    <!-- <%  %> -->
                 </label>
                 <label class="actions">
                     <form action="/admin/setcat" method="post">

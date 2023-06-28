@@ -35,10 +35,19 @@
                         <p class="pb">09/11/2000</p>
                         <p class="p-l"><%= content[i].address %></p>
                         <p >
-                            <a href="/admin/customers?user=<% content[i].name%>&status=<%= content[i].status%>"
-                                style="color: black; font-size: 18px; margin-right: 35px;">
-                                <!-- <%= content[i].name %> -->
-                                hello
+                            <% let color = ''%>
+                            <% let access = '' %>
+                            <% if(content[i].status) { %>
+                                    <% access = 'block' %>
+                                    <% color = 'green' %>
+                            <% } else { %>
+                                    <% access = 'unblock' %>
+                                    <% color = 'red' %>
+                            <% } %>
+                            <!-- Need to change the location as /admin/customers/block -->
+                            <a href="/admin/customers/block?user=<%= content[i].name %>&status=<%= content[i].status%>"
+                                style="background-color: <%= color %>; position: relative; color: white; font-size: 18px; right: 40px;">
+                                <%= access %>
                             </a>
                         </p>
                     </div>
