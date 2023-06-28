@@ -1,8 +1,9 @@
-const adminLoginModel = require('../../models/adminModel')// const mongoose = require('mongoose')
+// const adminmiddlware = require('../../middlewares/adminMiddleware')
+const adminLoginModel = require('../../models/adminModel')
 
 module.exports.adminLogin = (req, res) => {
     if(req.session.isAdminLogin === false || req.session.isAdminLogin === undefined) {
-        // res.redirect('/admin/login')
+        // res.render('login')
         res.render('pages/admin/adminLogin')
     } else {
         res.redirect('/admin/dashboard')
@@ -10,6 +11,7 @@ module.exports.adminLogin = (req, res) => {
 }
 
 module.exports.adminAuth = (req, res) => {
+    console.log(req.session.isAdminLogin, 'auth')
     adminLoginModel.findOne({
         email: req.body.email,
         password: req.body.password
@@ -18,7 +20,7 @@ module.exports.adminAuth = (req, res) => {
             req.session.isAdminLogin = true
             res.redirect('/admin/dashboard')
         } else {
-            res.redirect('/admin/login')
+            res.redirect('/admin/login') 
         }
     })
 }

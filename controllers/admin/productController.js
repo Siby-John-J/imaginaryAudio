@@ -1,20 +1,20 @@
-const {isadminlogin, adminmiddlware} = require('../../middlewares/adminMiddleware')
+// const {isadminlogin, adminmiddlware} = require('../../middlewares/adminMiddleware')
 const { categorymodel, itemmodel } = require('../../models/productsModel')
 
 module.exports.products = (req, res) => {
-    adminmiddlware()
-    console.log(isadminlogin)
-    // console.log('here man')
-    if(!isadminlogin) {
-        res.redirect('/admin/login')
-    } else {
-        itemmodel.find({}).then(data => {
-            calculate().then(data1 => {
-                // console.log(data)
-                res.render('pages/admin/mainpage', {page: "products", data: data, countes: data1})
-            })
+    // let isadminlogin = req.session.isadminlogin
+    // console.log(isadminlogin)
+    // // console.log('here man')
+    // if(!isadminlogin) {
+    //     res.redirect('/admin/login')
+    // } else {
+    // }
+    itemmodel.find({}).then(data => {
+        calculate().then(data1 => {
+            // console.log(data)
+            res.render('pages/admin/mainpage', {page: "products", data: data, countes: data1})
         })
-    }
+    })
     calculate()
     
     async function calculate() {

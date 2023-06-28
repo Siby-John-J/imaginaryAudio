@@ -6,8 +6,8 @@ const loginRouter = require('./router/loginRoute')
 const signupRoute = require('./router/signupRoute')
 const homepageRoute = require('./router/homepage/homePageRoute')
 
-const {adminMiddleware} = require('./middlewares/adminMiddleware')
-const userMiddleware = require('./middlewares/userMiddleware')
+const adminMiddleware = require('./middlewares/adminMiddleware')
+// const userMiddleware = require('./middlewares/userMiddleware')
 
 const app = express()
 
