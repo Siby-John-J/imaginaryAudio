@@ -5,6 +5,8 @@ const { deleteProduct, addProduct, products, authProduct, editProduct, editProdu
 const { customers, userBlock } = require('../controllers/admin/userController')
 
 const adminmiddlware = require('../middlewares/adminMiddleware')
+const errormiddleware = require('../middlewares/errorMiddleware')
+const imageMiddleware = require('../middlewares/multer')
 
 const router = Router()
 
@@ -21,7 +23,7 @@ router.post('/setcat', setCategory)
 
 router.get('/products', adminmiddlware, products)
 router.get('/addproduct', addProduct)
-router.post('/authproduct', authProduct)
+router.post('/authproduct', imageMiddleware.array('image'), authProduct)
 router.get('/editproduct', editProduct)
 router.post('/modifyproduct', editProductAuth)
 

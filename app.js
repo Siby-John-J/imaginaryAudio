@@ -7,12 +7,13 @@ const loginRouter = require('./router/loginRoute')
 const signupRoute = require('./router/signupRoute')
 
 const adminMiddleware = require('./middlewares/adminMiddleware')
+const errorMiddleware = require('./middlewares/errorMiddleware')
 // const userMiddleware = require('./middlewares/userMiddleware')
 
 const app = express()
 
 app.set('view engine', 'ejs')
-app.use('/', express.static('public'))  
+app.use('/', express.static('public'))
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 app.use(session({
@@ -21,13 +22,14 @@ app.use(session({
     saveUninitialized: false
 }))
 
-app.use(adminMiddleware)
-// app.use(userMiddleware)
 
 app.use('/', loginRouter)
 app.use('/', signupRoute)
 
 app.use('/:id', userRoute)
 app.use('/admin', adminRouter)
+
+app.use(adminMiddleware)
+app.use(errorMiddleware)
 
 app.listen(2000)

@@ -15,7 +15,7 @@ const itemModel = mongoose.Schema({
     stock: Number,
     date: String,
     description: String,
-    image: String,
+    image: Array,
     reviews: Array,
     questions: Array
 })

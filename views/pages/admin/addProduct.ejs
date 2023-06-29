@@ -15,14 +15,14 @@
     <% } else { %>
       <% action = '/admin/authproduct' %>
     <% } %>
-    <form action="<%= action %>" method="post">
+    <form action="<%= action %>" method="post" enctype="multipart/form-data">
         <div class="addproduct-main">
             <div class="image-field">
                 <div class="main-img">
-                    <button class="btn">upload img</button>
-                    <input type="file" name="imageUpload">
+                    <button class="btn">upload imgs</button>
+                    <input type="file" name="image" multiple>
                 </div>
-                <div class="button-container">
+                <!-- <div class="button-container">
                     <div class="upload-btn-wrapper">
                       <button class="btn upload-btn">Upload 1</button>
                       <input type="file" name="myfile1" id="myfile1" />
@@ -39,7 +39,7 @@
                       <button class="btn upload-btn">Upload 4</button>
                       <input type="file" name="myfile4" id="myfile4" />
                     </div>
-                  </div>
+                  </div> -->
             </div>
             <% if(type === 'edit') { %>
               <input type="text" name="pname" value="<%= contents.name %>" placeholder="Product name">

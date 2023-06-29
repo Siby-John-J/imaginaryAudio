@@ -11,6 +11,11 @@
 [+] that you enter there become added to the database
 [+] resize the main image to fit the 
 
+have to add all kind of middlewares
+
+# IMPORTENT
+need to add ajax for checking the fields
+
 # in future
 
 in setting have to add the theme of double color in which

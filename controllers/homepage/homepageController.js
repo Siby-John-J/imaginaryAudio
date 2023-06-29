@@ -27,6 +27,7 @@ module.exports.homepageLoad = (req, res) => {
                                 fulldata[i['name']] = []
                                 for(let j of data2) {
                                     if(i['name'] === j['category']) {
+                                        // console.log(j['image'][0])
                                         fulldata[i['name']]
                                         .push({name: j['name'], price: j['price'], image: j['image']})
                                     }
