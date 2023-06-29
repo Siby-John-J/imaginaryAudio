@@ -75,7 +75,7 @@
             <form action="/admin/deleteproduct" method="post">
                 <button type="submit">delete product</button>
                 <% for(let i = 0; i < data.length; i++) { %>
-                    <div class="users-list-content">
+                    <a class="users-list-content" href="/admin/editproduct?prod=<%= data[i].name%>">
                         <input type="checkbox" value="<%= data[i].name %>" name="check" id="cBox">
                         <label class="p-name"><%= data[i].name %></label>
                         <label class="p-cat"><%= data[i].category %></label>
@@ -83,10 +83,10 @@
                         <label><%= data[i].stock %></label>
                         <label class="p-stat"><%= data[i].status %></label>
                         <label><%= data[i].date %></label>
-                    </div>
-                    <% } %>
-                </form>
-            </div>
+                    </a>
+                <% } %>
+            </form>
         </div>
-    </body>
-    </html>
+    </div>
+</body>
+</html>

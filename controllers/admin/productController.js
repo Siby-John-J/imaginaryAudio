@@ -23,12 +23,38 @@ module.exports.products = (req, res) => {
 
 module.exports.addProduct = (req, res) => {
     categorymodel.find({}, {name: 1}).then(data => {
-        res.render('pages/admin/addProduct', {data: data})
+        res.render('pages/admin/addProduct', {data: data, type: 'add'})
     })
 }
 
 module.exports.editProduct = (req, res) => {
-    res.send('edit product')
+    categorymodel.find({}, {name: 1}).then(data2 => {
+        itemmodel.findOne({ name: req.query.prod }).then(data1 => {
+            res.render('pages/admin/addProduct', {data: data2, contents: data1, type: 'edit'})
+        })
+    })
+}
+
+module.exports.editProductAuth = (req, res) => {
+    let date = new Date()
+    let newdate = date.getDay().toString() + '-' + date.getMonth().toString() 
+    + '-' + date.getFullYear().toString()
+    
+    console.log(req.query)
+    itemmodel.findOneAndUpdate(
+        { _id: req.query.id },
+        {
+            name: req.body.pname,
+            price: Number(req.body.pprice),
+            category: req.body.pcat,
+            image: req.body.imageUpload,
+            description: req.body.pdesc,
+            date: newdate,
+            stock: req.body.pstock,
+            status: 'in stock'
+        }
+    ).then(data => {})
+    res.redirect('/admin/products')
 }
 
 module.exports.deleteProduct = (req, res) => {
@@ -46,13 +72,13 @@ module.exports.deleteProduct = (req, res) => {
 
 
 module.exports.authProduct = (req, res) => {
-    console.log('hey man..')
-    let formats = []
     let date = new Date()
     let newdate = date.getDay().toString() + '-' + date.getMonth().toString() 
     + '-' + date.getFullYear().toString()
+
+    let formats = []
+    console.log('here imposter..')
     req.body.date = newdate
-    
     for(let i in req.body) {
         if(i === 'pname') {
             break

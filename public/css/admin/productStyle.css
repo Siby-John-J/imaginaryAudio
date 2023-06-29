@@ -117,13 +117,15 @@ select {
 }
 
 .users-list-content {
-    box-shadow: 2px 1px 9px 0px gray;
+    box-shadow: 2px 1px 3px 0px gray;
     height: 53px;
     width: 100%;
-    margin-top: 20px;
+    margin-top: 9px;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    color: black;
+    font-size: 16px;
+    font-family: revert;
 }
 
 .users-list-content:hover {
@@ -159,4 +161,17 @@ form button {
     position: relative;
     bottom: 13em;
     left: 71em;
+}
+
+.users-list-content > * {
+    position: relative;
+    right: 30px;
+}
+
+.users-list-content #cBox {
+    left: 20px;
+}
+
+.users-list-content {
+    cursor: pointer;
 }

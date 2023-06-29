@@ -7,8 +7,15 @@
     <title>add category</title>
 </head>
 <body>
-    <h1>Create Product</h1>
-    <form action="/admin/authproduct" method="post">
+    <h1><%= type%> Product</h1>
+    <% let action = '' %>
+    <% if(type === 'edit') { %>
+      <% variable = contents.id %>
+      <% action = '/admin/modifyproduct?id=' + variable %>
+    <% } else { %>
+      <% action = '/admin/authproduct' %>
+    <% } %>
+    <form action="<%= action %>" method="post">
         <div class="addproduct-main">
             <div class="image-field">
                 <div class="main-img">
@@ -34,7 +41,11 @@
                     </div>
                   </div>
             </div>
-            <input type="text" name="pname" placeholder="Product name">
+            <% if(type === 'edit') { %>
+              <input type="text" name="pname" value="<%= contents.name %>" placeholder="Product name">
+            <% } else { %>
+                <input type="text" name="pname" placeholder="Product name">
+            <% } %>
             <!-- <input type="text" name="pcat" placeholder="Product category"> -->
             <select name="pcat">
               <% for(let i = 0; i < data.length; i++) { %>
@@ -42,9 +53,15 @@
                 <option value="<%= name %>"><%= name %></option>
               <% } %>
             </select>
-            <input type="text" name="pprice" placeholder="Product price">
-            <input type="text" name="pstock" placeholder="Stock">
-            <input class="desc" type="text" name="pdesc" placeholder="Description">
+            <% if(type === 'edit') { %>
+              <input type="text" name="pprice" value="<%= contents.price %>">
+              <input type="text" name="pstock" value="<%= contents.stock %>"">
+              <input class="desc" type="text" value="<%= contents.description %>" name="pdesc">
+            <% } else { %>            
+              <input type="text" name="pprice" placeholder="Product price">
+              <input type="text" name="pstock" placeholder="Stock">
+              <input class="desc" type="text" name="pdesc" placeholder="Description">
+            <% } %>
             <div class="btns">
                 <form action="">
                     <button>Create</button>

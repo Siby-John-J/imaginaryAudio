@@ -1,7 +1,7 @@
 const { Router } = require('express')
 const { adminLogin, adminAuth, adminLogout } = require('../controllers/admin/adminLoginController')
 const { dashboard, category, setCategory, blockCategory } = require('../controllers/admin/adminPageController')
-const { deleteProduct, addProduct, products, authProduct } = require('../controllers/admin/productController')
+const { deleteProduct, addProduct, products, authProduct, editProduct, editProductAuth } = require('../controllers/admin/productController')
 const { customers, userBlock } = require('../controllers/admin/userController')
 
 const adminmiddlware = require('../middlewares/adminMiddleware')
@@ -20,6 +20,9 @@ router.post('/setcat', setCategory)
 router.get('/products', adminmiddlware, products)
 router.get('/addproduct', addProduct)
 router.post('/authproduct', authProduct)
+router.get('/editproduct', editProduct)
+router.post('/modifyproduct', editProductAuth)
+
 router.post('/deleteproduct', deleteProduct)
 router.post('/products', products)
 

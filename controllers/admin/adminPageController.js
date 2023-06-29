@@ -1,6 +1,7 @@
 
 const usermodel = require('../../models/userModel')
 const { categorymodel, itemmodel } = require('../../models/productsModel')
+const { ConversationListInstance } = require('twilio/lib/rest/conversations/v1/conversation')
 
 module.exports.mainpage = (req, res) => {
     res.render('pages/admin/mainpage')
@@ -70,48 +71,103 @@ module.exports.blockCategory = (req, res) => {
 }
 
 module.exports.setCategory = (req, res) => {
-    if(req.body.addcat === '') {
-        // res.redirect('/admin/category')
-    } else if(req.body.action || req.body.control) {
-        if(req.body.action) {
-            const [item, count] = req.body.action.split(',')
-            
-            if(count === 'min') {
-                categorymodel.findOneAndUpdate(
-                    {name: item},
-                    {$inc: {stock: -1}}
-                    ).then(data => {})
-                } else if(count === 'max') {
+    if(!req.body.addcat) {
+        if(req.body.addcat === '') {
+            // res.redirect('/admin/category')
+        } else if(req.body.action || req.body.control) {
+            if(req.body.action) {
+                const [item, count] = req.body.action.split(',')
+                
+                if(count === 'min') {
                     categorymodel.findOneAndUpdate(
-                    {name: item},
-                    {$inc: {stock: 1}}
-                ).then(data => {})
+                        {name: item},
+                        {$inc: {stock: -1}}
+                        ).then(data => {})
+                    } else if(count === 'max') {
+                        categorymodel.findOneAndUpdate(
+                        {name: item},
+                        {$inc: {stock: 1}}
+                    ).then(data => {})
+                }
+            } else if(req.body.control) {
+                const [item, action] = req.body.control.split(',')
+                
+                itemmodel.deleteMany({
+                    category: item
+                }).then(dat => {})
+    
+                categorymodel.deleteOne({
+                    name: item
+                }).then(data => {
+                    console.log(data)
+                })
             }
-        } else if(req.body.control) {
-            const [item, action] = req.body.control.split(',')
-            
-            itemmodel.deleteMany({
-                category: item
-            }).then(dat => {})
-
-            categorymodel.deleteOne({
-                name: item
+        } else {
+            categorymodel.findOne({
+                name: req.body.addcat
             }).then(data => {
-                console.log(data)
+                if(data === null) {
+                    categorymodel.insertMany([{
+                        name: req.body.addcat,
+                        stock: 1,
+                        active: true
+                    }])
+                }
             })
         }
+        res.redirect('/admin/category')
     } else {
-        categorymodel.findOne({
-            name: req.body.addcat
-        }).then(data => {
-            if(data === null) {
-                categorymodel.insertMany([{
-                    name: req.body.addcat,
-                    stock: 1,
-                    active: true
-                }])
+        let str = req.body.addcat.toLowerCase()
+        categorymodel.findOne({ name: { $regex: new RegExp("^" + str + "$", "i") } }).then(data => {
+            if(data) {
+                res.redirect('/admin/category')
+            } else {
+                console.log('<UWU>')
+                if(req.body.addcat === '') {
+                    // res.redirect('/admin/category')
+                } else if(req.body.action || req.body.control) {
+                    if(req.body.action) {
+                        const [item, count] = req.body.action.split(',')
+                        
+                        if(count === 'min') {
+                            categorymodel.findOneAndUpdate(
+                                {name: item},
+                                {$inc: {stock: -1}}
+                                ).then(data => {})
+                            } else if(count === 'max') {
+                                categorymodel.findOneAndUpdate(
+                                {name: item},
+                                {$inc: {stock: 1}}
+                            ).then(data => {})
+                        }
+                    } else if(req.body.control) {
+                        const [item, action] = req.body.control.split(',')
+                        
+                        itemmodel.deleteMany({
+                            category: item
+                        }).then(dat => {})
+                        
+                        categorymodel.deleteOne({
+                            name: item
+                        }).then(data => {
+                            console.log(data)
+                        })
+                    }
+                } else {
+                    categorymodel.findOne({
+                        name: req.body.addcat
+                    }).then(data => {
+                        if(data === null) {
+                            categorymodel.insertMany([{
+                                name: req.body.addcat,
+                                stock: 1,
+                                active: true
+                            }])
+                        }
+                    })
+                    res.redirect('/admin/category')
+                }
             }
         })
     }
-    res.redirect('/admin/category')
 }
