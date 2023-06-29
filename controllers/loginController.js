@@ -1,5 +1,8 @@
+
+const bcrypt = require('bcrypt')
+
 const usermodel = require('../models/userModel')
-const { authEmail, sendSMS } = require('./sending')
+const { authEmail, sendSMS } = require('../config/sending')
 
 let email = ''
 let subject = ''
@@ -36,7 +39,7 @@ module.exports.forgetPassword = (req, res) => {
 }
 
 module.exports.resendOtp = (req, res) => {
-    sendSMS(ph, otp + ' is your otp from imaginaryAudio')
+    // sendSMS(ph, otp + ' is your otp from imaginaryAudio')
 
     expired = false
     function countdown(seconds) {
@@ -60,15 +63,21 @@ module.exports.checkEmail = (req, res) => {
 module.exports.auth = (req, res) => {
     if(req.body.email && req.body.password) {
         usermodel.findOne({
-            email: req.body.email,
-            password: req.body.password
+            email: req.body.email
         }).then(data => {
             if(data === null) {
                 res.redirect('/')
             } else {
-                req.session.isUserLogin = true
-                req.session.username = data.name
-                res.redirect(`/${data.name}/home`)
+                bcrypt.compare(req.body.password, data.password, (err, dat) => {
+                    if(dat) {
+                        req.session.isUserLogin = true
+                        req.session.username = data.name
+                        res.redirect(`/${data.name}/home`)
+                        // res.send('lwal')
+                    } else {
+                        res.redirect('/')
+                    }
+                })
             }
         })
     } else if(req.body.email) {
@@ -76,7 +85,7 @@ module.exports.auth = (req, res) => {
         subject = 'Password reset link from imaginaryAudio'
         html = 'click here to reset password http://localhost:2000/reset_password'
 
-        authEmail(email, subject, html)
+        // authEmail(email, subject, html)
         
         res.render('pages/login', {type: 'check-email', email: req.body.email})
     } else if('password' in req.body && typeof req.body.password === 'object'){
@@ -96,7 +105,7 @@ module.exports.auth = (req, res) => {
         let randomNumber = Math.floor(Math.random() * (max - min + 1)) + min
         otp = randomNumber
         console.log(otp, 'is this')
-        sendSMS(ph, otp + ' is your otp from imaginaryAudio')
+        // sendSMS(ph, otp + ' is your otp from imaginaryAudio')
 
         res.render('pages/login', {type: 'enter-otp', ph: ph})
         

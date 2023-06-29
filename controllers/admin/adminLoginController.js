@@ -1,5 +1,6 @@
 // const adminmiddlware = require('../../middlewares/adminMiddleware')
 const adminLoginModel = require('../../models/adminModel')
+const bcrypt = require('bcrypt')
 
 module.exports.adminLogin = (req, res) => {
     if(req.session.isAdminLogin) {
@@ -11,12 +12,17 @@ module.exports.adminLogin = (req, res) => {
 
 module.exports.adminAuth = (req, res) => {
     adminLoginModel.findOne({
-        email: req.body.email,
-        password: req.body.password
+        email: req.body.email
     }).then(data => {
         if(data !== null) {
-            req.session.isAdminLogin = true
-            res.redirect('/admin/dashboard')
+            bcrypt.compare(req.body.password, data.password, (err, data) => {
+                if(data) {
+                    req.session.isAdminLogin = true
+                    res.redirect('/admin/dashboard')
+                } else {
+                    res.redirect('/admin/login')
+                }
+            })
         } else {
             res.redirect('/admin/login') 
         }
