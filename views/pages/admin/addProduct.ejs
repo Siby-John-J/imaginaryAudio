@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/admin/addproductStyle.css">
+    <script src="/js/checkInputField.js"></script>
     <title>add category</title>
 </head>
 <body>
@@ -20,7 +21,7 @@
             <div class="image-field">
                 <div class="main-img">
                     <button class="btn">upload imgs</button>
-                    <input type="file" name="image" multiple>
+                    <input id="img" type="file" name="image" multiple>
                 </div>
                 <!-- <div class="button-container">
                     <div class="upload-btn-wrapper">
@@ -44,28 +45,28 @@
             <% if(type === 'edit') { %>
               <input type="text" name="pname" value="<%= contents.name %>" placeholder="Product name">
             <% } else { %>
-                <input type="text" name="pname" placeholder="Product name">
+                <input type="text" id="p-name" name="pname" placeholder="Product name">
             <% } %>
             <!-- <input type="text" name="pcat" placeholder="Product category"> -->
             <select name="pcat">
               <% for(let i = 0; i < data.length; i++) { %>
-                <% let name = data[i].name %> 
+                <% let name = data[i].name %>
                 <option value="<%= name %>"><%= name %></option>
               <% } %>
             </select>
             <% if(type === 'edit') { %>
-              <input type="text" name="pprice" value="<%= contents.price %>">
+              <input type="text" name="pprice"  value="<%= contents.price %>">
               <input type="text" name="pstock" value="<%= contents.stock %>"">
               <input class="desc" type="text" value="<%= contents.description %>" name="pdesc">
             <% } else { %>            
-              <input type="text" name="pprice" placeholder="Product price">
-              <input type="text" name="pstock" placeholder="Stock">
-              <input class="desc" type="text" name="pdesc" placeholder="Description">
+              <input type="text" id="p-price" name="pprice" placeholder="Product price">
+              <input type="text" id="p-stock" name="pstock" placeholder="Stock">
+              <input class="desc" id="p-desc" type="text" name="pdesc" placeholder="Description">
             <% } %>
             <div class="btns">
                 <form action="">
-                    <button>Create</button>
-                    <button>Cancel</button>
+                    <button onclick="check(event)">Create</button>
+                    <a href="/admin/products">Cancel</a>
                 </form>
             </div>
         </div>

@@ -12,7 +12,7 @@ let storage = multer.diskStorage({
             let err = new Error('no other file extenstions allowed')
             err.status = 'unknown files'
             err.statusCode = 500
-
+            
             cb(err)
         }
     }

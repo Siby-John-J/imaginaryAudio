@@ -35,19 +35,27 @@ module.exports.editProduct = (req, res) => {
     })
 }
 
-module.exports.editProductAuth = (req, res) => {
+module.exports.editProductAuth = async(req, res) => {
+    let img = []
+    console.log(req.body)
+
+    await Promise.all(
+        req.files.map(file => {
+            img.push(file.originalname)
+        })
+    )
+    
     let date = new Date()
     let newdate = date.getDay().toString() + '-' + date.getMonth().toString() 
     + '-' + date.getFullYear().toString()
-    
-    console.log(req.query)
+
     itemmodel.findOneAndUpdate(
         { _id: req.query.id },
         {
             name: req.body.pname,
             price: Number(req.body.pprice),
             category: req.body.pcat,
-            image: req.body.imageUpload,
+            image: img,
             description: req.body.pdesc,
             date: newdate,
             stock: req.body.pstock,
@@ -66,7 +74,6 @@ module.exports.deleteProduct = (req, res) => {
             itemmodel.deleteOne({name: i}).then(data => {})
         }
     }
-    
     res.redirect('/admin/products')
 }
 
@@ -82,7 +89,7 @@ module.exports.authProduct = async(req, res, next) => {
                 img.push(file.originalname)
             })
         )
-
+        
         await itemmodel.insertMany([{
             name: req.body.pname,
             price: Number(req.body.pprice),
@@ -97,7 +104,6 @@ module.exports.authProduct = async(req, res, next) => {
         res.redirect('/admin/products')
 
     } catch (error) {
-        // let err = new Error()
         next(error)
     }
 }

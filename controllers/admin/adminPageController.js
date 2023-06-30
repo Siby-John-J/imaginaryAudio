@@ -8,10 +8,10 @@ module.exports.mainpage = (req, res) => {
 }
 
 module.exports.dashboard = (req, res) => {
-    if(!req.session.isAdminLogin) {
-        res.redirect('/admin/login')
-    } else {
+    if(req.session.isAdminLogin) {
         res.render('pages/admin/mainpage', {page: "dashboard"})
+        // res.redirect('/admin/login')
+    } else {
     }
 }
 

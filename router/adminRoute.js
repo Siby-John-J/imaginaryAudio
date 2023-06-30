@@ -4,36 +4,36 @@ const { dashboard, category, setCategory, blockCategory } = require('../controll
 const { deleteProduct, addProduct, products, authProduct, editProduct, editProductAuth } = require('../controllers/admin/productController')
 const { customers, userBlock } = require('../controllers/admin/userController')
 
-const adminmiddlware = require('../middlewares/adminMiddleware')
+const { adminLoginMiddleware, adminAccessMiddleware } = require('../middlewares/adminMiddleware')
 const errormiddleware = require('../middlewares/errorMiddleware')
 const imageMiddleware = require('../middlewares/multer')
 
 const router = Router()
 
-router.get('/login', adminmiddlware, adminLogin)
-router.get('/logout', adminmiddlware, adminLogout)
+router.get('/login', adminLoginMiddleware, adminLogin)
+router.get('/logout', adminLogout)
 
 // router.get('/deleteandupdate', insertPassword)
 
-router.post('/auth', adminmiddlware, adminAuth)
+router.post('/auth', adminLoginMiddleware, adminAuth)
 
-router.get('/dashboard', adminmiddlware, dashboard)
+router.get('/dashboard', adminAccessMiddleware, dashboard)
 
-router.post('/setcat', setCategory)
+router.post('/setcat', adminAccessMiddleware, setCategory)
 
-router.get('/products', adminmiddlware, products)
+router.get('/products', adminAccessMiddleware, products)
 router.get('/addproduct', addProduct)
 router.post('/authproduct', imageMiddleware.array('image'), authProduct)
 router.get('/editproduct', editProduct)
-router.post('/modifyproduct', editProductAuth)
+router.post('/modifyproduct', imageMiddleware.array('image'), editProductAuth)
 
 router.post('/deleteproduct', deleteProduct)
 router.post('/products', products)
 
-router.get('/category', adminmiddlware, category)
+router.get('/category', adminAccessMiddleware ,category)
 router.get('/category/block', blockCategory)
 
-router.get('/customers', adminmiddlware, customers)
+router.get('/customers', adminAccessMiddleware, customers)
 router.get('/customers/block', userBlock)
 
 module.exports = router

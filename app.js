@@ -22,14 +22,13 @@ app.use(session({
     saveUninitialized: false
 }))
 
-
 app.use('/', loginRouter)
 app.use('/', signupRoute)
 
 app.use('/:id', userRoute)
 app.use('/admin', adminRouter)
 
-app.use(adminMiddleware)
+// app.use(adminLoginMiddleware)
 app.use(errorMiddleware)
 
 app.listen(2000)
