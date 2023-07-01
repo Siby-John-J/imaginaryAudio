@@ -14,19 +14,24 @@ module.exports.signupPage = (req, res) => {
 
 module.exports.signupAuth = (req, res) => {
     email = req.body.email
-    subject = 'link for otp verification from imaginaryAudio'
-    html = 'click here to config otp verification http://localhost:2000/otp_auth'
-
+    subject = 'Dear ' + req.body.fullname + ' welcome to imaginaryAudio'
+    html = `
+        <label>Go to Login Page</label>
+        <a href="http://localhost:2000">
+            Click here
+        </a>`
+    
     bcrypt.hash(req.body.password[0], 10).then(data => {        
         usermodel.insertMany([{
             name: req.body.fullname,
             email: email,
             password: data,
+            phone: Number(req.body.phnum),
             status: true
         }]).then(data => {})
     })
     
     // authEmail(email, subject, html)
-
-    res.send('we will send you a email')
+    
+    res.render('pages/login', {type: 'check-email', email: req.body.email})
 }

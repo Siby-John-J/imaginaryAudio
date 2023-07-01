@@ -37,14 +37,13 @@ module.exports.editProduct = (req, res) => {
 
 module.exports.editProductAuth = async(req, res) => {
     let img = []
-    console.log(req.body)
 
     await Promise.all(
         req.files.map(file => {
             img.push(file.originalname)
         })
     )
-    
+
     let date = new Date()
     let newdate = date.getDay().toString() + '-' + date.getMonth().toString() 
     + '-' + date.getFullYear().toString()

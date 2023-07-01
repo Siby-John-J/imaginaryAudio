@@ -8,6 +8,8 @@ let email = ''
 let subject = ''
 let html = ''
 
+let name = ''
+
 let ph = 0
 let otp = 0
 let expired = false
@@ -56,7 +58,7 @@ module.exports.resendOtp = (req, res) => {
 }
 
 module.exports.checkEmail = (req, res) => {
-    authEmail(email, subject, html)
+    // authEmail(email, subject, html)
     res.render('pages/login', {type: 'check-email', email: email})
 }
 
@@ -73,7 +75,6 @@ module.exports.auth = (req, res) => {
                         req.session.isUserLogin = true
                         req.session.username = data.name
                         res.redirect(`/${data.name}/home`)
-                        // res.send('lwal')
                     } else {
                         res.redirect('/')
                     }
@@ -84,7 +85,7 @@ module.exports.auth = (req, res) => {
         email = req.body.email
         subject = 'Password reset link from imaginaryAudio'
         html = 'click here to reset password http://localhost:2000/reset_password'
-
+        
         // authEmail(email, subject, html)
         
         res.render('pages/login', {type: 'check-email', email: req.body.email})
@@ -98,23 +99,36 @@ module.exports.auth = (req, res) => {
         // OTP verification
 
         ph = req.body.phoneNum
+        req.session.number = ph
 
-        let min = 1000
-        let max = 9999
-
-        let randomNumber = Math.floor(Math.random() * (max - min + 1)) + min
-        otp = randomNumber
-        console.log(otp, 'is this')
-        // sendSMS(ph, otp + ' is your otp from imaginaryAudio')
-
-        res.render('pages/login', {type: 'enter-otp', ph: ph})
+        usermodel.findOne({phone: Number(ph)}).then(data => {
+            if(data) {
+                let min = 1000
+                let max = 9999
+                
+                let randomNumber = Math.floor(Math.random() * (max - min + 1)) + min
+                otp = randomNumber
+                console.log(otp, 'is this')
+                // sendSMS(ph, otp + ' is your otp from imaginaryAudio')
+                
+                res.render('pages/login', {type: 'enter-otp', ph: ph})
+            } else {
+                // alert('wrong password')
+                res.redirect('/otp_auth')
+            }
+        })
         
     } else if(req.body.otp) {
         if(otp === Number(req.body.otp)) {
             if(expired) {
                 res.send('otp expired')
             } else {
-                res.redirect('/home')
+                usermodel.findOne({phone: Number(req.session.number)}).then(data => {
+                    // console.log(data)
+                    req.session.isUserLogin = true
+                    req.session.username = data.name
+                    res.redirect(`/${data.name}/home`)
+                })
             }
         } else {
             res.send('wrong otp')
