@@ -25,8 +25,8 @@ app.use(session({
 app.use('/', loginRouter)
 app.use('/', signupRoute)
 
-app.use('/:id', userRoute)
 app.use('/admin', adminRouter)
+app.use('/:id', userRoute)
 
 // app.use(adminLoginMiddleware)
 app.use(errorMiddleware)

@@ -21,7 +21,7 @@
                     <div class="session-1">
                         <% for(let j of data[i]) { %>
                             <div class="pro">
-                                <a href="/home" class="prod-content">
+                                <a href="/<%= user + '/' + j['name']%>" class="prod-content">
                                     <img class="pro-img"
                                     src="/img/<%= j['image'][0] %>" alt="no img found">
                                     <label class="name"><%= j['name'] %></label>

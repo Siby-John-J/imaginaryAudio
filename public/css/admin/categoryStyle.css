@@ -85,9 +85,12 @@ body {
 }
 
 .cat-del, .cat-edit {
-    height: 22px;
-    width: 49px;
+    height: 31px;
+    width: 73px;
     border-radius: 20px;
+    color: white;
+    border: none;
+    font-weight: 600;
 }
 
 /* plus and min stock */

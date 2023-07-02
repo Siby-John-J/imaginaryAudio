@@ -1,0 +1,196 @@
+
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.main-cart {
+    height: 92vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+}
+
+.cart, .summmary {
+    /* border: 1px solid black; */
+    height: 100%;
+}
+
+.cart {
+    /* background-color: lightslategrey; */
+    width: 70%;
+}
+
+.cart-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 6em;
+    margin-top: 2em;
+}
+
+.cart-inner-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 6em;
+    margin-top: 2em;
+}
+
+.cart-inner-content {
+    height: 7em;
+    /* background-color: whitesmoke; */
+    margin: 1em 6em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.cart-inner-content .prod-details {
+    /* background-color: darkslategrey; */
+    height: 100%;
+    width: 18em;
+    padding-right: 71px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.prod-details .prod-pic {
+    background-color: darkgoldenrod;
+    height: 70%;
+    width: 31%;
+}
+
+.prod-details .prod-other {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    /* background-color: red; */
+    height: 70%;
+    padding-right: 7em;
+    margin-left: 10px;
+}
+
+.prod-details .prod-other label, a {
+    font-size: 15px;
+    margin-right: -20px;
+}
+
+.prod-pricing {
+    display: flex;
+    flex-direction: row;
+    /* background-color: royalblue; */
+    width: 50%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.prod-pricing .prod-quantity {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 37px;
+    width: 142px;
+    justify-content: space-evenly;
+    /* background-color: blueviolet; */
+}
+
+.prod-quantity label {
+    color: black;
+    position: relative;
+    top: 5px;
+    left: -2px;
+}
+
+.prod-quantity button {
+    font-size: 20px;
+    position: relative;
+    color: black;
+    top: 5px;
+    height: 27px;
+    width: 25px;
+    border-radius: 9px;
+    /* background-color: white; */
+    border: none;
+    cursor: pointer;
+}
+
+/* part-2 */
+
+.summary {
+    background-color: rgb(240, 240, 240);
+    width: 30%;
+}
+
+.summary-field {
+    /* background-color: green; */
+    width: 81%;
+    height: 90%;
+    margin-left: 2.6em;
+    display: flex;
+    flex-direction: column;
+    /* align-content: space-around; */
+    align-items: flex-start;
+}
+
+.summary-title {
+    margin-top: 1.4em;
+    /* background-color: darkgray; */
+    margin-left: 58px;
+}
+
+.total-price {
+    /* background-color: brown; */
+    width: 100%;
+    height: 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.inp-fields {
+    /* background-color: navy; */
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 48%;
+    justify-content: space-evenly;
+}
+
+.inp-fields .control {
+    padding: 10px 0;
+    border: none;
+    outline: none;
+}
+
+.inp-fields .ap-btn {
+    background-color: rgb(255 63 63);
+    color: white;
+    border: none;
+    width: 125px;
+}
+
+.total-cost {
+    /* background-color: rosybrown; */
+    height: 20%;
+    width: 100%;
+}
+
+.total-cost .last-total {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 1.6em;
+}
+
+.total-cost .checkout-btn {
+    border: none;
+    color: white;
+    background-color: rgb(49 49 255);
+    margin-top: 2em;
+    width: 100%;
+    padding: 0.7em 0;
+}

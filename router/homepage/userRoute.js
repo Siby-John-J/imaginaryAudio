@@ -2,8 +2,12 @@ const { Router } = require('express')
 const router = Router()
 
 const usermiddleware = require('../../middlewares/userMiddleware')
-const { homepageLoad } = require('../../controllers/homepage/homepageController')
+const { homepageLoad, productLoad } = require('../../controllers/homepage/homepageController')
+const { cart, addToCart } = require('../../controllers/user/cartController')
 
 router.get('/home', usermiddleware ,homepageLoad)
+router.get('/cart', usermiddleware, cart)
+router.get('/cart/addtocart', usermiddleware, addToCart)
+router.get('/:id', usermiddleware, productLoad)
 
 module.exports = router

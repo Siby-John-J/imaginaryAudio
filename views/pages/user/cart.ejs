@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/home/cartStyle.css">
+    <title>Cart</title>
+</head>
+<body>
+    <%- include('../../layouts/header.ejs') %>
+    <div class="main-cart">
+        <div class="cart">
+            <div class="cart-title">
+                <h1>Shopping Cart</h1>
+                <h1>n items</h1>
+            </div>
+            <hr style="margin-top: 1em; width: 55em; border-color: rgb(0, 0, 0);">
+            <div class="cart-list">
+                <div class="cart-inner-title">
+                    <label style="padding-right: 13em;">PRODUCT DETAILS</label>
+                    <label>QUANTITY</label>
+                    <label>PRICE</label>
+                    <label>TOTAL</label>
+                </div>
+                <div class="cart-inner-content">
+                    <div class="prod-details">
+                        <div class="prod-pic">
+                            <img src="" alt="">
+                        </div>
+                        <div class="prod-other">
+                            <label for="">name</label>
+                            <label for="">category</label>
+                            <a href="">remove</a>
+                        </div>
+                    </div>
+                    <div class="prod-pricing">
+                        <div class="prod-quantity">
+                            <button>-</button>
+                            <label>2</label>
+                            <button>+</button>
+                        </div>
+                        <label>price</label>
+                        <label>total price</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="summary">
+            <div class="summary-field">
+                <div class="summary-title">
+                    <h1>Order summary</h1>
+                </div>
+                <hr style="margin-top: 2.3em; width: 20em; border-color: rgb(0, 0, 0);">
+                <div class="total-price">
+                    <label>ITEMS 3</label>
+                    <label>$4532</label>
+                </div>
+                <div class="inp-fields">
+                    <label for="">SHIPPING</label>
+                    <input  class="control" type="text">
+                    <label for="">PROMO CODE</label>
+                    <input class="control" type="text">
+                    <button class="control ap-btn">APPLY</button>
+                </div>
+                <div class="total-cost">
+                    <div class="last-total">
+                        <label for="">TOTAL COST</label>
+                        <label for="">$5550</label>
+                    </div>
+                    <button class="checkout-btn">CHECKOUT</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,141 @@
+
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.mainpg {
+    width: 100vw;
+    height: 100vh;
+    /* background-color: rgb(65, 65, 65); */
+    display: flex;
+    flex-direction: row;
+}
+
+.pics, .contents {
+    /* border: 1px solid black; */
+    width: 50vw;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.img {
+    /* background-color: black; */
+    /* border: 1px solid black; */
+    height: 70%;
+    width: 70%;
+    margin-top: 33px;
+    margin-left: 10em;
+}
+
+.img img {
+    height: 100%;
+    width: 100%;
+}
+
+.imgs {
+    /* background-color: black; */
+    height: 16%;
+    width: 79%;
+    margin-top: 33px;
+    margin-left: 8em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.imgs img {
+    height: 100%;
+    width: 8em;
+}
+
+.part-1 {
+    /* background-color: black; */
+    height: 50%;
+    width: 79%;
+    margin-top: 33px;
+    margin-left: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.part-1 h2 {
+    font-size: 3em;
+    margin-bottom: 14px;
+    font-weight: 200;
+}
+
+.part-1 .star {
+    /* background-color: yellowgreen; */
+    height: 30px;
+    width: 24em;
+    margin-bottom: 14px;
+}
+
+.part-1 label {
+    font-size: 2em;
+}
+
+.part-1 p {
+    width: 14em;
+    font-size: 1.4em;
+}
+
+.part-2 {
+    /* background-color: black; */
+    height: 36%;
+    width: 79%;
+    margin-top: 33px;
+    margin-left: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.part-2 .price-left {
+    width: 57%;
+    /* background-color: aquamarine; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.price-left {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.price-left h1 {
+    font-size: 3em;
+}
+
+.price-left label {
+    font-size: 22px;
+    color: red;
+}
+
+.part-2 .btns {
+    width: 57%;
+    /* background-color: rebeccapurple; */
+    display: flex;
+    justify-content: space-around;
+}
+.btns a {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding: 20px 8px;
+    font-size: 20px;
+    border: none;
+    border-radius: 8px;
+    color: white;
+}
+
+.btns .cart {
+    background-color: rgb(255, 73, 73);
+}
+
+.btns .wishlist {
+    background-color: rgb(228, 228, 40);
+}

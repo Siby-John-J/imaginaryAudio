@@ -13,21 +13,20 @@ module.exports.homepageLoad = (req, res) => {
         res.redirect('/')
         return
     } else if(req.session.isUserLogin) {
-        console.log(req.session.isUserLogin, 'hell yah')
+        // console.log(req.session.isUserLogin, 'hell yah')
         try {
             loadUserData(req.session.username).then(data => {
                 if(data.status === false) {
                     res.render('pages/login',{type: 'email'})
                 } else {
                     let fulldata = {}
-                
+                    
                     categorymodel.find({}).then(data1 => {
                         itemmodel.find({}).then(data2 => {
                             for(let i of data1) {
                                 fulldata[i['name']] = []
                                 for(let j of data2) {
                                     if(i['name'] === j['category']) {
-                                        // console.log(j['image'][0])
                                         fulldata[i['name']]
                                         .push({name: j['name'], price: j['price'], image: j['image']})
                                     }
@@ -39,7 +38,7 @@ module.exports.homepageLoad = (req, res) => {
                                     continue
                                 }
                             }
-                            res.render('pages/home', {data: fulldata})
+                            res.render('pages/home', {data: fulldata, user: req.session.username})
                         }).then(dat => {})
                         // cate = data
                     }).then(dat => {})
@@ -50,4 +49,11 @@ module.exports.homepageLoad = (req, res) => {
         }
         return
     }
+}
+
+module.exports.productLoad = (req, res) => {
+    // console.log(req.session)
+    itemmodel.findOne({name: req.params.id}).then(data => {
+        res.render('pages/user/item', {data: data, user: req.session.username})
+    })
 }

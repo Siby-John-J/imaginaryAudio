@@ -1,15 +1,15 @@
 
-* {
+body {
     margin: 0;
     padding: 0;
 }
 
 .main-header {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    /* font-size: 1.2rem; */
+    font-size: 1.2rem;
     width: 100%;
     height: 58px;
-    background-color: rgb(0, 0, 0);
+    background-color: rgb(43, 43, 43);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -21,7 +21,7 @@ a {
     text-decoration: none;
 }
 
-input {
+input[name="search-bar"] {
     border: none;
     outline: none;
     padding-left: 18px;

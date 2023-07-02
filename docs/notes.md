@@ -14,7 +14,8 @@
 have to add all kind of middlewares
 
 # IMPORTENT
-need to add ajax for checking the fields
+need to add ajax for checking the fields, 
+need to set middleware in app.js but not on routes [depends on situation]
 
 # in future
 
