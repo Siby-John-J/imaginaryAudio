@@ -13,11 +13,12 @@ module.exports.homepageLoad = (req, res) => {
         res.redirect('/')
         return
     } else if(req.session.isUserLogin) {
-        // console.log(req.session.isUserLogin, 'hell yah')
         try {
             loadUserData(req.session.username).then(data => {
+                console.log(data)
                 if(data.status === false) {
                     res.render('pages/login',{type: 'email'})
+                    // res.send('handle this bitch!')
                 } else {
                     let fulldata = {}
                     

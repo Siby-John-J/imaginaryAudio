@@ -16,8 +16,6 @@ let expired = false
 let cd = 10
 
 module.exports.loginEmailControl = (req, res) => {
-    console.log(req.session.isUserLogin)
-    
     if(!req.session.isUserLogin) {
         res.render('pages/login', {type: 'email'})
     } else {
@@ -41,7 +39,7 @@ module.exports.forgetPassword = (req, res) => {
 }
 
 module.exports.resendOtp = (req, res) => {
-    // sendSMS(ph, otp + ' is your otp from imaginaryAudio')
+    sendSMS(ph, otp + ' is your otp from imaginaryAudio')
 
     expired = false
     function countdown(seconds) {
@@ -86,12 +84,20 @@ module.exports.auth = (req, res) => {
         subject = 'Password reset link from imaginaryAudio'
         html = 'click here to reset password http://localhost:2000/reset_password'
         
-        // authEmail(email, subject, html)
+        authEmail(email, subject, html)
         
         res.render('pages/login', {type: 'check-email', email: req.body.email})
     } else if('password' in req.body && typeof req.body.password === 'object'){
         if(req.body.password[0] === req.body.password[1]) {
-            res.redirect('/home')
+            bcrypt.hash(req.body.password[0], 10).then(dat1 => {
+                usermodel.updateOne(
+                    {email: email}, 
+                    {$set: { password: dat1 }}
+                ).then(data => {
+                    console.log(data)
+                    res.redirect('/')
+                })
+            })
         } else {
             res.send('incorrect password')
         }
@@ -109,12 +115,12 @@ module.exports.auth = (req, res) => {
                 let randomNumber = Math.floor(Math.random() * (max - min + 1)) + min
                 otp = randomNumber
                 console.log(otp, 'is this')
-                // sendSMS(ph, otp + ' is your otp from imaginaryAudio')
+                sendSMS(ph, otp + ' is your otp from imaginaryAudio')
                 
                 res.render('pages/login', {type: 'enter-otp', ph: ph})
             } else {
                 // alert('wrong password')
-                res.redirect('/otp_auth')
+                res.redirect('/')
             }
         })
         
