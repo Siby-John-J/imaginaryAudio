@@ -4,19 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/loginStyle.css">
+    <script defer src="/js/signupVal.js"></script>
     <title>Sign up</title>
 </head>
 <body>
     <form action="/signup_auth" method="post">
         <h1>Sign in</h1>
         
-        <input type="text" name="fullname" placeholder="FullName">
-        <input type="email" name="email" placeholder="Email" style="margin-bottom: 0px;">
-        <input type="password" name="password" placeholder="Password">
-        <input type="password" name="password" placeholder="Config password">
-        <input type="text" name="phnum" placeholder="Phone number">
+        <input id="name" type="text" name="fullname" placeholder="FullName">
+        <input id="email" type="email" name="email" placeholder="Email" style="margin-bottom: 0px;">
+        <input id="pass" type="password" name="password" placeholder="Password">
+        <input id="pass-con" type="password" name="password" placeholder="Config password">
+        <input id="ph" type="text" name="phnum" placeholder="Phone number">
         
-        <button>Sign up</button>
+        <button onclick="checkVal(event)">Sign up</button>
         <label for="">already have an Account?
             <a href="/">Login</a>
         </label>

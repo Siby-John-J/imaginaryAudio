@@ -4,8 +4,7 @@ async function loadUserData(user) {
     return await usermodel.findOne({name: user})
 }
 
-module.exports.blockUser = async(data, req, res) => {
-    console.log(res)    
+module.exports.blockUser = async(data, req, res) => {   
     try {
         const loadData = await loadUserData(data)
         if(loadData.status === false) {

@@ -15,10 +15,9 @@ module.exports.homepageLoad = (req, res) => {
     } else if(req.session.isUserLogin) {
         try {
             loadUserData(req.session.username).then(data => {
-                console.log(data)
+
                 if(data.status === false) {
                     res.render('pages/login',{type: 'email'})
-                    // res.send('handle this bitch!')
                 } else {
                     let fulldata = {}
                     
@@ -53,8 +52,11 @@ module.exports.homepageLoad = (req, res) => {
 }
 
 module.exports.productLoad = (req, res) => {
-    // console.log(req.session)
-    itemmodel.findOne({name: req.params.id}).then(data => {
-        res.render('pages/user/item', {data: data, user: req.session.username})
-    })
+    if(req.session.isUserLogin) {
+        itemmodel.findOne({name: req.params.id}).then(data => {
+            res.render('pages/user/item', {data: data, user: req.session.username})
+        })
+    } else {
+        res.redirect('/')
+    }
 }

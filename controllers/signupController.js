@@ -21,17 +21,17 @@ module.exports.signupAuth = (req, res) => {
             Click here
         </a>`
     
-    bcrypt.hash(req.body.password[0], 10).then(data => {        
-        usermodel.insertMany([{
-            name: req.body.fullname,
-            email: email,
-            password: data,
-            phone: Number(req.body.phnum),
-            status: true
-        }]).then(data => {})
-    })
+    // bcrypt.hash(req.body.password[0], 10).then(data => {        
+    //     usermodel.insertMany([{
+    //         name: req.body.fullname, 
+    //         email: email,
+    //         password: data,
+    //         phone: Number(req.body.phnum),
+    //         status: true
+    //     }]).then(data => {})
+    // })
     
     // authEmail(email, subject, html)
-    
+
     res.render('pages/login', {type: 'check-email', email: req.body.email})
 }

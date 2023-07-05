@@ -11,10 +11,10 @@ const { loginEmailControl,
         } = require("../controllers/loginController")
 const router = Router()
 
-router.get('/', loginEmailControl)
+router.get('/', usermiddleware ,loginEmailControl)
 router.get('/otp_auth', usermiddleware, loginOTPControl)
 
-router.post('/auth', usermiddleware, auth)
+router.post('/auth', auth)
 router.get('/enter_email', enterEmail)
 
 router.get('/reset_password', forgetPassword)
