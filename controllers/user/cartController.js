@@ -6,23 +6,31 @@ const { ObjectId } = require('mongodb')
 
 module.exports.cart = async(req, res) => {
     let data = []
-
+    
     if(req.session.isUserLogin) {
         let user = await usermodel.findOne({name: req.session.username})
-    
+        
         if(user.cart.length <= 0) {
-            res.render('pages/user/cart', {user: req.session.username, data: null})
+            res.render('pages/user/cart', {user: req.session.username, 
+                data: null, address: '', visible: 'none'})
         } else {
             for(let i of user.cart) {
                 let products = await itemmodel.findOne({_id: i.item})
                 data.push([products, i.count])
             }
-            res.render('pages/user/cart', {user: req.session.username, data: data})
+
+            if(req.body.option) {
+                res.render('pages/user/cart', {user: req.session.username, 
+                    data: data, address: 'add', visible: 'flex'})
+                // check the datbase with user address 
+            } else {
+                res.render('pages/user/cart', {user: req.session.username, 
+                    data: data, address: '', visible: 'none'})
+            }
         }
     } else {
         res.redirect('/')
     }
-
 }
 
 module.exports.addToCart = async(req, res) => {

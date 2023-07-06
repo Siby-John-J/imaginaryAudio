@@ -3,6 +3,7 @@ const { adminLogin, adminAuth, adminLogout, insertPassword } = require('../contr
 const { dashboard, category, setCategory, blockCategory } = require('../controllers/admin/adminPageController')
 const { deleteProduct, addProduct, products, authProduct, editProduct, editProductAuth } = require('../controllers/admin/productController')
 const { customers, userBlock } = require('../controllers/admin/userController')
+const { orders } = require('../controllers/admin/orderController')
 
 const { adminLoginMiddleware, adminAccessMiddleware } = require('../middlewares/adminMiddleware')
 const errormiddleware = require('../middlewares/errorMiddleware')
@@ -35,5 +36,7 @@ router.get('/category/block', blockCategory)
 
 router.get('/customers', adminAccessMiddleware, customers)
 router.get('/customers/block', userBlock)
+
+router.get('/orders', adminAccessMiddleware, orders)
 
 module.exports = router

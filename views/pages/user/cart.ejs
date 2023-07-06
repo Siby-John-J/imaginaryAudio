@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/home/cartStyle.css">
-    <title>Cart</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/home/cartStyle.css">
+        <title>Cart</title>
+        <script defer src="/js/addressPanel.js"></script>
+    </head>
 <body>
     <%- include('../../layouts/header.ejs') %>
     <div class="main-cart">
@@ -52,9 +53,9 @@
                             </div>
                         </div>
                     <% } %>
-                <% } else { %>
+                    <% } else { %>
                     <h1 class="no-it">No items</h1>
-                <% } %>
+                    <% } %>
             </div>
         </div>
         <div class="summary">
@@ -79,7 +80,34 @@
                         <label for="">TOTAL COST</label>
                         <label for="">$5550</label>
                     </div>
-                    <button class="checkout-btn">CHECKOUT</button>
+                    <button onclick="adding()" class="checkout-btn">CHECKOUT</button>
+                    
+                    <div style="display: <%= visible %>;" class="add-address-checkout">
+                        <button class="close-btn" onclick="closeAdd()">X</button>
+                        <a class="ad-add-btn" href="/<%= user%>/address?type=checkout">
+                            <% if(address === 'add') { %>
+                                <div class="main-checkout-address">
+                                    <label for="">Address1</label>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                        Architecto vero fuga possimus? Ipsum sed iste nobis non, 
+                                        temporibus atque vitae!
+                                    </p>
+                                </div>
+                                <% } else { %>
+                                    click here
+                                    <% } %>
+                                </a>
+                        <button onclick="order()" class="place-order-btn">Place order</button>
+                    </div>
+                    
+                    <div class="place-order-label">
+                        <img src="/img/icons/3500833.png" alt="">
+                        <h1>Youre Order Placed</h1>
+                        <div class="order-control-btns">
+                            <a class="show-order" href="">show orders</a>
+                            <button class="order-ok" onclick="order('ent')">ok</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

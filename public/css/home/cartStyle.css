@@ -202,3 +202,109 @@ body {
     color: #bebebe;
     margin-top: 4em;
 }
+
+/* add address popup */
+
+.add-address-checkout {
+    border-radius: 10px;
+    position: absolute;
+    height: 50vh;
+    width: 40vw;
+    left: 14em;
+    top: 10em;
+    display: none;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-evenly;
+    background-color: white;
+    border: 2px solid black;
+}
+
+.add-address-checkout .ad-add-btn {
+    text-align: center;
+    border: 1px solid black;
+    padding: 10vh 20vh;
+    color: black;
+}
+
+.add-address-checkout .place-order-btn {
+    padding: 10px 30px;
+    border: none;
+    border-radius: 10px;
+    background-color: crimson;
+    color: white;
+    cursor: pointer;
+}
+
+.add-address-checkout .close-btn {
+    color: white;
+    position: absolute;
+    right: 1.6em;
+    top: 1em;
+    border-radius: 20px;
+    border: none;
+    height: 2em;
+    width: 2em;
+    background-color: black;
+    cursor: pointer;
+}
+
+.main-checkout-address {
+    border: 1px solid;
+    padding: 0;
+    height: 111%;
+    width: 89%;
+    margin-left: 29px;
+    color: black;
+}
+
+/* place order */
+
+.place-order-label {
+    border-radius: 10px;
+    position: absolute;
+    height: 50vh;
+    width: 40vw;
+    left: 14em;
+    top: 10em;
+    display: none;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-evenly;
+    background-color: white;
+    border: 2px solid black;
+}
+
+.place-order-label img {
+    width: 130px;
+}
+
+.place-order-label h1 {
+    color: green;
+}
+
+.order-control-btns {
+    color: black;
+    /* background-color: royalblue; */
+    padding: 13px 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.order-control-btns a, button {
+    color: white;
+    padding: 7px 10px;
+    border-radius: 8px;
+    margin-left: 1em;
+    border: none;
+}
+
+.order-control-btns .show-order {
+    background-color: green;
+}
+
+.order-control-btns .order-ok {
+    background-color: red;
+}
+

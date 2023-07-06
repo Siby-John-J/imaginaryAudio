@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/user/userProfile.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="main-win">
+        <div class="select">
+            <div class="profile-details">
+                <div class="profile-pic">
+    
+                </div>
+                <label id="name">name</label>
+                <label id="email">name@gmail.com</label>
+            </div>
+            <div class="select-fields">
+                <a href="/<%= user %>/profile">profile</a>
+                <a href="/<%= user %>/orders">orders</a>
+                <a href="/<%= user %>/address?type=view">address</a>
+                <a href="/<%= user %>/cart">cart</a>
+                <a href="/logout">logout</a>
+            </div>
+        </div>
+        
+        <div class="contents">
+            <%- include('./header.ejs')%>
+            <div class="details">
+                <% if(page === 'profile') { %>
+                    <%- include('./profile.ejs')%>
+                <% } else if(page === 'orders') { %>
+                    <%- include('./orders.ejs')%>
+                <% } else if(page === 'address') { %>
+                    <%- include('./address.ejs')%>
+                <% } else if(page === 'cart') { %>
+                    <%- include('../cart.ejs')%>
+                <% } %>
+            </div>  
+        </div>
+    </div>
+</body>
+</html>
