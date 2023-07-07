@@ -12,20 +12,20 @@ module.exports.cart = async(req, res) => {
         
         if(user.cart.length <= 0) {
             res.render('pages/user/cart', {user: req.session.username, 
-                data: null, address: '', visible: 'none'})
+                data: null, address: '', visible: 'none', popup: ''})
         } else {
             for(let i of user.cart) {
                 let products = await itemmodel.findOne({_id: i.item})
                 data.push([products, i.count])
             }
-
+            
             if(req.body.option) {
                 res.render('pages/user/cart', {user: req.session.username, 
-                    data: data, address: 'add', visible: 'flex'})
+                    data: data, address: ['add', req.body.option], visible: 'flex', popup: ''})
                 // check the datbase with user address 
             } else {
                 res.render('pages/user/cart', {user: req.session.username, 
-                    data: data, address: '', visible: 'none'})
+                    data: data, address: '', visible: 'none', popup: ''})
             }
         }
     } else {

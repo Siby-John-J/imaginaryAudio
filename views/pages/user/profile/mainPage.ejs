@@ -11,16 +11,16 @@
         <div class="select">
             <div class="profile-details">
                 <div class="profile-pic">
-    
+                    
                 </div>
-                <label id="name">name</label>
-                <label id="email">name@gmail.com</label>
+                <label id="name"><%= data.name %></label>
+                <label id="email"><%= data.email %></label>
             </div>
             <div class="select-fields">
-                <a href="/<%= user %>/profile">profile</a>
-                <a href="/<%= user %>/orders">orders</a>
-                <a href="/<%= user %>/address?type=view">address</a>
-                <a href="/<%= user %>/cart">cart</a>
+                <a href="/<%= data.name %>/profile">profile</a>
+                <a href="/<%= data.name %>/orders">orders</a>
+                <a href="/<%= data.name %>/address?type=view">address</a>
+                <a href="/<%= data.name %>/cart">cart</a>
                 <a href="/logout">logout</a>
             </div>
         </div>

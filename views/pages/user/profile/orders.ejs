@@ -10,52 +10,49 @@
     <h1>Your Orders</h1>
 
     <div class="main-order-panel">
-        <div class="order1">
-            <div class="order-details">
-                <div class="od-con order-id">
-                    <label class="od-title" for="">order id</label>
-                    <label class="od-content" for="">#3431</label>
-                </div>
-                <div class="od-con order-date">
-                    <label class="od-title" for="">date purchased</label>
-                    <label class="od-content" for="">09/11/2023</label>
-                </div>
-                <div class="od-con arrive-date">
-                    <label class="od-title" for="">date arriving</label>
-                    <label class="od-content" for="">09/11/2026</label>
-                </div>
-                <a class="m-ord" href="">Manage Order</a>
-            </div>
-            <div class="process-bar">
-                <div class="process-graph">
-                    <div class="pending">
-                        <img src="/img/icons/pngfind.com-check-mark-symbol-png-2546448.png" alt="" srcset="">
+        <% if(cart.length > 0) { %>
+            <div class="order1">
+                <div class="order-details">
+                    <div class="od-con order-id">
+                        <label class="od-title" for="">order id</label>
+                        <label class="od-content" for="">#3431</label>
                     </div>
-                    <div class="processing"></div>
-                    <div class="shipped"></div>
-                </div>
-            </div>
-            <div class="total-products">
-                <div class="prod1">
-                    <div class="prod-pic">
-                        <img src="/img/6850Sennheiser-HD-200-PRO.jpg" alt="">
+                    <div class="od-con order-date">
+                        <label class="od-title" for="">date purchased</label>
+                        <label class="od-content" for="">09/11/2023</label>
                     </div>
-                    <div class="prod-contents">
-                        <label for="">Audient id4</label>
-                        <label for="">audio interface</label>
+                    <div class="od-con arrive-date">
+                        <label class="od-title" for="">date arriving</label>
+                        <label class="od-content" for="">09/11/2026</label>
+                    </div>
+                    <a class="m-ord" href="/<%= user %>/orders/remove_order?id=<%= cart[0] %>">Delete Order</a>
+                </div>
+                <div class="process-bar">
+                    <div class="process-graph">
+                        <div class="pending">
+                            <img src="/img/icons/pngfind.com-check-mark-symbol-png-2546448.png" alt="" srcset="">
+                        </div>
+                        <div class="processing"></div>
+                        <div class="shipped"></div>
                     </div>
                 </div>
-                <div class="prod1">
-                    <div class="prod-pic">
-                        <img src="/img/6850Sennheiser-HD-200-PRO.jpg" alt="">
-                    </div>
-                    <div class="prod-contents">
-                        <label for="">Audient id4</label>
-                        <label for="">audio interface</label>
-                    </div>
+                <div class="total-products">
+                    <% for(let i = 1; i < cart.length; i++) { %>
+                        <div class="prod1">
+                            <div class="prod-pic">
+                                <img src="/img/<%= cart[i][0].image[0]%>" alt="">
+                            </div>
+                            <div class="prod-contents">
+                                <label for=""><%= cart[i][0].name%></label>
+                                <label for=""><%= cart[i][0].category%></label>
+                            </div>
+                        </div>
+                    <% } %>
                 </div>
             </div>
-        </div>
+        <% } else { %>
+            <h1>No items</h1>
+        <% } %>
     </div>
 </body>
 </html>

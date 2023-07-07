@@ -10,7 +10,7 @@ function closeAdd() {
     addAddress[0].style.display = 'none'
 }
 
-function order(ent='') {
+function order(event, ent='') {
     if(ent === 'ent') {
         orderClose[0].style.display = 'none'
     } else {

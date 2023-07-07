@@ -10,28 +10,29 @@
 <body>
     <h1>Address</h1>
     <div class="main-address-panel">
-        <div class="address1">
-            <div class="adPart1">
-                <% if(type === 'checkout') { %>
-                    <form action="/<%= user%>/cart" method="post">
-                        <input style="margin-left: 2em;" type="radio" name="option" value="address1">
+        <% for(let i = 0; i < data.address.length; i++) { %>
+            <div class="address1">
+                <div class="adPart1">
+                    <% if(type === 'checkout') { %>
+                        <form action="/<%= user %>/cart" method="post">
+                            <input style="margin-left: 2em;" type="radio"
+                             name="option" value="<%= data.address[i].address %>">
+                            <label for="">Address1</label>
+                            <p>
+                                <%= data.address[i].address %>
+                            </p>
+                            <button class="popup" onclick="action()">Add</button>
+                        </form>
+                    <% } else { %>
                         <label for="">Address1</label>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                            Architecto vero fuga possimus? Ipsum sed iste nobis non, 
-                            temporibus atque vitae!
+                        <p>
+                            <%= data.address[i].address %>
                         </p>
-                        <button class="popup" onclick="action()">Add</button>
-                    </form>
-                <% } else { %>
-                    <label for="">Address1</label>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Architecto vero fuga possimus? Ipsum sed iste nobis non, 
-                        temporibus atque vitae!
-                    </p>
-                    <button class="popup" onclick="action()">Edit</button>
-                <% } %>
+                        <button class="popup" onclick="action()">Edit</button>
+                    <% } %>
+                </div>
             </div>
-        </div>
+        <% } %>
         <div class="ad-bottom">
             <button class="addAddressBtn" onclick="action()">Add Address</button>
         </div>
@@ -39,10 +40,9 @@
     <div class="add-address">
         <h1>New Address</h1>
         <button class="close-form" onclick="closeBar()">X</button>
-        <form action="" method="">
-            
-            <input placeholder="first name" name="first-name" type="text">
-            <input placeholder="last name" name="last-name" type="text">
+        <form action="/<%= user %>/address/add_address" method="post">
+            <input placeholder="first name" name="firstname" type="text">
+            <input placeholder="last name" name="lastname" type="text">
             <input placeholder="email address" name="email" type="text">
             <input placeholder="telephone" name="phone" type="text">
             <input placeholder="address" name="address" type="text">

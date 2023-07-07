@@ -53,9 +53,9 @@
                             </div>
                         </div>
                     <% } %>
-                    <% } else { %>
+                <% } else { %>
                     <h1 class="no-it">No items</h1>
-                    <% } %>
+                <% } %>
             </div>
         </div>
         <div class="summary">
@@ -70,7 +70,11 @@
                 </div>
                 <div class="inp-fields">
                     <label for="">SHIPPING</label>
-                    <input  class="control" type="text">
+                    <select name="" class="control">
+                        <option value="">Cash on delivery</option>
+                        <option value="">Paypal</option>
+                        <option value="">Razorpay</option>
+                    </select>
                     <label for="">PROMO CODE</label>
                     <input class="control" type="text">
                     <button class="control ap-btn">APPLY</button>
@@ -85,29 +89,36 @@
                     <div style="display: <%= visible %>;" class="add-address-checkout">
                         <button class="close-btn" onclick="closeAdd()">X</button>
                         <a class="ad-add-btn" href="/<%= user%>/address?type=checkout">
-                            <% if(address === 'add') { %>
+                            <% if(address[0] === 'add') { %>
                                 <div class="main-checkout-address">
                                     <label for="">Address1</label>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto vero fuga possimus? Ipsum sed iste nobis non, 
-                                        temporibus atque vitae!
+                                    <p>
+                                        <%= address[1] %>
                                     </p>
                                 </div>
-                                <% } else { %>
-                                    click here
-                                    <% } %>
-                                </a>
-                        <button onclick="order()" class="place-order-btn">Place order</button>
+                            <% } else { %>
+                                add address
+                            <% } %>
+                        </a>
+                        <form action="/<%= user %>/orders/place_order?data=<%= address[1] %>" method="post">
+                            <button class="place-order-btn">Place order</button>
+                        </form>
+                        <!-- <button onclick="order(event, '')" class="place-order-btn">Place order</button> -->
                     </div>
                     
-                    <div class="place-order-label">
-                        <img src="/img/icons/3500833.png" alt="">
-                        <h1>Youre Order Placed</h1>
-                        <div class="order-control-btns">
-                            <a class="show-order" href="">show orders</a>
-                            <button class="order-ok" onclick="order('ent')">ok</button>
+                    <% if(popup === 'true') { %>
+                        <div class="place-order-label">
+                            <img src="/img/icons/3500833.png" alt="">
+                            <h1>Youre Order Placed</h1>
+                            <div class="order-control-btns">
+                                <form action="/<%= user %>/orders">
+                                    <button class="show-order" href="">show orders</button>
+                                </form>
+                                <button class="order-ok" onclick="order(event, 'ent')">ok</button>
+                                <!-- <button class="order-ok" onclick="order(event, 'ent')">ok</button> -->
+                            </div>
                         </div>
-                    </div>
+                    <% } %>
                 </div>
             </div>
         </div>

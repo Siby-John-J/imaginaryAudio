@@ -8,32 +8,66 @@
 </head>
 <body>
     <h1>Profile</h1>
-    <div class="profile-contents">
-        <div class="content1">
-            <label for="">name</label>
-            <input type="text">
+    <form action="/<%= data.name %>/profile" method="post">
+        <div class="profile-contents">
+            <% if(content === 'edit') { %>
+                <div class="content1">
+                    <label for="">name</label>
+                    <input type="text" value="<%= data.name %>" name="name">
+                </div>
+                <div class="content1">
+                    <label for="">email</label>
+                    <input type="text" value="<%= data.email %>" name="email">
+                </div>
+                <div class="content1">
+                    <label for="">phone</label>
+                    <input type="text" value="<%= data.phone %>" name="phone">
+                </div>
+                <div class="content1">
+                    <label for="">postal code</label>
+                    <input type="text" value="<%= data.address[0].zip %>" name="postal">
+                </div>
+                <div class="content1">
+                    <label for="">location</label>
+                    <input type="text" value="<%= data.address[0].town %>" name="city">
+                </div>
+                <div class="content1">
+                    <label for="">name</label>
+                    <input type="text" value="<%= data.address[0].region %>" name="country">
+                </div>
+                <button class="profile-edit-btn">Save</button>
+            <% } else { %>
+                <div class="content1">
+                    <label for="">name</label>
+                    <label for="" class="label"><%= data.name%></label>
+                </div>
+                <div class="content1">
+                    <label for="">email</label>
+                    <label for="" class="label"><%= data.email %></label>
+                </div>
+                <div class="content1">
+                    <label for="">phone</label>
+                    <label for="" class="label"><%= data.phone%></label>
+                </div>
+                <div class="content1">
+                    <label for="">postal code</label>
+                    <label for="" class="label"><%= data.address[0].zip %></label>
+                </div>
+                <div class="content1">
+                    <label for="">town</label>
+                    <label for="" class="label"><%= data.address[0].town %></label>
+                </div>
+                <div class="content1">
+                    <label for="">region</label>
+                    <label for="" class="label"><%= data.address[0].region %></label>
+                </div>
+            <% } %>
         </div>
-        <div class="content1">
-            <label for="">email</label>
-            <input type="text">
-        </div>
-        <div class="content1">
-            <label for="">phone</label>
-            <input type="text">
-        </div>
-        <div class="content1">
-            <label for="">postal code</label>
-            <input type="text">
-        </div>
-        <div class="content1">
-            <label for="">location</label>
-            <input type="text">
-        </div>
-        <div class="content1">
-            <label for="">name</label>
-            <input type="text">
-        </div>
-    </div>
-    <button class="profile-edit-btn">Edit</button>
+    </form>
+    <% if(content === 'edit') { %>
+        
+    <% } else { %>
+        <a class="profile-edit-btn-2" href="<%= '/' + data.name + '/profile?type=edit' %>">Edit</a>
+    <% } %>
 </body>
 </html>
