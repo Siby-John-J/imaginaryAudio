@@ -11,10 +11,15 @@
     <%- include('../../layouts/header.ejs') %>
     <div class="main-cart">
         <div class="cart">
+            <% let total = 0 %>
+            <% let totalprice = 0 %>
             <div class="cart-title">
                 <h1>Shopping Cart</h1>
                 <% if(data) { %>
-                    <h1><%= data.length + ' items' %></h1>
+                    <% for(let i of data) { %>
+                        <% total += i[1] %>
+                    <% } %>
+                    <h1><%= total + ' items' %></h1>
                 <% } else { %>
                     <h1>0 items</h1>
                 <% } %>
@@ -50,6 +55,7 @@
                                 </div>
                                 <label>$<%= data[i][0].price%></label>
                                 <label>$<%= data[i][0].price * data[i][1]%></label>
+                                <% totalprice += data[i][0].price * data[i][1] %>
                             </div>
                         </div>
                     <% } %>
@@ -65,8 +71,8 @@
                 </div>
                 <hr style="margin-top: 2.3em; width: 20em; border-color: rgb(0, 0, 0);">
                 <div class="total-price">
-                    <label>ITEMS 3</label>
-                    <label>$4532</label>
+                    <label>ITEMS <%= total %></label>
+                    <label>$<%= totalprice %></label>
                 </div>
                 <div class="inp-fields">
                     <label for="">SHIPPING</label>
@@ -82,10 +88,20 @@
                 <div class="total-cost">
                     <div class="last-total">
                         <label for="">TOTAL COST</label>
-                        <label for="">$5550</label>
+                        <label for="">$<%= totalprice %></label>
                     </div>
-                    <button onclick="adding()" class="checkout-btn">CHECKOUT</button>
-                    
+                    <% if(data) { %>
+                        <button onclick="adding(<%= true %>)" class="checkout-btn">CHECKOUT</button>
+                    <% } else { %>
+                        <button onclick="adding(<%= false %>)" class="checkout-btn">CHECKOUT</button>
+                    <% } %>
+                    <div id="checkout-error">
+                        <label for="">You cannot order</label>
+                        <div class="ch-er-control">
+                            <a class="homepage" href="/<%= user %>/home">home</a>
+                            <a class="ok" href="">ok</a>
+                        </div>
+                    </div>
                     <div style="display: <%= visible %>;" class="add-address-checkout">
                         <button class="close-btn" onclick="closeAdd()">X</button>
                         <a class="ad-add-btn" href="/<%= user%>/address?type=checkout">
@@ -96,14 +112,20 @@
                                         <%= address[1] %>
                                     </p>
                                 </div>
-                            <% } else { %>
-                                add address
+                                <form action="/<%= user %>/orders/place_order?data=<%= address[1]%>&price=<%= totalprice %>" method="post">
+                                    <button class="place-order-btn">Place order</button>
+                                </form> 
+                                <% } else { %>
+                                    add address
+                                    <a href="">
+                                    </a>
+                                    <button onclick="noAddress()" class="place-order-btn">Placesus order</button>
                             <% } %>
                         </a>
-                        <form action="/<%= user %>/orders/place_order?data=<%= address[1] %>" method="post">
-                            <button class="place-order-btn">Place order</button>
-                        </form>
-                        <!-- <button onclick="order(event, '')" class="place-order-btn">Place order</button> -->
+                    </div>
+                    <div class="no-address-panel">
+                        <label for="">please select a address</label>
+                        <button onclick="adding(<%= true %>)">Ok</button>
                     </div>
                     
                     <% if(popup === 'true') { %>
@@ -115,7 +137,6 @@
                                     <button class="show-order" href="">show orders</button>
                                 </form>
                                 <button class="order-ok" onclick="order(event, 'ent')">ok</button>
-                                <!-- <button class="order-ok" onclick="order(event, 'ent')">ok</button> -->
                             </div>
                         </div>
                     <% } %>

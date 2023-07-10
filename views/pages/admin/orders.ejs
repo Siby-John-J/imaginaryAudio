@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/admin/orderStyle.css">
+    <script defer src="/js/editOrder.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -16,22 +17,65 @@
             <label for="">Price</label>
             <label for="">Payment</label>
             <label for="">Status</label>
+            <label for="">Action</label>
         </div>
         <div class="order-content">
-            <div class="order1">
-                <label for="">romy</label>
-                <label for="">adam a7x</label>
-                <label for="">$1432</label>
-                <label for="">cash on delivery</label>
-                <label class="ord-proc" for="">in progress</label>
-            </div>
-            <div class="order1">
-                <label for="">romy</label>
-                <label for="">adam a7x</label>
-                <label for="">$1432</label>
-                <label for="">cash on delivery</label>
-                <label class="ord-proc" for="">in progress</label>
-            </div>
+            <% let num = 0 %>
+            <% for(let i of data) { %>
+                <div class="order1">
+                    <label for=""><%= i.user %></label>
+                    <label for="">
+                        <% if(i.products.length > 1) { %>
+                            <select style="border: none; outline: none;" name="" id="">
+                                <% for(let j of i.products) { %>
+                                    <option value=""><%= j %></option>
+                                <% } %>
+                            </select>
+                        <% } else { %>
+                            <%= i.products[0] %>
+                        <% } %>
+                    </label>
+                    <label for="">$<%= i.price %></label>
+                    <label for=""><%= i.payment %></label>
+                    <% if(i.status === 'cancel') { %>
+                        <label style="background-color: red;" class="ord-proc" for=""><%= i.status %></label>
+                    <% } else if(i.status === 'pending') { %>
+                        <label style="background-color: yellow;" class="ord-proc" for=""><%= i.status %></label>
+                    <% } else if(i.status === 'delivered') { %>
+                        <label style="background-color: green;" class="ord-proc" for=""><%= i.status %></label>
+                    <% } else if(i.status === 'progress') { %>
+                        <label style="background-color: blue;" class="ord-proc" for=""><%= i.status %></label>
+                    <% } %>
+                    <label class="ord-edit" for="">
+                        <% if(i.status === 'cancel') { %>
+                            <button style="opacity: 0.6;" onclick="disable()">edit</button>
+                        <% } else { %>
+                            <button onclick="call(<%= num %>)">edit</button>
+                        <% } %>
+                    </label>
+                    <div id="no-edit">
+                        <label for="">You cannot edit this product</label>
+                        <a style="font-size: 20px;" href="">Ok</a>
+                    </div>
+                    <div class="ord-popup">
+                        <label for="">Edit order</label>
+                        <form action="/admin/orders/edit_order" method="post">
+                            <input style="display: none;" name="id" value="<%= i.orderid %>" type="text">
+                            <select name="status" id="">
+                                <option value="pending">Pending</option>
+                                <option value="progress">In progress</option>
+                                <option value="delivered">Delivered</option>
+                                <option value="cancel">Return</option>
+                            </select>
+                            <div style="margin-top: 1.5em;" class="action-btns">
+                                <a style="border-radius: 5px; background-color: red; font-size: 0.9em;" href="">Cancel</a>
+                                <button>Submit</button> 
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <% num++ %>
+            <% } %>
         </div>
     </div>
 </body>

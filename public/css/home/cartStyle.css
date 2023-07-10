@@ -234,6 +234,9 @@ body {
     background-color: crimson;
     color: white;
     cursor: pointer;
+    position: absolute;
+    left: 13em;
+    top: 23em;
 }
 
 .add-address-checkout .close-btn {
@@ -306,5 +309,64 @@ body {
 
 .order-control-btns .order-ok {
     background-color: red;
+}
+
+#checkout-error {
+    position: absolute;
+    background-color: rgb(161, 161, 255);
+    left: 30em;
+    top: 20em;
+    width: 15em;
+    height: 8em;
+    border-radius: 5px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#checkout-error .ch-er-control {
+    margin-bottom: 30px;
+    width: 52%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#checkout-error .homepage {
+    color: white;
+    text-decoration: none;
+    background-color: blue;
+    border-radius: 3px;
+    padding: 3px 7px;
+}
+
+#checkout-error .ok {
+    color: white;
+    text-decoration: none;
+    background-color: coral;
+    border-radius: 3px;
+    padding: 3px 7px;
+}
+
+.no-address-panel {
+    display: none;
+    background-color: rgb(99, 99, 247);
+    height: 9em;
+    width: 16em;
+    position: absolute;
+    top: 18em;
+    left: 26em;
+    border-radius: 8px;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.no-address-panel button {
+    background-color: red;
+    padding: 3px 5px;
+    width: 5em;
+    border-radius: 4px;
 }
 

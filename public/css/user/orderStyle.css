@@ -6,6 +6,8 @@
     display: flex;
     justify-content: center;
     font-family: sans-serif;
+    flex-direction: column;
+    text-align: center;
 }
 
 .main-order-panel .order1 {
@@ -138,4 +140,16 @@
     flex-direction: column;
     justify-content: space-evenly;
     /* background-color: royalblue; */
+}
+
+/* order popup */
+
+#view-order {
+    background-color: rebeccapurple;
+    display: none;
+    height: 31em;
+    width: 43em;
+    position: absolute;
+    left: 34em;
+    top: 11em;
 }

@@ -10,28 +10,37 @@
 <body>
     <h1>Address</h1>
     <div class="main-address-panel">
-        <% for(let i = 0; i < data.address.length; i++) { %>
-            <div class="address1">
-                <div class="adPart1">
-                    <% if(type === 'checkout') { %>
-                        <form action="/<%= user %>/cart" method="post">
-                            <input style="margin-left: 2em;" type="radio"
-                             name="option" value="<%= data.address[i].address %>">
-                            <label for="">Address1</label>
+        <% if(data.address.length > 0) { %>
+            <% for(let i = 0; i < data.address.length; i++) { %>
+                <div class="address1">
+                    <div class="adPart1">
+                        <% if(type === 'checkout') { %>
+                            <form action="/<%= user %>/cart" method="post">
+                                <input style="margin-left: 2em;" type="radio"
+                                    name="option" value="<%= data.address[i].address %>">
+                                <label for="">Address <%= i + 1%></label>
+                                <p>
+                                    <%= data.address[i].address %>
+                                </p>
+                                <button class="popup" onclick="action('')">Add</button>
+                            </form>
+                        <% } else { %>
+                            <div style=" display: flex; justify-content: space-between; width: 33vw;" class="address-title">
+                                <label for="">Address <%= i + 1%></label>
+                                <a href="/<%= user %>/address/delete_address?pos=<%= data.address[i].zip %>">
+                                    <img style="width: 1.3em;" src="/img/icons/icons8-delete-120.png" alt="">
+                                </a>
+                            </div>
                             <p>
                                 <%= data.address[i].address %>
                             </p>
-                            <button class="popup" onclick="action()">Add</button>
-                        </form>
-                    <% } else { %>
-                        <label for="">Address1</label>
-                        <p>
-                            <%= data.address[i].address %>
-                        </p>
-                        <button class="popup" onclick="action()">Edit</button>
-                    <% } %>
+                            <a class="popup" href="/<%= user %>/address/edit_address?data=<%= data.address[i].firstname %>">Edit</a>
+                        <% } %>
+                    </div>
                 </div>
-            </div>
+            <% } %>
+        <% } else { %>
+            <h1 style="text-align: center;">No items</h1>
         <% } %>
         <div class="ad-bottom">
             <button class="addAddressBtn" onclick="action()">Add Address</button>
@@ -40,16 +49,10 @@
     <div class="add-address">
         <h1>New Address</h1>
         <button class="close-form" onclick="closeBar()">X</button>
-        <form action="/<%= user %>/address/add_address" method="post">
-            <input placeholder="first name" name="firstname" type="text">
-            <input placeholder="last name" name="lastname" type="text">
-            <input placeholder="email address" name="email" type="text">
-            <input placeholder="telephone" name="phone" type="text">
-            <input placeholder="address" name="address" type="text">
-            <input placeholder="town" name="town" type="text">
-            <input placeholder="region/state" name="state" type="text">
-            <input placeholder="zip/postal code" name="zip" type="text">
-
+        <form class="edit_add_form" action="/<%= user %>/address/add_address" method="post">
+                <% for(let i in form) { %>
+                    <input name="<%= i %>" placeholder="<%= i %>" type="text">
+                <% } %>
             <button class="submit-form" onclick="closeBar()">Submit</button>
         </form>
     </div>

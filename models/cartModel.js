@@ -3,8 +3,8 @@ const db = require('../config/db')
 const mongoose = require('mongoose')
 
 const cartSchema = mongoose.Schema({
-    product: Object,
-    count: Number
+    user: Object,
+    products: Array
 })
 
 const cart = db.model('cart', cartSchema)

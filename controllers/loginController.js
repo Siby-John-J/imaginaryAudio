@@ -61,6 +61,7 @@ module.exports.checkEmail = (req, res) => {
 }
 
 module.exports.auth = (req, res) => {
+    console.log(req.body)
     if(req.body.email && req.body.password) {
         usermodel.findOne({
             email: req.body.email

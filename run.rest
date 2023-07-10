@@ -1,0 +1,9 @@
+
+
+POST http://localhost:2000/arya/home
+Content-Type: multipart/form-data
+
+{
+    "email" : "arya@gmail.com",
+    "password" : "cute"
+}

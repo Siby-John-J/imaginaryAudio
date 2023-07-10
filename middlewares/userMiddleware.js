@@ -4,5 +4,5 @@ module.exports = userMiddleware = (req, res, next) => {
     res.setHeader('Pragma', 'no-cache')
     res.setHeader('Expires', '0')
     
-    next() 
+    next()
 }

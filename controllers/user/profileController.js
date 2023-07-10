@@ -5,6 +5,7 @@ const addressmodel = require('../../models/addressModel')
 module.exports.profile = async(req, res) => {
     try {
         let data = await usermodel.findOne({name: req.session.username})
+        
         if(req.query.type === 'edit') {
             res.render('pages/user/profile/mainPage', {page: 'profile', 
             data: data, content: 'edit'})
@@ -18,17 +19,17 @@ module.exports.profile = async(req, res) => {
 }
 
 module.exports.address = async(req, res) => {
-    console.log(req.body)
-
     try {
         let data = await usermodel.findOne({name: req.session.username})
 
+        console.log(data.address)
+
         if(req.query.type === 'checkout') {
             res.render('pages/user/profile/mainPage', {page: 'address', 
-            data: data, user: req.session.username, type: 'checkout'})
+            data: data, user: req.session.username, type: 'checkout', form: ''})
         } else {
             res.render('pages/user/profile/mainPage', {page: 'address', 
-            data: data, user: req.session.username, type: 'view'})
+            data: data, user: req.session.username, type: 'view', form: data.address[0]})
             }
     } catch (error) {
 
@@ -52,8 +53,38 @@ module.exports.addAddress = async(req, res) => {
             { $push: { address: address } }
         )
 
-        res.send('req senede..')
+        res.redirect('/' + req.session.username + '/address')
     } catch (error) {
         console.log(error)
+    }
+}
+
+module.exports.removeAddress = async(req, res) => {
+    try {
+        const position = Number(req.query.pos)
+        
+        let del_address = await usermodel.updateOne(
+            { name: req.session.username },
+            { $pull: { address: {zip: position} } }
+        )
+        
+        res.redirect('/' + req.session.username + '/address')
+    } catch (error) {
+        
+    }
+}
+
+module.exports.editAddress = async(req, res) => {
+    try {
+        const dat = req.query.data
+        
+        let edit_address = await usermodel.findOne(
+            { name: req.session.username },
+            { address: dat }
+        )
+
+        res.redirect('/' + req.session.username + '/address')
+    } catch (error) {
+        
     }
 }

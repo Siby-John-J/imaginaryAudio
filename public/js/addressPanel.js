@@ -1,9 +1,18 @@
 
 const addAddress = document.getElementsByClassName('add-address-checkout')
+const noaddress = document.getElementsByClassName('no-address-panel')
+// const noadpop = document.getElementsByClassName('place-order-btn')
+
+const errorCheckout = document.getElementById('checkout-error')
 const orderClose = document.getElementsByClassName('place-order-label')
 
-function adding() {
-    addAddress[0].style.display = 'flex'
+function adding(data) {
+    if(data) {
+        addAddress[0].style.display = 'flex'
+        noaddress[0].style.display = 'none'
+    } else {
+        errorCheckout.style.display = 'flex'
+    }
 }
 
 function closeAdd() {
@@ -17,4 +26,9 @@ function order(event, ent='') {
         addAddress[0].style.display = 'none'
         orderClose[0].style.display = 'flex'
     }
+}
+
+function noAddress() {
+    addAddress[0].style.display = 'none'
+    noaddress[0].style.display = 'flex'
 }

@@ -25,21 +25,21 @@
                 </div>
                 <div class="content1">
                     <label for="">postal code</label>
-                    <input type="text" value="<%= data.address[0].zip %>" name="postal">
+                    <input type="text" value="<%= data.address[0] ? data.address[0].zip : 'none' %>" name="postal">
                 </div>
                 <div class="content1">
                     <label for="">location</label>
-                    <input type="text" value="<%= data.address[0].town %>" name="city">
+                    <input type="text" value="<%= data.address[0] ? data.address[0].town : 'none' %>" name="city">
                 </div>
                 <div class="content1">
                     <label for="">name</label>
-                    <input type="text" value="<%= data.address[0].region %>" name="country">
+                    <input type="text" value="<%= data.address[0] ? data.address[0].region : 'none' %>" name="country">
                 </div>
                 <button class="profile-edit-btn">Save</button>
             <% } else { %>
                 <div class="content1">
                     <label for="">name</label>
-                    <label for="" class="label"><%= data.name%></label>
+                    <label for="" class="label"><%= data.name %></label>
                 </div>
                 <div class="content1">
                     <label for="">email</label>
@@ -51,15 +51,15 @@
                 </div>
                 <div class="content1">
                     <label for="">postal code</label>
-                    <label for="" class="label"><%= data.address[0].zip %></label>
+                    <label for="" class="label"><%= data.address[0] ? data.address[0].zip : 'none' %></label>
                 </div>
                 <div class="content1">
                     <label for="">town</label>
-                    <label for="" class="label"><%= data.address[0].town %></label>
+                    <label for="" class="label"><%= data.address[0] ? data.address[0].town : 'none' %></label>
                 </div>
                 <div class="content1">
                     <label for="">region</label>
-                    <label for="" class="label"><%= data.address[0].region %></label>
+                    <label for="" class="label"><%= data.address[0] ? data.address[0].region : 'none' %></label>
                 </div>
             <% } %>
         </div>

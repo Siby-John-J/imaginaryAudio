@@ -2,7 +2,6 @@
 const cartmodel = require('../../models/cartModel')
 const usermodel = require('../../models/userModel')
 const { itemmodel } = require('../../models/productsModel')
-const { ObjectId } = require('mongodb')
 
 module.exports.cart = async(req, res) => {
     let data = []

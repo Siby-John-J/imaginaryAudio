@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/user/orderStyle.css">
+    <script defer src="/js/viewOrder.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -11,45 +12,62 @@
 
     <div class="main-order-panel">
         <% if(cart.length > 0) { %>
-            <div class="order1">
-                <div class="order-details">
-                    <div class="od-con order-id">
-                        <label class="od-title" for="">order id</label>
-                        <label class="od-content" for="">#3431</label>
-                    </div>
-                    <div class="od-con order-date">
-                        <label class="od-title" for="">date purchased</label>
-                        <label class="od-content" for="">09/11/2023</label>
-                    </div>
-                    <div class="od-con arrive-date">
-                        <label class="od-title" for="">date arriving</label>
-                        <label class="od-content" for="">09/11/2026</label>
-                    </div>
-                    <a class="m-ord" href="/<%= user %>/orders/remove_order?id=<%= cart[0] %>">Delete Order</a>
-                </div>
-                <div class="process-bar">
-                    <div class="process-graph">
-                        <div class="pending">
-                            <img src="/img/icons/pngfind.com-check-mark-symbol-png-2546448.png" alt="" srcset="">
-                        </div>
-                        <div class="processing"></div>
-                        <div class="shipped"></div>
-                    </div>
-                </div>
-                <div class="total-products">
-                    <% for(let i = 1; i < cart.length; i++) { %>
+            <% for(let i of cart) { %>
+                <div id="view-order">
+                    <% for(let j of i.details) { %>
                         <div class="prod1">
                             <div class="prod-pic">
-                                <img src="/img/<%= cart[i][0].image[0]%>" alt="">
+                                <img src="/img/<%= j.img %>" alt="">
                             </div>
                             <div class="prod-contents">
-                                <label for=""><%= cart[i][0].name%></label>
-                                <label for=""><%= cart[i][0].category%></label>
+                                <label for=""><%= j.name %></label>
+                                <!-- <label for=""><%= i.price %></label> -->
                             </div>
+                            <a href="">close</a>
                         </div>
                     <% } %>
                 </div>
-            </div>
+                <div class="order1">
+                    <div class="order-details">
+                        <div class="od-con order-id">
+                            <label class="od-title" for="">order id</label>
+                            <label class="od-content" for=""><%= i.orderid %></label>
+                        </div>
+                        <div class="od-con order-date">
+                            <label class="od-title" for="">date purchased</label>
+                            <label class="od-content" for=""><%= i.purchase %></label>
+                        </div>
+                        <div class="od-con arrive-date">
+                            <label class="od-title" for="">date arriving</label>
+                            <label class="od-content" for=""><%= i.arriving %></label>
+                        </div>
+                        <a class="m-ord" href="/<%= user %>/orders/remove_order?id=<%= i %>">Cancel Order</a>
+                        <button onclick="vieworder()">View Order</button>
+                    </div>
+                    <div class="process-bar">
+                        <div class="process-graph">
+                            <div class="pending">
+                                <img src="/img/icons/pngfind.com-check-mark-symbol-png-2546448.png" alt="" srcset="">
+                            </div>
+                            <div class="processing"></div>
+                            <div class="shipped"></div>
+                        </div>
+                    </div>
+                    <div class="total-products">
+                        <% for(let j of i.details) { %>
+                            <div class="prod1">
+                                <div class="prod-pic">
+                                    <img src="/img/<%= j.img %>" alt="">
+                                </div>
+                                <div class="prod-contents">
+                                    <label for=""><%= j.name %></label>
+                                    <!-- <label for=""><%= i.price %></label> -->
+                                </div>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+            <% } %>
         <% } else { %>
             <h1>No items</h1>
         <% } %>

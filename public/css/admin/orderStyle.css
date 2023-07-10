@@ -39,7 +39,7 @@ body {
 
 .order-content .order1 {
     display: grid;
-    grid-template-columns: 11.4em 8.9em 7.4em 11em 8em;
+    grid-template-columns: 11.4em 8.9em 7.4em 10em 8em 3em;
     height: 8%;
     /* background-color: tomato; */
     align-items: center;
@@ -54,4 +54,59 @@ body {
     padding: 6px 22px;
     color: white;
     border-radius: 18px;
+    text-align: center;
+}
+
+.order1 .ord-edit {
+    margin-left: 20px;
+}
+
+.ord-edit button {
+    
+}
+
+.ord-popup {
+    display: none;
+    height: 6em;
+    width: 12em;
+    background-color: blue;
+    flex-direction: column;
+    text-align: center;
+    border-radius: 7px;
+    color: white;
+    position: absolute;
+    left: 86em;
+    top: 11em;
+}
+
+.ord-popup button {
+    background-color: rgb(255, 105, 135);
+    border: none;
+    border-radius: 4px;
+    color: white;
+}
+
+.ord-popup select {
+    border: none;
+    outline: none;
+}
+
+.ord-popup form {
+    display: flex;
+    flex-direction: column;
+}
+
+#no-edit {
+    display: none;
+    background-color: #ff6464;
+    flex-direction: column;
+    position: absolute;
+    border-radius: 10px;
+    height: 90px;
+    top: 16em;
+    left: 49em;
+}
+
+#no-edit label {
+    padding: 1em 1em;
 }
