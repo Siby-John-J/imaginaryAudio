@@ -28,7 +28,8 @@ module.exports.homepageLoad = (req, res) => {
                                 for(let j of data2) {
                                     if(i['name'] === j['category']) {
                                         fulldata[i['name']]
-                                        .push({name: j['name'], price: j['price'], image: j['image']})
+                                        .push({name: j['name'], price: j['price'], 
+                                        image: j['image'], category: j['category']})
                                     }
                                 }
                             }

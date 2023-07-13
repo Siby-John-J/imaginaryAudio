@@ -9,7 +9,8 @@ let UserSchema = mongoose.Schema({
     status: Boolean,
     address: Array,
     wishlist: Array,
-    cart: Array
+    cart: Array,
+    details: Object
 })
 
 module.exports = db.model('user', UserSchema)

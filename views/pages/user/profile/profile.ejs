@@ -4,10 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/user/userProfile.css">
+    <script src="/js/changePassword.js"></script>
     <title>Document</title>
 </head>
 <body>
-    <h1>Profile</h1>
+    <!-- <div class="change-password-panel">
+        <div class="enter-pass-inp">
+            <label for="">Enter the password</label>
+            <input type="text">
+            <a href="">Enter</a>
+        </div>
+        <div class="change-pass-inp">
+            <label for="">Enter the new password</label>
+            <input type="text">
+            <label for="">Config the password</label>
+            <input type="text">
+            <a href="">Enter</a>
+        </div>
+    </div> -->
+    <div style="align-items: center; display: flex; flex-direction: row; justify-content: space-between;" class="profile-title">
+        <h1>Profile</h1>
+        <button onclick="password()" style="margin-right: 3em ;">Change Password</button>
+    </div>
     <form action="/<%= data.name %>/profile" method="post">
         <div class="profile-contents">
             <% if(content === 'edit') { %>
@@ -24,16 +42,16 @@
                     <input type="text" value="<%= data.phone %>" name="phone">
                 </div>
                 <div class="content1">
-                    <label for="">postal code</label>
-                    <input type="text" value="<%= data.address[0] ? data.address[0].zip : 'none' %>" name="postal">
-                </div>
-                <div class="content1">
                     <label for="">location</label>
-                    <input type="text" value="<%= data.address[0] ? data.address[0].town : 'none' %>" name="city">
+                    <input type="text" value="<%= data.details ? data.details.place : 'none' %>" name="place">
                 </div>
                 <div class="content1">
-                    <label for="">name</label>
-                    <input type="text" value="<%= data.address[0] ? data.address[0].region : 'none' %>" name="country">
+                    <label for="">age</label>
+                    <input type="text" value="<%= data.details ? data.details.age : 'none' %>" name="age">
+                </div>
+                <div class="content1">
+                    <label for="">DOB</label>
+                    <input type="text" value="<%= data.details ? data.details.dob : 'none' %>" name="dob">
                 </div>
                 <button class="profile-edit-btn">Save</button>
             <% } else { %>
@@ -50,16 +68,16 @@
                     <label for="" class="label"><%= data.phone%></label>
                 </div>
                 <div class="content1">
-                    <label for="">postal code</label>
-                    <label for="" class="label"><%= data.address[0] ? data.address[0].zip : 'none' %></label>
+                    <label for="">location</label>
+                    <label for="" class="label"><%= data.details ? data.details.place : 'none' %></label>
                 </div>
                 <div class="content1">
-                    <label for="">town</label>
-                    <label for="" class="label"><%= data.address[0] ? data.address[0].town : 'none' %></label>
+                    <label for="">age</label>
+                    <label for="" class="label"><%= data.details ? data.details.age : 'none' %></label>
                 </div>
                 <div class="content1">
-                    <label for="">region</label>
-                    <label for="" class="label"><%= data.address[0] ? data.address[0].region : 'none' %></label>
+                    <label for="">DOB</label>
+                    <label for="" class="label"><%= data.details ? data.details.dob : 'none' %></label>
                 </div>
             <% } %>
         </div>

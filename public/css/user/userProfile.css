@@ -206,3 +206,31 @@ body {
     font-family: sans-serif;
     text-decoration: none;
 }
+
+.change-password-panel {
+    background-color: gray;
+    height: 27em;
+    width: 20em;
+    position: absolute;
+    left: 46em;
+    top: 12em;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.change-pass-inp {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.enter-pass-inp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}

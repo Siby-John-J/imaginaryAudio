@@ -1,0 +1,232 @@
+
+
+.main-order-panel {
+    /* background-color: rgb(111, 111, 215); */
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    font-family: sans-serif;
+    flex-direction: column;
+    text-align: center;
+}
+
+.main-order-panel .order1 {
+    /* background-color: rgb(212, 212, 212); */
+    overflow-y: scroll;
+    width: 76%;
+    height: 95%;
+    border: 0.5px solid;
+    margin-left: 9em;
+}
+
+.order1 .order-details {
+    /* background-color: violet; */
+    height: 20%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.order1 .progress-bar {
+    /* background-color: rgb(202, 130, 238); */
+    height: 30%;
+}
+
+.order1 .total-products {
+    /* background-color: rgb(91, 82, 91); */
+    height: 22%;
+}
+
+/* order title */
+
+.order-details .od-con {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-evenly;
+}
+
+.order-details .od-title {
+    /* color: gray; */
+    font-size: 13px;
+}
+
+.order-details .m-ord {
+    color: black;
+    border: 1px solid;
+    padding: 10px;
+    text-decoration: none;
+}
+
+/* order progress */
+
+.process-graph {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.process-graph div {
+    height: 50px;
+    width: 50px;
+    /* background-color: green; */
+    border-radius: 50%;
+}
+
+.process-graph .pending {
+    background-color: rgb(200, 200, 200);
+}
+
+.process-graph .processing {
+    background-color: gray;
+}
+
+.process-graph .shipped {
+    background-color: gray;
+}
+
+.process-graph .pending::before {
+    content: '';
+    display: block;
+    height: 5px;
+    width: 15vw;
+    background-color: var(--afterBack, gray);
+    margin-top: 22px;
+}
+
+.process-graph .processing::before {
+    content: '';
+    display: block;
+    height: 5px;
+    width: 15vw;
+    background-color: var(--afterBack, gray);
+    margin-top: 22px;
+}
+
+.process-graph .pending img {
+    width: 30px;
+    margin-top: -7em;
+}
+
+.process-graph .processing img {
+    width: 30px;
+    margin-top: -7em;
+}
+
+.process-graph .shipped img {
+    width: 30px;
+    margin-top: 0.7em;
+}
+
+/* show products */
+
+.total-products {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    justify-content: space-evenly;
+}
+
+.total-products .prod1 {
+    display: flex;
+    flex-direction: row;
+    margin-left: 5em;
+}
+
+.prod1 .prod-pic {
+    /* background-color: red; */
+    height: 64px;
+    width: 64px;
+}
+
+.prod-pic img {
+    height: 100%;
+    width: 100%;
+}
+
+.prod1 .prod-contents {
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    justify-content: space-between;
+    margin-left: 1em;
+    width: 70%;
+    /* background-color: royalblue; */
+}
+
+.prod-contents .pd-p1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.order-others {
+    /* background-color: #868986; */
+    border-top: solid 1px black;
+    width: 100%;
+    height: 75%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.order-others .cons {
+    /* background-color: red; */
+    height: 99%;
+    width: 96%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding-left: 1em;
+}
+
+.order-subtotal {
+    display: flex;
+    /* background: cadetblue; */
+    flex-direction: row;
+    width: 90%;
+    height: 62%;
+    justify-content: space-between;
+}
+
+.order-total {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    height: 25%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ord-price {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    height: 100%;
+    /* background: rebeccapurple; */
+    justify-content: space-evenly;
+}
+
+.add-ord-details {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin-top: 0.5em;
+}
+
+.con-title {
+    font-size: 1.3em;
+    margin-bottom: 0.3em;
+    margin-top: 0.5em;
+}
+
+.process-title {
+    display: flex;
+    width: 79%;
+    height: 48px;
+    /* background: rebeccapurple; */
+    margin-left: 6em;
+    align-items: center;
+    justify-content: space-around;
+
+}

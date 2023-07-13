@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/user/orderView.css">
+    <script defer src="/js/orderBar.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <h1>ORDER-ID: <%= cart[0].orderid %></h1>
+    <div class="main-order-panel">
+        <div class="order1">
+            <div class="order-details">
+                <input class="input-show" style="display: none;" type="text" value="<%= cart[0].status %>">
+                <div class="od-con order-id">
+                    <label class="od-title" for="">order id <%= cart[0].status %></label>
+                    <label class="od-content" for=""><%= cart[0].orderid %></label>
+                </div>
+                <div class="od-con order-date">
+                    <label class="od-title" for="">date purchased</label>
+                    <label class="od-content" for=""><%= cart[0].purchase %></label>
+                </div>
+                <div class="od-con arrive-date">
+                    <label class="od-title" for="">date arriving</label>
+                    <label class="od-content" for=""><%= cart[0].arriving %></label>
+                </div>
+            </div>
+            <div class="process-bar">
+                <div class="process-graph">
+                    <div class="pending">
+                        <img id="img1" src="/img/icons/pngfind.com-check-mark-symbol-png-2546448.png" alt="" srcset="">
+                    </div>
+                    <div class="processing">
+                        <img id="img2" src="/img/icons/pngfind.com-check-mark-symbol-png-2546448.png" alt="" srcset="">
+                    </div>
+                    <div class="shipped">
+                        <img id="img3" src="/img/icons/pngfind.com-check-mark-symbol-png-2546448.png" alt="" srcset="">
+                    </div>
+                </div>
+                <div class="process-title">
+                    <label for="">Pending</label>
+                    <label for="">Processing</label>
+                    <label for="">Delivered</label>
+                </div>
+            </div>
+            <div class="total-products">
+                <% for(let j of cart[0].details) { %>
+                    <div class="prod1">
+                        <div class="prod-pic">
+                            <img src="/img/<%= j.img %>" alt="">
+                        </div>
+                        <div class="prod-contents">
+                            <div class="pd-p1">
+                                <label for=""><%= j.name %></label>
+                                <label for=""><%= j.cate %></label>
+                            </div>
+                            <div class="pd-p1">
+                                <label style="font-size: 1.3em;" for="">$<%= j.price %></label>
+                                <label for="">Qty:<%= j.quan %></label>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+            <div class="order-others">
+                <div class="cons payment-od">
+                    <label class="con-title" for="">Payment</label>
+                    <label for="">Cash on delivery</label>
+                </div>
+                <div class="cons address-od">
+                    <label class="con-title" for="">Delivery</label>
+                    <div style="text-align: start;" class="od-address-details">
+                        <label for="">Address</label>
+                        <div class="add-ord-details">
+                            <label for="">123 Main Street, Anytown, USA</label>
+                            <label for="">(555) 123-4567</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="cons need-help">
+                    <label class="con-title" for="">Need help?</label>
+                </div>
+                <div class="cons order-summary">
+                    <label class="con-title" style="font-size: 1.4em;" for="">Order summary</label>
+                    <div class="order-subtotal">
+                        <div class="ord-price order-sub-title">
+                            <label for="">Subtotal</label>
+                            <label for="">Discount</label>
+                            <label for="">Delivery</label>
+                            <label for="">Tax</label>
+                        </div>
+                        <div class="ord-price order-sub-content">
+                            <label for="">$3214</label>
+                            <label for="">(0%) - $0</label>
+                            <label for="">$0%</label>
+                            <label for="">+ $332.33</label>
+                        </div>
+                    </div>
+                    <div style="font-size: 24px;" class="order-total">
+                        <label for="">Total</label>
+                        <label for="">$3424</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -28,8 +28,6 @@ module.exports.orders = async(req, res) => {
             status: i.status,
             payment: i.payment,
         })
-        
-        console.log(i.status)
     }
     
     res.render('pages/admin/mainPage', {page: 'orders', data: data})

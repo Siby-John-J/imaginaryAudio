@@ -62,7 +62,7 @@ module.exports.removeFromCart = async(req, res) => {
 
 module.exports.countCart = async(req, res) => {
     let user = await usermodel.findOne({name: req.session.username}, {cart: 1})
-
+    
     for(let i of user.cart) {
         if(i.item.toString() === req.query.item) {
             if(req.query.num === 'max') {
@@ -71,7 +71,7 @@ module.exports.countCart = async(req, res) => {
                     { $inc: {'cart.$.count': 1}}
                 )
             } else {
-                if(i.count <= 0) {
+                if(i.count <= 1) {
                     res.redirect('/' + req.session.username + '/cart')
                     return
                 } else {

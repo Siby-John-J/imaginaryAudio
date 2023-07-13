@@ -34,7 +34,9 @@
                             <p>
                                 <%= data.address[i].address %>
                             </p>
-                            <a class="popup" href="/<%= user %>/address/edit_address?data=<%= data.address[i].firstname %>">Edit</a>
+                            <a class="popup" href="/<%= user %>/address/edit_address?func=show&num=<%= i %>">
+                                Edit
+                            </a>
                         <% } %>
                     </div>
                 </div>
@@ -50,11 +52,23 @@
         <h1>New Address</h1>
         <button class="close-form" onclick="closeBar()">X</button>
         <form class="edit_add_form" action="/<%= user %>/address/add_address" method="post">
-                <% for(let i in form) { %>
+                <% for(let i of form) { %>
                     <input name="<%= i %>" placeholder="<%= i %>" type="text">
                 <% } %>
             <button class="submit-form" onclick="closeBar()">Submit</button>
         </form>
     </div>
+    <% if(formdata) { %>
+        <div style="display: flex;" class="edit-address">
+            <h1>Edit Address</h1>
+            <button class="close-form" onclick="closeBar()">X</button>
+            <form class="edit_add_form" action="/<%= user %>/address/edit_address" method="post">
+                    <% for(let i in formdata) { %>
+                        <input value="<%= formdata[i] %>" name="<%= i %>" placeholder="<%= i %>" type="text">
+                    <% } %> 
+                <button class="submit-form" onclick="closeBar()">Submit</button>
+            </form>
+        </div>
+    <% } %>
 </body>
 </html>
