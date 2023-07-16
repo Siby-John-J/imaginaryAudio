@@ -39,7 +39,7 @@ module.exports.homepageLoad = (req, res) => {
                                     continue
                                 }
                             }
-                            res.render('pages/home', {data: fulldata, user: req.session.username})
+                            res.render('pages/home', {data: fulldata, user: req.session.username, page: 'products'})
                         }).then(dat => {})
                         // cate = data
                     }).then(dat => {})

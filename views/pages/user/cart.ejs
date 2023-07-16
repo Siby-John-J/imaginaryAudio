@@ -91,7 +91,7 @@
                         <label for="">$<%= totalprice %></label>
                     </div>
                     <% if(data) { %>
-                        <button onclick="adding(<%= true %>)" class="checkout-btn">CHECKOUT</button>
+                        <a href="/<%= user %>/checkout?details=<%= data %>" class="checkout-btn">CHECKOUT</a>
                     <% } else { %>
                         <button onclick="adding(<%= false %>)" class="checkout-btn">CHECKOUT</button>
                     <% } %>

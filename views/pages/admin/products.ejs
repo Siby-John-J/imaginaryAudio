@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/admin/productStyle.css">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous"> -->
     <script defer src="/js/deleteProduct.js"></script>
     <title>products</title>
 </head>
@@ -14,7 +15,7 @@
             <div class="all-info">
                 <div class="total">
                     <label class="tl">total products</label>
-                    <label class="ct"><%= countes[0]%></label>
+                    
                 </div>
                 <div class="stock">
                     <label class="tl">out of stock</label>
@@ -22,7 +23,7 @@
                 </div>
                 <div class="cat">
                     <label class="tl">catagories</label>
-                    <label class="ct"><%= countes[1]%></label>
+                    
                 </div>
             </div>
             <div class="edit-options">
@@ -31,38 +32,39 @@
                 <!-- <button type="submit">delete product</button> -->
             </div>
         </div>
-        <div class="search-and-filter">
+        <form method="post" action="/admin/products/traverse" class="search-and-filter">
             <div class="cat-main">
-                <label for="">Catagory</label>
-                <!-- <input type="submit"> -->
-                <select>
-                    <option value="option1">Option 1</option>
-                    <option value="option2">Option 2</option>
-                    <option value="option3">Option 3</option>
+                <label for="">Category</label>
+                <select name="category">
+                    <% for(let i of category) { %>
+                        <option value="<%= i.name %>"><%= i.name %></option>
+                    <% } %>
                 </select>
             </div>
             <div class="price-main">
-                <label for="">Price</label>
+                <label for="">Sort</label>
                 <!-- <input type="submit"> -->
-                <select>
-                    <option value="option1">Option 1</option>
-                    <option value="option2">Option 2</option>
-                    <option value="option3">Option 3</option>
+                <select name="sort">
+                    <option value="ascending">Ascending</option>
+                    <option value="desending">Desending</option>
                 </select>
             </div>
             <div class="search-main">
-                <input type="search">
+                <input name="searchbar" type="search">
+                <button>Enter</button>
             </div>
             <div class="sort-main">
-                <label for="">Sort</label>
+                <label for="">Filter</label>
                 <!-- <input type="submit"> -->
-                <select>
-                    <option value="option1">Option 1</option>
-                    <option value="option2">Option 2</option>
-                    <option value="option3">Option 3</option>
+                <select name="filter">
+                    <option value="all">All</option>
+                    <option value="name">Name</option>
+                    <option value="date">Date</option>
+                    <option value="price">Price</option>
+                    <option value="stock">Inventory</option>
                 </select>
             </div>
-        </div>
+        </form>
         <div class="users-list-main">
             <div class="users-list-title">
                 <label>Product name</label>
@@ -71,22 +73,30 @@
                 <label>Inventory</label>
                 <label>Status</label>
                 <label>Date-Added</la   bel>
+                </div>
+                <form action="/admin/deleteproduct" method="post">
+                    <button class="delete" type="submit">delete product</button>
+                    <% for(let i = 0; i < data.length; i++) { %>
+                        <a class="users-list-content" href="/admin/editproduct?prod=<%= data[i].name%>">
+                            <input type="checkbox" value="<%= data[i].name %>" name="check" id="cBox">
+                            <label class="p-name"><%= data[i].name %></label>
+                            <label class="p-cat"><%= data[i].category %></label>
+                            <label class="p-price"><%= '$' + data[i].price %></label>
+                            <label><%= data[i].stock %></label>
+                            <label class="p-stat"><%= data[i].status %></label>
+                            <label><%= data[i].date %></label>
+                        </a>
+                        <% } %>
+                    </form>
+                    <div class="nav">
+                        <a href="/admin/products/traverse?trav=prev"><</a>
+                        <label class="left" for="">0</label>
+                        <label class="middle" for="">1</label>
+                        <label class="right" for="">2</label>
+                        <a href="/admin/products/traverse?trav=next">></a>
+                    </div>
+                </div>
             </div>
-            <form action="/admin/deleteproduct" method="post">
-                <button type="submit">delete product</button>
-                <% for(let i = 0; i < data.length; i++) { %>
-                    <a class="users-list-content" href="/admin/editproduct?prod=<%= data[i].name%>">
-                        <input type="checkbox" value="<%= data[i].name %>" name="check" id="cBox">
-                        <label class="p-name"><%= data[i].name %></label>
-                        <label class="p-cat"><%= data[i].category %></label>
-                        <label class="p-price"><%= '$' + data[i].price %></label>
-                        <label><%= data[i].stock %></label>
-                        <label class="p-stat"><%= data[i].status %></label>
-                        <label><%= data[i].date %></label>
-                    </a>
-                <% } %>
-            </form>
-        </div>
-    </div>
-</body>
+        </body>
+        <!-- <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script> -->
 </html>

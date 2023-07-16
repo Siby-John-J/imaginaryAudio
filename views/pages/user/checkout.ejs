@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/home/checkoutStyle.css">
+    <script src="/js/checkoutAddress.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <h1>Checkout</h1>
+    <div class="main-checkout">
+        <div class="checkout-options">
+            <div class="login-div">
+                <div class="login-session-1">
+                    <div class="login-verify">
+                        <label for="">Login</label>
+                    </div>
+                    <div class="login-details">
+                        <label for="">Siby john</label>
+                        <label for="" style="margin-left: 1em;">9893487183</label>
+                    </div>
+                </div>
+                <div class="login-session-2">
+                    <label for="">Change</label>
+                </div>
+            </div>
+            <div class="address-div">
+                <div class="address-title">
+                    <label for="">Shipping Address</label>
+                    <button onclick="envoke('visible')">x</button>
+                </div>  
+                <div class="address-content">
+
+                </div>
+                <div style="overflow: hidden; height: 100%;">
+                        <div class="address-add">
+                        <div class="addcon name">
+                            <div class="nme fname" style="display: flex; flex-direction: column;">
+                                <label for="">First name</label>
+                                <input class="inp-control" type="text">
+                            </div>
+                            <div class="nme lname" style="display: flex; flex-direction: column;">
+                                <label for="">Last name</label>
+                                <input class="inp-control" type="text">
+                            </div>
+                        </div>
+                        <div class="addcon address">
+                            <div class="addcon add">
+                                <div class="nme addre" style="display: flex; flex-direction: column;">
+                                    <label class="title-label" for="">Address</label>
+                                    <input style="width: 38em;" class="inp-control" type="text">
+                                </div>
+                                <div class="nme phone" style="display: flex; flex-direction: column;">
+                                    <label class="title-label" for="">Phone</label>
+                                    <input style="width: 17em;" class="inp-control" type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="addcon city">
+                            <div class="addcon add">
+                                <div class="nme addre" style="display: flex; flex-direction: column;">
+                                    <label class="title-label" for="">City</label>
+                                    <input class="inp-control" type="text">
+                                </div>
+                                <div class="nme phone" style="display: flex; flex-direction: column;">
+                                    <label class="title-label" for="">Country</label>
+                                    <input class="inp-control" type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="addcon address-buttons">
+                            <div class="nme">
+                                <button>Save</button>
+                                <button>Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="payment-div">
+                <div class="payment-panel">
+                    <div class="payment-title">
+                        <label for="">Payment Method</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="orders-options">
+
+        </div>
+    </div>
+
+</body>
+</html>

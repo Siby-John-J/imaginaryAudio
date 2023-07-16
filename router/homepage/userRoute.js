@@ -6,6 +6,7 @@ const { homepageLoad, productLoad } = require('../../controllers/homepage/homepa
 const { cart, addToCart, countCart, removeFromCart } = require('../../controllers/user/cartController')
 const { profile, address, addAddress, removeAddress, editAddress, editProfile, saveAddress } = require('../../controllers/user/profileController')
 const { orders, placeOrder, removeOrder, viewOrder } = require('../../controllers/user/orderController')
+const { checkout } = require('../../controllers/user/checkoutController')
 
 router.get('/home', usermiddleware ,homepageLoad)
 
@@ -15,6 +16,8 @@ router.post('/cart', usermiddleware, cart)
 router.get('/cart/addtocart', usermiddleware, addToCart)
 router.get('/cart/countcart', usermiddleware, countCart)
 router.get('/cart/remove', usermiddleware, removeFromCart)
+
+router.get('/checkout', usermiddleware, checkout)
 
 router.get('/profile', usermiddleware, profile)
 router.post('/profile', usermiddleware, editProfile)

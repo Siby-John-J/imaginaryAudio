@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/home/productStyle.css">
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
+    />
+    <body>
     <title>Document</title>
 </head>
 <body>
@@ -25,7 +30,6 @@
                                     <img class="pro-img"
                                     src="/img/<%= j['image'][0] %>" alt="no img found">
                                     <label class="name"><%= j['name'] %></label>
-                                    <!-- <label class="category"><%= j['category'] %></label> -->
                                     <label class="pr"><%= '$' + j['price'] %></label>
                                     <div class="show-details">
                                         <label for="">show details</label>
@@ -41,5 +45,20 @@
             <button class="show-more">Show More</button>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script>
+        const swiper = new Swiper('.swiper', {
+            // If we need pagination
+            pagination: {
+                el: '.swiper-pagination',
+            },
+
+            // Navigation arrows
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+    </script>
 </body>
 </html>

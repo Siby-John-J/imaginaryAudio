@@ -14,10 +14,11 @@
 have to add all kind of middlewares
 
 # IMPORTENT
-need to add ajax for checking the fields, 
-need to set middleware in app.js but not on routes [depends on situation]
+pagination is not finished
 
 # in future
 
+need to add ajax for checking the fields, 
+need to set middleware in app.js but not on routes [depends on situation]
 in setting have to add the theme of double color in which
 one was background and other one is content
