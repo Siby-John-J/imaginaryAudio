@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/admin/couponStyle.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="main-coupons">
+        <div class="coupons-title">
+            <h1>Coupon</h1>
+            <a class="coupon-options" href="/admin/coupon/list">All coupons</a>
+            <a class="coupon-options" href="/admin/coupon/create">Create coupon</a>
+            <a class="coupon-options" href="/admin/coupon/purchase">Purchases</a>
+        </div>
+        <% if(cPage === 'list-coupon') { %>
+            <%- include('./coupons/couponList.ejs') %>
+        <% } else if(cPage === 'create-coupon') { %>
+            <%- include('./coupons/createCoupon.ejs') %>
+        <% } else if(cPage === 'purchase-coupon') { %>
+            <%- include('./coupons/purchases.ejs') %>
+        <% } %>
+    </div>
+</body>
+</html>

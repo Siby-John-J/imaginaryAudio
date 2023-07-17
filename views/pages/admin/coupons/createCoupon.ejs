@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/admin/createCouponStyle.css">
+    <script defer src="/js/couponCreate.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="coupon-create-main">
+        <form class="prod-info" action="/admin/coupon/create/set" method="post">
+            <div class="coupon-name">
+                <label class="title" for="">coupon name</label>
+                <input name="couponName" class="field" type="text">
+            </div>
+            <div class="gen-coupon">
+                <label class="title" for="">generate coupon</label>
+                <label style="font-size: 1.4em; margin-left: 1em; margin-right: 0.7em;" class="" for="">u8834uid</label>
+                <button>Generate</button>
+            </div>
+            <div class="discount-type">
+                <label class="title" for="">Discout type</label>
+                <select class="field" name="discountType" id="">
+                    <option value="items">num of items</option>
+                    <option value="amount">amount</option>
+                </select>
+            </div>
+            <div class="discount-per">
+                <label class="title" for="">Discount values</label>
+                <select class="sel field" name="discountVal" id="">
+                    <option value="amount">amount</option>
+                    <option value="percentage">persentage</option>
+                </select>
+                <input class="sel field" type="number" name="discountValue" id="">
+            </div>
+            <div class="min-purchase">
+                <label class="title" for="">Minimum Purchase</label>
+                <input class="field" type="number" name="minimum" id="">
+            </div>
+            <div class="discount-limit">
+                <label class="title" for="">Discount limit</label>
+                <select class="sel field" name="limit" id="">
+                    <option value="coupons">per coupons</option>
+                    <option value="user">per user</option>
+                </select>
+                <input class="sel field" type="number" name="limitNumber" id="">
+            </div>
+            <div class="submit-field other-fields">
+                <a href="/admin/coupon/create?type=cancel">Cancel</a>
+                <button>Submit</button>
+            </div>
+        </form>
+        <div class="prod-select">
+            <div class="main-field choose-prods">
+                <form action="/admin/coupon/create/action" method="post">
+                    <div class="navigation">
+                        <a href="/admin/coupon/create">All</a>
+                        <label for=""> / </label>
+                        <a href="">
+                            <% if(qname) { %>
+                                <%= qname %>
+                            <% } %>
+                        </a>
+                    </div>
+                    <div class="choosing">
+                        <% for(let i of data) { %>
+                            <% if(i._id) { %>
+                                <!-- <a href="/admin/coupon/create/select?select=<%= i.name %>"><%= i.name %></a> -->
+                                <div class="bind">
+                                    <label for=""><%= i.name %></label>
+                                    <input type="checkbox" name="addto" value="<%= i.name %>">
+                                </div>
+                            <% } else { %>
+                                <a href="/admin/coupon/create/select?name=<%= i.name %>"><%= i.name %></a>
+                            <% } %>
+                        <% } %>
+                    </div>
+                    <button onclick="wait()" class="add-btn">Add</button>
+                </form>
+            </div>
+            <div class="main-field display-prods">
+                <div class="choosing display-selected-fields">
+                    <% if(typeof fielddata === 'object') { %>
+                        <% for(let i of fielddata) { %>
+                            <label class="display-select-field" for="">
+                                <%= i %>
+                            </label>
+                        <% } %>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

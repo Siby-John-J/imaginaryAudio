@@ -1,0 +1,98 @@
+
+
+body {
+    background-color: #3d3d3d;
+}
+
+.main-coupons {
+    display: flex;
+    flex-direction: column;
+}
+
+.coupons-title {
+    /* color: white; */
+    font-family: sans-serif;
+    font-weight: 400;
+    display: flex;
+    flex-direction: row;
+    /* background-color: rebeccapurple; */
+    width: 79.2vw;
+    align-items: center;
+    text-align: center;
+    justify-content: space-evenly;
+}
+
+.coupons-title h1 {
+    padding-right: 7em;
+}
+
+.coupons-list {
+    height: 70vh;
+    width: 70vw;
+    /* background-color: gray; */
+    margin-top: 4.5em;
+    margin-left: 4.5em;
+    border-radius: 14px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    box-shadow: 1px 1px 4px 0px;
+    overflow: scroll;
+}
+
+.coupons {
+    /* border: 1px solid; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2em;
+}
+
+.coupon1 {
+    background-color: tomato;
+    height: 13em;
+    width: 20em;
+    border-radius: 8px;
+}
+
+.coupon-options {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    font-family: sans-serif;
+    font-size: 1.6em;
+    padding: 10px;
+}
+
+.coupon-options:hover {
+    background-color: rgb(95, 95, 255);
+    transition: 0.2s ease-out;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.first {
+    background-color: #515151;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    justify-content: space-evenly;
+    font-family: sans-serif;
+}
+
+.coupon-details {
+    margin-left: 1em;
+    font-size: 2em; 
+}
+
+.first .offer {
+    font-size: 43px;
+    margin-left: 31px;
+    font-family: system-ui;
+    font-weight: 200;
+}
+
+.first .type {
+    font-size: 1em;
+    margin-left: 2em;
+    margin-bottom: 25px;
+}

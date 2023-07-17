@@ -4,10 +4,11 @@ const { dashboard, category, setCategory, blockCategory } = require('../controll
 const { deleteProduct, addProduct, products, authProduct, editProduct, editProductAuth, traverse } = require('../controllers/admin/productController')
 const { customers, userBlock } = require('../controllers/admin/userController')
 const { orders, editOrder } = require('../controllers/admin/orderController')
+const { couponList, couponCreate, couponPurchase, couponSet } = require('../controllers/admin/couponController')
 
 const { adminLoginMiddleware, adminAccessMiddleware } = require('../middlewares/adminMiddleware')
 const errormiddleware = require('../middlewares/errorMiddleware')
-const imageMiddleware = require('../middlewares/multer')
+const imageMiddleware = require('../middlewares/multer')    
 
 const router = Router()
 
@@ -42,5 +43,13 @@ router.get('/customers/block', userBlock)
 
 router.get('/orders', adminAccessMiddleware, orders)
 router.post('/orders/edit_order', adminAccessMiddleware, editOrder)
+
+router.get('/coupon/list', adminAccessMiddleware, couponList)
+router.get('/coupon/create', adminAccessMiddleware, couponCreate)
+router.get('/coupon/create/select', adminAccessMiddleware, couponCreate)
+router.post('/coupon/create/action', adminAccessMiddleware, couponCreate)
+router.post('/coupon/create/set', adminAccessMiddleware, couponSet)
+
+router.get('/coupon/purchase', adminAccessMiddleware, couponPurchase)
 
 module.exports = router

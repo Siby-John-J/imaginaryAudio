@@ -10,11 +10,11 @@
     <div class="main-body">
         <div class="content-list">
             <a class="main-links" href="/admin/dashboard">Dashboard</a>
-            <a class="main-links" href="/admin/customers">Customers</a>
+            <a class="main-links" href="/admin/customers">Customers</a> 
             <a class="main-links" href="/admin/products">Products</a>
             <a class="main-links" href="/admin/category">Category</a>
             <a class="main-links" href="/admin/orders">Orders</a>
-            <a class="main-links" href="">Coupon</a>
+            <a class="main-links" href="/admin/coupon/list">Coupon</a>
             <a class="main-links" href="">Settings</a>
             <a class="main-links" href="/admin/logout" style="color: red;">Logout</a>
         </div>
@@ -38,6 +38,10 @@
         <% } else if(page === 'orders') { %>
             <div class="orders-page">
                 <%- include('./orders.ejs') %>
+            </div>
+        <% } else if(page === 'coupon') { %>
+            <div class="coupon-page">
+                <%- include('./coupon.ejs') %>
             </div>
         <% } %>
     </div>

@@ -34,7 +34,7 @@ body {
 
 /* .main-links */
 
-a {
+.main-links {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 2em;
     text-decoration: none;
