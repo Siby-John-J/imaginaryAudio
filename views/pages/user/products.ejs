@@ -13,13 +13,15 @@
 </head>
 <body>
     <div class="full-prod">
-        <div class="types">
-            <a href="">monitors</a>
-            <a href="">monitors</a>
-            <a href="">monitors</a>
-            <a href="">monitors</a>
-            <a href="">monitors</a>
-        </div>
+        <% if(page !== 'seperate') { %>            
+            <div class="types">
+                <a href="">monitors</a>
+                <a href="">monitors</a>
+                <a href="">monitors</a>
+                <a href="">monitors</a>
+                <a href="">monitors</a>
+            </div>
+        <% } %>
         <div class="products">
             <% for(let i in data) { %>
                 <% if(data[i].length !== 0) { %>
@@ -42,7 +44,9 @@
             <% } %>
         </div>
         <div>
-            <button class="show-more">Show More</button>
+            <form action="/<%= user + '/list'%>" method="post">
+                <button class="show-more">Show More</button>
+            </form>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>

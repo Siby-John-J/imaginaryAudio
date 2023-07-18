@@ -8,88 +8,102 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Checkout</h1>
-    <div class="main-checkout">
-        <div class="checkout-options">
-            <div class="login-div">
-                <div class="login-session-1">
-                    <div class="login-verify">
-                        <label for="">Login</label>
-                    </div>
-                    <div class="login-details">
-                        <label for="">Siby john</label>
-                        <label for="" style="margin-left: 1em;">9893487183</label>
-                    </div>
-                </div>
-                <div class="login-session-2">
-                    <label for="">Change</label>
-                </div>
+    <h1 class="title-main">Checkout</h1>
+    <div class="main-checkout-panel">
+        <div class="coupon-enter-field">
+            <div class="coupon-title-field">
+                <label for="">Have a coupon? </label>
+                <button>Click here to Enter Your code</button>
             </div>
-            <div class="address-div">
-                <div class="address-title">
-                    <label for="">Shipping Address</label>
-                    <button onclick="envoke('visible')">x</button>
-                </div>  
-                <div class="address-content">
-
+            <div class="coupon-input-field">
+                <div class="div-a">
+                    <label for="">if you have a coupon code please enter here</label>
                 </div>
-                <div style="overflow: hidden; height: 100%;">
-                        <div class="address-add">
-                        <div class="addcon name">
-                            <div class="nme fname" style="display: flex; flex-direction: column;">
-                                <label for="">First name</label>
-                                <input class="inp-control" type="text">
-                            </div>
-                            <div class="nme lname" style="display: flex; flex-direction: column;">
-                                <label for="">Last name</label>
-                                <input class="inp-control" type="text">
-                            </div>
-                        </div>
-                        <div class="addcon address">
-                            <div class="addcon add">
-                                <div class="nme addre" style="display: flex; flex-direction: column;">
-                                    <label class="title-label" for="">Address</label>
-                                    <input style="width: 38em;" class="inp-control" type="text">
-                                </div>
-                                <div class="nme phone" style="display: flex; flex-direction: column;">
-                                    <label class="title-label" for="">Phone</label>
-                                    <input style="width: 17em;" class="inp-control" type="text">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="addcon city">
-                            <div class="addcon add">
-                                <div class="nme addre" style="display: flex; flex-direction: column;">
-                                    <label class="title-label" for="">City</label>
-                                    <input class="inp-control" type="text">
-                                </div>
-                                <div class="nme phone" style="display: flex; flex-direction: column;">
-                                    <label class="title-label" for="">Country</label>
-                                    <input class="inp-control" type="text">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="addcon address-buttons">
-                            <div class="nme">
-                                <button>Save</button>
-                                <button>Cancel</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="payment-div">
-                <div class="payment-panel">
-                    <div class="payment-title">
-                        <label for="">Payment Method</label>
-                    </div>
+                <div class="div-b">
+                    <input type="text">
+                    <button>APPLY COUPON</button>
                 </div>
             </div>
         </div>
-        <div class="orders-options">
-
+        <div class="other-and-address">
+            <div class="address-field">
+                <div class="inner-address-field">
+                    <div class="inps div-1">
+                        <h1>Billing details</h1>
+                    </div>
+                    <div class="inps div-2">
+                        <div class="first">
+                            <label class="texts" for="">firstname</label>
+                            <input class="fields" type="text">
+                        </div>
+                        <div class="second">
+                            <label class="texts" for="">secondname</label>
+                            <input class="fields" type="text">
+                        </div>
+                    </div>
+                    <div class="inps div-3">
+                        <label class="texts" for="">country / region</label>
+                        <input style="height: 3em;" type="text">
+                    </div>
+                    <div class="inps div-4">
+                        <label class="texts" for="">address</label>
+                        <input style="height: 3em;" type="text">
+                    </div>
+                    <div class="inps div-5">
+                        <label class="texts" for="">postcode / zip</label>
+                        <input style="height: 3em;" type="text">
+                    </div>
+                    <div class="inps div-6">
+                        <label class="texts" for="">town / city</label>
+                        <input style="height: 3em;" type="text">
+                    </div>
+                    <div class="inps div-7">
+                        <label class="texts" for="">phone</label>
+                        <input style="height: 3em;" type="text">
+                    </div>
+                    <div class="inps div-8">
+                        <label class="texts" for="">email</label>
+                        <input style="height: 3em;" type="text">
+                    </div>
+                    <div class="inps div-9"></div>
+                </div>
+            </div>
+            <div class="other-field">
+                <div class="outer order-list">
+                    <label style="font-size: 1.4em; margin-left: 2em; margin-top: 1em;" for="">
+                        Your orders
+                    </label>
+                    <div class="products">
+                        <div class="prod-title">
+                            <label for="">Products</label>
+                            <label for="">Subtotal</label>
+                        </div>
+                        <div class="prod-list">
+                            <label for="">first</label>
+                            <label for="">89$</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="outer payments">
+                    <label style="font-size: 1.4em; margin-left: 2em;" for="">
+                        Payment Options
+                    </label>
+                    <div class="choice pay1">
+                        <input type="radio" name="" id="">
+                        <label for="">cash on delivery</label>
+                    </div>
+                    <div class="choice pay2">
+                        <input type="radio" name="" id="">
+                        <label for="">paypal</label>
+                    </div>
+                    <div class="choice pay3">
+                        <input type="radio" name="" id="">
+                        <label for="">razorpay</label>
+                    </div>
+                    <button class="apply-btn">Place Order</button>
+                </div>
+            </div>
         </div>
     </div>
-
 </body>
 </html>

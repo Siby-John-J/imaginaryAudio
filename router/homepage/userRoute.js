@@ -2,13 +2,14 @@ const { Router } = require('express')
 const router = Router()
 
 const usermiddleware = require('../../middlewares/userMiddleware')
-const { homepageLoad, productLoad } = require('../../controllers/homepage/homepageController')
+const { homepageLoad, productLoad, listpageLoad } = require('../../controllers/homepage/homepageController')
 const { cart, addToCart, countCart, removeFromCart } = require('../../controllers/user/cartController')
 const { profile, address, addAddress, removeAddress, editAddress, editProfile, saveAddress } = require('../../controllers/user/profileController')
 const { orders, placeOrder, removeOrder, viewOrder } = require('../../controllers/user/orderController')
 const { checkout } = require('../../controllers/user/checkoutController')
 
 router.get('/home', usermiddleware ,homepageLoad)
+router.post('/list', usermiddleware, listpageLoad)
 
 router.get('/cart', usermiddleware, cart)
 router.post('/cart', usermiddleware, cart)

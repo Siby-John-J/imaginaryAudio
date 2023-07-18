@@ -1,176 +1,194 @@
 
+
 body {
-    margin: 0;
-    padding: 0;
+    /* background-color: darkgreen; */
     font-family: sans-serif;
 }
 
-.main-checkout {
-    display: flex;
-    flex-direction: row;
-    height: 80vh;
-    width: 100%;
+.title-main {
+    /* font-size: 3em; */
+    margin-left: 2em;
+}
+
+.main-checkout-panel {
     /* background-color: gray; */
-}
-
-.checkout-options {
-    width: 70%;
-    /* background-color: rgb(174, 174, 174); */
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    height: 100vh;
     align-items: center;
 }
 
-.orders-options {
-    width: 30%;
-    /* background-color: rgb(152, 135, 109); */
-}
-
-.login-div {
-    display: flex;
-    flex-direction: row;
-    /* align-items: center; */
-    /* background-color: rgb(213, 222, 222); */
-    height: 4em;
-    width: 50em;
-    border-radius: 10px;
-    box-shadow: 1px 0px 4px 0px black;
-}
-
-.login-session-1 {
-    width: 60%;
-    /* background-color: thistle; */
-    padding-left: 3em;
-    display: flex;
-    flex-direction: column;
-}
-
-.login-session-1 .login-verify {
-    margin: 0.5em 0em;
-}
-
-.login-session-2 {
-    width: 40%;
-    display: flex;
-    /* background-color: slategrey; */
-    justify-content: end;
-    align-items: center;
-    margin-right: 2em;
-}
-
-.address-ad {
-    display: grid;
-}
-
-.address-ad .addcon {
-    /* background-color: grey; */
-}
-
-.address-div {
-    /* background: #71687a; */
-    width: 50em;
-    height: 25em;
-    margin-top: 1em;
-}
-
-.address-div .address-title {
-    /* background: rgb(126 126 126); */
-    height: 4em;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    box-shadow: 1px 0px 4px 0px black;
-    justify-content: space-between;
-    padding: 0 2em;
-}
-
-.address-title label {
-    padding-left: 2.2em;
-}
-
-.address-add {
-    /* background-color: #a9baee; */
-    height: 65%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    transition: 0.3s ease-in-out;
-}
-
-.address-add .addcon {
-    /* border: 1px solid black; */
-    /* box-shadow: 1px 0px 4px 0px black; */
-
-}
-
-.payment-div {
+.coupon-enter-field {
     /* background-color: green; */
-    width: 50em;
-    height: 10em;
-    transition: 0.3s ease-in-out;
-}
-
-.name {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-}
-
-.name .nme {
-    height: 4.4em;
-    /* width: 30%; */
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-}
-
-.inp-control {
-    height: 3em;
-    width: 27.5em;
-    border-radius: 10px;
-    box-shadow: 1px 0px 4px 0px black;
-    border: none;
-    outline: none;
-}
-
-.title-label {
-
-}
-
-.add {
-    display: flex;
-    justify-content: space-around;
-}
-
-.payment-panel {
-    display: flex;
-    /* background-color: rgb(134, 0, 0); */
-    height: 4em;
-    width: 100%;
-    border-radius: 10px;
-}
-
-.payment-panel .payment-title {
-    width: 100%;
-    height: 100%;
-    display: flex;
     align-items: center;
-    box-shadow: 1px 0px 4px 0px black;
 }
 
-.payment-title label {
-    padding-left: 2.2em;
+.coupon-title-field {
+    margin-bottom: 2em;
+    /* background-color: rgb(0, 216, 0); */
+    border-top: 4px solid rgb(0, 0, 0);
+    padding: 17px;
+    width: 64em;
+    font-family: sans-serif;
+    box-shadow: 1px 1px 4px 1px;
 }
 
-.address-buttons {
-    /* background: yellowgreen; */
-    /* margin-top: 1em; */
+.coupon-input-field {
+    border-top: 4px solid rgb(0, 0, 0);
+    padding: 17px;
+    width: 64em;
+    font-size: 1em;
+    font-family: sans-serif;
+    /* background-color: rgb(0, 216, 0); */
+    height: 7em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    box-shadow: 1px 1px 4px 1px;
+}
+
+.div-b input {
+    height: 3em;
+    width: 22em;
+    margin-right: 3em;
+    border: 1px solid gray;
+    background: none;
+    outline: none;
+    padding-left: 2em;
+}
+
+.div-b button {
+    height: 3.4em;
+    width: 10em;
+}
+
+.coupon-title-field button {
+    background: none;
+    border: none;
+}
+
+/*  */
+
+.other-and-address {
+    /* background-color: #393269; */
+    height: 70vh;
+    width: 66.2em;
+    display: flex;
+}
+
+.other-and-address .address-field {
+    /* background-color: darkmagenta; */
+    height: 100%;
+    width: 64%;
+    margin-top: 4em;
+}
+.other-and-address .other-field {
+    /* background-color: saddlebrown; */
+    height: 100%;
+    width: 36%;
+    margin-top: 4em;
+}
+
+.inner-address-field {
+    /* background-color: darkgreen; */
+    height: 42em;
+    width: 30em;
+    margin-left: 6em;
+    margin-top: 2em;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid;
+    padding: 18px;
+    box-shadow: 1px 1px 4px 1px;
+}
+
+.inner-address-field .inps {
+    /* border: 1px solid white; */
     height: 5em;
 }
 
-.address-buttons button {
-    height: 90%;
-    width: 8em;
-    /* margin-top: 3em; */
+.div-2 {
+    display: flex;
+    flex-direction: row;
+}
+
+.texts {
+    font-size: 1.4em;
+}
+
+.div-3, .div-4, .div-5, .div-6, .div-7, .div-8 {
+    display: flex;
+    flex-direction: column;
+}
+
+.fields {
+    height: 2.5em;
+    width: 15em;
+    border: 1px solid;
+    margin-left: 2em;
+}
+
+/*  */
+
+.other-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.other-field .order-list {
+    height: 12em;
+    width: 90%;
+    /* background-color: red; */
+    margin-top: 2em;
+    margin-left: 1.2em;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid;
+    box-shadow: 1px 1px 4px 1px;
+}
+
+.prod-title {
+    margin-left: 2em;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1em;
+    margin-top: 1em;
+}
+
+.prod-list {
+    margin-left: 2em;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1em;
+    margin-top: 0.7em;
+}
+
+.payments {
+    /* background-color: #cbbe46; */
+    width: 21.4em;
+    height: 14em;
+    margin-left: 1.2em;
+    margin-top: 3em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    border: 2px solid;
+    box-shadow: 1px 1px 4px 1px;
+}
+
+.choice {
+    margin-left: 2em;
+}
+
+.apply-btn {
+    padding: 10px 1px;
+    width: 77px;
+    margin-left: 10em;
+}
+
+input[type="text"] {
+    border: 1px solid;
+    background: none;
 }
