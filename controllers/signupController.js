@@ -31,7 +31,8 @@ module.exports.signupAuth = (req, res) => {
         }]).then(data => {})
     })
     
+    console.log('created')
     authEmail(email, subject, html)
-
+    
     res.render('pages/login', {type: 'check-email', email: req.body.email})
 }

@@ -1,0 +1,105 @@
+
+
+.main-purchase-panel {
+    height: 78vh;
+    width: 100%;
+    /* background-color: gray; */
+    display: flex;
+    flex-direction: row;
+}
+
+.purchase-list {
+    /* background-color: blanchedalmond; */
+    width: 50%;
+}
+
+.give-coupon {
+    /* background-color: burlywood; */
+    width: 50%;
+}
+
+.pur-lis-main, .giv-coup {
+    /* border: 1px solid; */
+    border-radius: 10px;
+    height: 74vh;
+    width: 32vw;
+    box-shadow: 1px 1px 23px 0px;
+    display: flex;
+    flex-direction: column;
+}
+
+.set {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-title {
+    font-size: 2em;
+    text-align: center;
+}
+
+.both {
+    height: 62vh;
+    width: 56vh;
+    margin-left: 2.3em;
+    margin-top: 1em;
+    border-radius: 10px;
+    border: 2px solid;
+    overflow: scroll;
+}
+
+.content {
+    height: 3em;
+    width: 93%;
+    border: 1px solid;
+    margin-top: 1em;
+    margin-left: 1em;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+}
+
+.user-details {
+    height: 100%;
+    width: 40%;
+    /* background-color: red; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.user-details .profile {
+    background-color: black;
+    height: 2.6em;
+    width: 2.6em;
+    border-radius: 32px;
+    margin-left: 0.5em;
+}
+
+.sending {
+    height: 100%;
+    width: 60%;
+    /* background-color: blue; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.sending button, a {
+    padding: 7px 14px;
+    border-radius: 6px;
+    border: none;
+    color: white;
+}
+
+.btn-1 {
+    background-color: lightgreen;
+    text-decoration: none;
+}
+
+.btn-2 {
+    background-color: lightskyblue;
+}
+

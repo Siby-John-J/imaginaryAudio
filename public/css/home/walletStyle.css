@@ -1,42 +1,44 @@
 
-
 body {
-    /* background-color: #3d3d3d; */
+    font-family: sans-serif;
 }
 
-.main-coupons {
+.main-cardWallet-panel {
+    /* background: coral; */
+    height: 77vh;
     display: flex;
     flex-direction: column;
-}
-
-.coupons-title {
-    /* color: white; */
-    font-family: sans-serif;
-    font-weight: 400;
-    display: flex;
-    flex-direction: row;
-    /* background-color: rebeccapurple; */
-    width: 79.2vw;
     align-items: center;
+}
+
+.walletBalance {
+    height: 10vh;
+    width: 60vw;
+    background-color: #aaaaff;
     text-align: center;
-    justify-content: space-evenly;
+    border-top: 4px solid blue;
 }
 
-.coupons-title h1 {
-    padding-right: 7em;
-}
-
-.coupons-list {
+.cards {
     height: 70vh;
-    width: 70vw;
+    width: 60vw;
     /* background-color: gray; */
-    margin-top: 4.5em;
-    margin-left: 4.5em;
-    border-radius: 14px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.cards-panel {
+    border: 2px solid;
+    border-radius: 10px;
+    height: 50vh;
+    width: 54vw;
+    margin-bottom: 3em;
+    box-shadow: 1px 0px 4px 1px black;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    box-shadow: 1px 1px 4px 0px;
-    overflow: scroll;
 }
 
 .coupons {
@@ -45,12 +47,13 @@ body {
     align-items: center;
     justify-content: center;
     margin-top: 2em;
+    margin-left: -11px;
 }
 
 .coupon1 {
     background-color: tomato;
-    height: 13em;
-    width: 20em;
+    height: 9em;
+    width: 16em;
     border-radius: 8px;
 }
 
@@ -77,11 +80,12 @@ body {
     color: white;
     justify-content: space-evenly;
     font-family: sans-serif;
+    margin-left: 1em;
 }
 
 .coupon-details {
     margin-left: 1em;
-    font-size: 2em; 
+    font-size: 1.5em;
 }
 
 .first .offer {
@@ -97,9 +101,9 @@ body {
     margin-bottom: 25px;
 }
 
-.add-btn {
-    width: 14em;
-    margin-top: 30px;
-    height: 34px;
-    margin-left: 40%;
+.divide {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
 }

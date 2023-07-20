@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/home/checkoutStyle.css">
     <script src="/js/checkoutAddress.js"></script>
+    <script defer src="/js/onlinePayment.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -20,90 +21,125 @@
                     <label for="">if you have a coupon code please enter here</label>
                 </div>
                 <div class="div-b">
-                    <input type="text">
-                    <button>APPLY COUPON</button>
+                    <form action="/<%= user %>/apply_coupon" method="post">
+                        <input name="coupon" type="text">
+                        <button>APPLY COUPON</button>
+                    </form>
                 </div>
             </div>
         </div>
-        <div class="other-and-address">
-            <div class="address-field">
-                <div class="inner-address-field">
-                    <div class="inps div-1">
-                        <h1>Billing details</h1>
-                    </div>
-                    <div class="inps div-2">
-                        <div class="first">
-                            <label class="texts" for="">firstname</label>
-                            <input class="fields" type="text">
+        <!-- <div class="show-address">
+            <% for(let i of data.address) { %>
+                <div class="address1">
+                    <label for=""><%= i.firstname %></label>
+                </div>
+            <% } %>
+        </div> -->
+        <form action="/<%= user %>/place_order" method="post">
+            <div class="other-and-address">
+                <div class="address-field">
+                    <div class="inner-address-field">
+                        <div class="inps div-1">
+                            <h1>Billing details</h1>
                         </div>
-                        <div class="second">
-                            <label class="texts" for="">secondname</label>
-                            <input class="fields" type="text">
+                        <div class="inps div-2">
+                            <div class="first">
+                                <label class="texts" for="">firstname</label>
+                                <input name="fname" class="fields" type="text">
+                            </div>
+                            <div class="second">
+                                <label class="texts" for="">secondname</label>
+                                <input name="lname" class="fields" type="text">
+                            </div>
+                        </div>
+                        <div class="inps div-3">
+                            <label class="texts" for="">country / region</label>
+                            <input name="region" style="height: 3em;" type="text">
+                        </div>
+                        <div class="inps div-4">
+                            <label class="texts" for="">address</label>
+                            <input name="address" style="height: 3em;" type="text">
+                        </div>
+                        <div class="inps div-5">
+                            <label class="texts" for="">postcode / zip</label>
+                            <input name="zip" style="height: 3em;" type="text">
+                        </div>
+                        <div class="inps div-6">
+                            <label class="texts" for="">town / city</label>
+                            <input name="city" style="height: 3em;" type="text">
+                        </div>
+                        <div class="inps div-7">
+                            <label class="texts" for="">phone</label>
+                            <input name="phone" style="height: 3em;" type="text">
+                        </div>
+                        <div class="inps div-8">
+                            <label class="texts" for="">email</label>
+                            <input name="email" style="height: 3em;" type="text">
+                        </div>
+                        <div class="inps div-9"></div>
+                    </div>
+                </div>
+                <div class="other-field">
+                    <div class="outer order-list">
+                        <label style="font-size: 1.4em; margin-left: 2em; margin-top: 1em;" for="">
+                            Your orders
+                        </label>
+                        <div class="products">
+                            <div class="prod-title">
+                                <label for="">Products</label>
+                                <label for="">Subtotal</label>
+                            </div>
+                            <% for(let i of products) { %>
+                                <div class="prod-list">
+                                    <label for="">
+                                        <% for(let j of i) { %>
+                                            <% if(typeof j === 'object') { %>
+                                                <%= j.name %>
+                                            <% } %>
+                                        <% } %>
+                                    </label>
+                                    <label style="margin-left: 7em;" for="">
+                                        <% for(let j of i) { %>
+                                            <% if(typeof j === 'number') { %>
+                                                <%= 'x' + j %>
+                                            <% } %>
+                                        <% } %>
+                                    </label>
+                                    <label for="">
+                                        <% for(let j of i) { %>
+                                            <% if(typeof j === 'object') { %>
+                                                <%= j.price %>
+                                            <% } %>
+                                        <% } %>
+                                    </label>
+                                </div>
+                            <% } %>
                         </div>
                     </div>
-                    <div class="inps div-3">
-                        <label class="texts" for="">country / region</label>
-                        <input style="height: 3em;" type="text">
+                    <div class="outer payments">
+                        <label style="font-size: 1.4em; margin-left: 2em;" for="">
+                            Payment Options
+                        </label>
+                        <div class="choice pay1">
+                            <input type="radio" name="" id="">
+                            <label for="">cash on delivery</label>
+                        </div>
+                        <div class="choice pay2">
+                            <input type="radio" name="" id="paypal">
+                            <label for="">paypal</label>
+                        </div>
+                        <div class="choice pay3">
+                            <input type="radio" name="" id="razorpay">
+                            <label for="">razorpay</label>
+                        </div>
+                        <button class="apply-btn">Place Order</button>
                     </div>
-                    <div class="inps div-4">
-                        <label class="texts" for="">address</label>
-                        <input style="height: 3em;" type="text">
+                    <div class="payment-model">
+                        <a style="color: black;" href="">X</a>
                     </div>
-                    <div class="inps div-5">
-                        <label class="texts" for="">postcode / zip</label>
-                        <input style="height: 3em;" type="text">
-                    </div>
-                    <div class="inps div-6">
-                        <label class="texts" for="">town / city</label>
-                        <input style="height: 3em;" type="text">
-                    </div>
-                    <div class="inps div-7">
-                        <label class="texts" for="">phone</label>
-                        <input style="height: 3em;" type="text">
-                    </div>
-                    <div class="inps div-8">
-                        <label class="texts" for="">email</label>
-                        <input style="height: 3em;" type="text">
-                    </div>
-                    <div class="inps div-9"></div>
                 </div>
             </div>
-            <div class="other-field">
-                <div class="outer order-list">
-                    <label style="font-size: 1.4em; margin-left: 2em; margin-top: 1em;" for="">
-                        Your orders
-                    </label>
-                    <div class="products">
-                        <div class="prod-title">
-                            <label for="">Products</label>
-                            <label for="">Subtotal</label>
-                        </div>
-                        <div class="prod-list">
-                            <label for="">first</label>
-                            <label for="">89$</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="outer payments">
-                    <label style="font-size: 1.4em; margin-left: 2em;" for="">
-                        Payment Options
-                    </label>
-                    <div class="choice pay1">
-                        <input type="radio" name="" id="">
-                        <label for="">cash on delivery</label>
-                    </div>
-                    <div class="choice pay2">
-                        <input type="radio" name="" id="">
-                        <label for="">paypal</label>
-                    </div>
-                    <div class="choice pay3">
-                        <input type="radio" name="" id="">
-                        <label for="">razorpay</label>
-                    </div>
-                    <button class="apply-btn">Place Order</button>
-                </div>
-            </div>
-        </div>
+        </form>
     </div>
 </body>
 </html>

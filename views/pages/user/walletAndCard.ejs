@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="/css/admin/couponStyle.css"> -->
+    <link rel="stylesheet" href="/css/home/walletStyle.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Wallet and cards</h1>
+    <div class="main-cardWallet-panel">
+        <div class="walletBalance">
+            <h1>total $0</h1>
+        </div>
+        <div class="cards">
+            <h3>Cards</h3>
+            <div class="cards-panel">
+                <% for(let i of coupon) { %>
+                    <div class="coupons">
+                        <div style="background: <%= i.color %>" class="coupon1 first">
+                            <div class="divide">
+                                <label class="coupon-details" for=""><%= i.name %></label>
+                                <label for=""><%= i.code %></label>
+                            </div>
+                            <label class="offer coupon-details" for="">
+                                <% if(i.value[0] === 'amount') { %>
+                                    <%= i.value[1] + ' $ OFF' %>
+                                    <% } else if(i.value[0] === 'percentage') { %>
+                                        <%= i.value[1] + ' % OFF' %>
+                                <% } %>
+                            </label>
+                            <label class="type coupon-details" for="">Any <%= i.type %></label>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

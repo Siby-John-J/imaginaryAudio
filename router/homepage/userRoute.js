@@ -7,6 +7,8 @@ const { cart, addToCart, countCart, removeFromCart } = require('../../controller
 const { profile, address, addAddress, removeAddress, editAddress, editProfile, saveAddress } = require('../../controllers/user/profileController')
 const { orders, placeOrder, removeOrder, viewOrder } = require('../../controllers/user/orderController')
 const { checkout } = require('../../controllers/user/checkoutController')
+const { wallet, card } = require('../../controllers/user/walletAndCardController')
+const { applyCoupon } = require('../../controllers/user/couponController')
 
 router.get('/home', usermiddleware ,homepageLoad)
 router.post('/list', usermiddleware, listpageLoad)
@@ -18,7 +20,12 @@ router.get('/cart/addtocart', usermiddleware, addToCart)
 router.get('/cart/countcart', usermiddleware, countCart)
 router.get('/cart/remove', usermiddleware, removeFromCart)
 
+router.get('/wallet', usermiddleware, wallet)
+router.post('/apply_coupon', usermiddleware, applyCoupon)
+
 router.get('/checkout', usermiddleware, checkout)
+
+// router.post('/place_order', usermiddleware, placeOrder)
 
 router.get('/profile', usermiddleware, profile)
 router.post('/profile', usermiddleware, editProfile)

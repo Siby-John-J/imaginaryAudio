@@ -3,9 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/admin/couponPurchaseStyle.css">
     <title>Document</title>
 </head>
 <body>
     <h1>Coupon Purchase</h1>
+    <div class="main-purchase-panel">
+        <div class="set purchase-list">
+            <div class="pur-lis-main">
+                <label class="main-title" for="">Purchase List</label>
+                <div class="both purchase-list-main">
+
+                </div>
+            </div>
+        </div>
+        <div class="set give-coupon">
+            <div class="giv-coup">
+                <label class="main-title" for="">give coupon</label>
+                <div class="both givecoupon-list-main">
+                    <% for(let i of data) { %>
+                        <div class="content">
+                            <div class="user-details">
+                                <div class="profile"></div>
+                                <label style="margin-left: 0.7em;" for=""><%= i.name %></label>
+                            </div>
+                            <div class="sending">
+                                <a href="/admin/coupon/list?type=select&&id=<%= i._id %>" class="btn-1">select</a>
+                                <form action="/admin/coupon/send?id=<%= i._id %>" method="post">
+                                    <button class="btn-2">send</button>
+                                </form>
+                            </div>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

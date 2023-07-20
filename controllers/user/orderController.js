@@ -13,7 +13,7 @@ async function getOrderDetails(username, orderid='') {
             let i = await ordermodel.findOne( { _id: orderid } )
             
             let prod = []
-
+            
             for(let j of i.order) {
                 let product = await itemmodel.findOne(
                     { _id: j.item }
@@ -83,7 +83,6 @@ module.exports.orders = async(req, res) => {
 }
 
 module.exports.placeOrder = async(req, res) => {
-
     let total = Number(req.query.price)
     
     let dat = await usermodel.findOne(
@@ -123,6 +122,6 @@ module.exports.removeOrder = async(req, res) => {
         {_id: req.query.id},
         { $set: { status: 'cancel' } }
     )
-
+    
     res.redirect('/' + req.session.username + '/orders')
 }

@@ -1,16 +1,27 @@
 
 const { categorymodel, itemmodel } = require('../../models/productsModel')
 const couponmodel = require('../../models/couponModel')
+const usermodel = require('../../models/userModel')
 
 let item = []
+let coupons = []
+let id = ''
 
 module.exports.couponList = async(req, res) => {
     let data = await couponmodel.find({})
-    res.render('pages/admin/mainPage', {page: 'coupon', cPage: 'list-coupon', data: data})
+
+    if(req.query.id) {
+        id = req.query.id
+    }
+
+    res.render('pages/admin/mainPage', {page: 'coupon', cPage: 'list-coupon', 
+    data: data, type: req.query.type})
 }
 
-module.exports.couponPurchase = (req, res) => {
-    res.render('pages/admin/mainPage', {page: 'coupon', cPage: 'purchase-coupon'})
+module.exports.couponPurchase = async(req, res) => {
+    let data = await usermodel.find({}, {name: 1})
+
+    res.render('pages/admin/mainPage', {data: data, page: 'coupon', cPage: 'purchase-coupon'})
 }
 
 module.exports.couponCreate = async(req, res) => {
@@ -87,10 +98,22 @@ module.exports.couponSet = async(req, res) => {
             color = 'linear-gradient(0deg, #0800ff, #12ff00);'
         }
     }
+
+    function generateCouponCode(length) {
+        const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        let couponCode = "";
+        
+        for (let i = 0; i < length; i++) {
+          const randomIndex = Math.floor(Math.random() * charset.length);
+          couponCode += charset[randomIndex];
+        }
+        
+        return couponCode;
+    }
     
     let model = await couponmodel.insertMany([{
         name: req.body.couponName,
-        code: '',
+        code: generateCouponCode(8),
         type: req.body.discountType,
         value: [req.body.discountVal, Number(req.body.discountValue)],
         Purchase: Number(req.body.minimum),
@@ -101,4 +124,29 @@ module.exports.couponSet = async(req, res) => {
     }])
 
     res.redirect('/admin/coupon/list')
+}
+
+module.exports.setCoupon = (req, res) => {
+    coupons = []
+
+    if(typeof req.body.selected === 'string') {
+        coupons = [req.body.selected]
+    } else {
+        coupons = [...req.body.selected]
+    }
+
+    res.redirect('/admin/coupon/purchase')
+}
+
+module.exports.sendCoupon = async(req, res) => {
+    let model = await usermodel.updateOne(
+        {_id: id},
+        { $push: { coupons: [...coupons] } }
+    )
+    
+    // for(let i of coupons) {
+    //     let couponmd = await couponmodel.deleteOne({_id: i})
+    // }
+    
+    res.redirect('/admin/coupon/purchase')
 }

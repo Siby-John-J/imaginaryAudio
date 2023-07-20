@@ -7,22 +7,30 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="coupons-list">
-        <% for(let i of data) { %>
-            <div class="coupons">
-                <div style="background: <%= i.color %>" class="coupon1 first">
-                    <label class="coupon-details" for=""><%= i.name %></label>
-                    <label class="offer coupon-details" for="">
-                        <% if(i.value[0] === 'amount') { %>
-                            <%= i.value[1] + ' $ OFF' %>
-                            <% } else if(i.value[0] === 'percentage') { %>
-                                <%= i.value[1] + ' % OFF' %>
+    <form action="/admin/coupon/set" method="post">
+        <div class="coupons-list">
+            <% for(let i of data) { %>
+                <div class="coupons">
+                    <div style="background: <%= i.color %>" class="coupon1 first">
+                        <label class="coupon-details" for=""><%= i.name %></label>
+                        <% if(type === 'select') { %>
+                            <input name="selected" value="<%= i._id %>" type="checkbox">
                         <% } %>
-                    </label>
-                    <label class="type coupon-details" for="">Any <%= i.type %></label>
+                        <label class="offer coupon-details" for="">
+                            <% if(i.value[0] === 'amount') { %>
+                                <%= i.value[1] + ' $ OFF' %>
+                                <% } else if(i.value[0] === 'percentage') { %>
+                                    <%= i.value[1] + ' % OFF' %>
+                            <% } %>
+                        </label>
+                        <label class="type coupon-details" for="">Any <%= i.type %></label>
+                    </div>
                 </div>
-            </div>
+            <% } %>
+        </div>
+        <% if(type === 'select') { %>
+            <button class="add-btn">Add</button>
         <% } %>
-    </div>
+    </form>
 </body>
 </html>
