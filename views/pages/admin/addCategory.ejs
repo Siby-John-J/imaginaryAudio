@@ -1,0 +1,25 @@
+<div class="col-12 stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <form action="/admin/setcat" method="post" class="forms-sample" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="exampleInputName1">Name</label>
+            <input placeholder="name" type="text" class="form-control" id="exampleInputName1" name="addcat">
+          </div>
+          <div class="form-group">
+            <label>File upload</label>
+            <input type="file" name="img" class="file-upload-default">
+            <div class="input-group col-xs-12">
+              <input name="img" type="file" class="form-control file-upload-info" placeholder="Upload Image">
+              <span class="input-group-append">
+                <button class="file-upload-browse btn btn-gradient-primary" type="button">Upload</button>
+              </span>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-gradient-primary me-2">Submit</button>
+          <a class="btn btn-light" href="">Cancel</a>
+        </form>
+      </div>
+    </div>
+</div>
+

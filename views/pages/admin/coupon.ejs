@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,17 +10,90 @@
     <div class="main-coupons">
         <div class="coupons-title">
             <h1>Coupon</h1>
-            <a class="coupon-options" href="/admin/coupon/list?type=view">All coupons</a>
-            <a class="coupon-options" href="/admin/coupon/create">Create coupon</a>
-            <a class="coupon-options" href="/admin/coupon/purchase">Purchases</a>
         </div>
-        <% if(cPage === 'list-coupon') { %>
-            <%- include('./coupons/couponList.ejs') %>
-        <% } else if(cPage === 'create-coupon') { %>
-            <%- include('./coupons/createCoupon.ejs') %>
-        <% } else if(cPage === 'purchase-coupon') { %>
-            <%- include('./coupons/purchases.ejs') %>
-        <% } %>
     </div>
 </body>
+</html> -->
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+    <title>Tiny Dashboard - A Bootstrap Dashboard Template</title>
+    <link rel="stylesheet" href="css/simplebar.css">
+    <!-- Fonts CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,
+    800;0,900;1,100;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Icons CSS -->
+    <link rel="stylesheet" href="/assets9/css/feather.css">
+    <link rel="stylesheet" href="/assets9/css/select2.css">
+    <link rel="stylesheet" href="/assets9/css/dropzone.css">
+    <link rel="stylesheet" href="/assets9/css/uppy.min.css">
+    <link rel="stylesheet" href="/assets9/css/jquery.steps.css">
+    <link rel="stylesheet" href="/assets9/css/jquery.timepicker.css">
+    <link rel="stylesheet" href="/assets9/css/quill.snow.css">
+    <!-- Date Range Picker CSS -->
+    <link rel="stylesheet" href="/assets9/css/daterangepicker.css">
+    <!-- App CSS -->
+    <link rel="stylesheet" href="/assets9/css/app-light.css" id="lightTheme">
+    <link rel="stylesheet" href="/assets9/css/app-dark.css" id="darkTheme" disabled>
+  </head>
+  <body class="vertical light">
+    <div class="card-body">
+        <h1>Coupon</h1>
+        <ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Pill Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</a>
+          </li>
+        </ul>
+        <div class="tab-content mb-1" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"> 
+                <%- include('./coupons/couponList.ejs') %>
+              </div>
+            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"> 
+                <%- include('./coupons/createCoupon.ejs') %>
+              </div>
+            <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab"> 
+                <%- include('./coupons/purchases.ejs') %>
+              </div>
+          </div>
+      </div>
+    <script src="/assets9/js/jquery.min.js"></script>
+    <script src="/assets9/js/popper.min.js"></script>
+    <script src="/assets9/js/moment.min.js"></script>
+    <script src="/assets9/js/bootstrap.min.js"></script>
+    <script src="/assets9/js/simplebar.min.js"></script>
+    <script src='/assets9/js/daterangepicker.js'></script>
+    <script src='/assets9/js/jquery.stickOnScroll.js'></script>
+    <script src="/assets9/js/tinycolor-min.js"></script>
+    <script src="/assets9/js/config.js"></script>
+    <script src='/assets9/js/jquery.mask.min.js'></script>
+    <script src='/assets9/js/select2.min.js'></script>
+    <script src='/assets9/js/jquery.steps.min.js'></script>
+    <script src='/assets9/js/jquery.validate.min.js'></script>
+    <script src='/assets9/js/jquery.timepicker.js'></script>
+    <script src='/assets9/js/dropzone.min.js'></script>
+    <script src='/assets9/js/uppy.min.js'></script>
+    <script src='/assets9/js/quill.min.js'></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag()
+      {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'UA-56159088-1');
+    </script>
+  </body>
 </html>

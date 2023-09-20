@@ -1,145 +1,477 @@
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/home/checkoutStyle.css">
-    <script src="/js/checkoutAddress.js"></script>
-    <script defer src="/js/onlinePayment.js"></script>
-    <title>Document</title>
-</head>
-<body>
-    <h1 class="title-main">Checkout</h1>
-    <div class="main-checkout-panel">
-        <div class="coupon-enter-field">
-            <div class="coupon-title-field">
-                <label for="">Have a coupon? </label>
-                <button>Click here to Enter Your code</button>
-            </div>
-            <div class="coupon-input-field">
-                <div class="div-a">
-                    <label for="">if you have a coupon code please enter here</label>
+  <head>
+    <title>Shoppers &mdash; Colorlib e-Commerce Template</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" 
+    integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ==" crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,400,700">
+    <link rel="stylesheet" href="/file5/fonts/icomoon/style.css">
+
+    <link rel="stylesheet" href="/file5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/file5/css/magnific-popup.css">
+    <link rel="stylesheet" href="/file5/css/jquery-ui.css">
+    <link rel="stylesheet" href="/file5/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/file5/css/owl.theme.default.min.css">
+    
+    <link rel="stylesheet" href="/file5/css/aos.css">
+    <link rel="stylesheet" href="/file5/css/style.css">
+    <script defer src="/js/billing.js"></script>
+  </head>
+  <body>
+  
+  <div class="site-wrap">
+    <% let total = 0 %>
+    <% let count = 0 %>
+    <% for(let i of data) { %>
+      <% total += i.price * i.count %>
+    <% } %>
+    <div class="site-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 mb-5 mb-md-0">
+            <h2 class="h3 mb-3 text-black">Billing Details</h2>
+
+            <div class="border p-3 mb-3">
+                <h3 class="h6 mb-0"><a class="d-block" data-toggle="collapse" href="#collapse_list" role="button" aria-expanded="false" aria-controls="collapsebank">Address List</a></h3>
+                <div class="collapse py-3" id="collapse_list">
+                  <div class="card col-md-11 col-sm-12 mb-3" style="width: 28rem;">
+                    <% for(let i of address) { %>
+                      <div class="card-body">
+                        <h5 class="card-title">Address 1</h5>
+                        <p class="card-text"><%= i.address %></p>
+                        <a href="#" class="card-link">Edit address</a>
+                        <div class="form-check py-3">
+                          <input class="form-check-input" type="checkbox"
+                          name="selectedAddress" value="<%= count %>" onclick="setAddress(<%= count %>)" class="addressCheck">
+                          <label class="form-check-label" for="addressCheck">
+                            Select
+                          </label>
+                        </div>
+                      </div>
+                      <% count++ %>
+                      <% } %>
+                    </div>
                 </div>
-                <div class="div-b">
-                    <form action="/<%= user %>/apply_coupon" method="post">
-                        <input name="coupon" type="text">
-                        <button>APPLY COUPON</button>
+            </div>
+
+            <form method="post" action="/<%= user %>/address/add_address/checkout" class="border p-3 mb-3">
+                <h3 class="h6 mb-0"><a class="d-block" data-toggle="collapse" href="#collapse_edit" role="button" aria-expanded="false" aria-controls="collapsebank">Add address</a></h3>
+                <div class="collapse py-3" id="collapse_edit">
+                <div class="p-3 p-lg-5 border">
+                  <div class="form-group">
+                    <label for="c_country" class="text-black">Country <span class="text-danger">*</span></label>
+                    <select name="region" id="c_country" class="form-control">
+                      <option value="none">Select a country</option>
+                      <option value="bangladesh">bangladesh</option>  
+                      <option value="Algeria">Algeria</option>    
+                      <option value="Afghanistan">Afghanistan</option>    
+                      <option value="Ghana">Ghana</option>    
+                      <option value="India">India</option>
+                      <option value="Albania">Albania</option>    
+                      <option value="Bahrain">Bahrain</option>    
+                      <option value="Colombia">Colombia</option>    
+                      <option value="Dominican Republic">Dominican Republic</option>    
+                    </select>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-md-6">
+                      <label for="c_fname" class="text-black">First Name <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control" id="c_fname" name="firstname">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="c_lname" class="text-black">Last Name <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control" id="c_lname" name="lastname">
+                    </div>
+                  </div>
+    
+                  <div class="form-group row">
+                    <div class="col-md-12">
+                      <label for="c_address" class="text-black">Address <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control" id="c_address" name="address" placeholder="Street address">
+                    </div>
+                  </div>
+    
+                  <div class="form-group row">
+                    <div class="col-md-6">
+                      <label for="c_state_country" class="text-black">State <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control" id="c_state_country" name="town">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="c_postal_zip" class="text-black">Posta / Zip <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control" id="c_postal_zip" name="zip">
+                    </div>
+                  </div>
+    
+                  <div class="form-group row mb-5">
+                    <div class="col-md-6">
+                      <label for="c_email_address" class="text-black">Email Address <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control" id="email" name="c_email_address">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="c_phone" class="text-black">Phone <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control" id="c_phone" name="phone" placeholder="Phone Number">
+                    </div>
+                  </div>
+    
+                  <div class="form-group">
+                    <button>Create</button>
+                  </div>
+                </div>
+                </div>
+              </form>
+
+          </div>
+          <div class="col-md-6">
+            <!-- method="post" action="/<%= user %>/apply_coupon"  -->
+            <div class="row mb-5">
+              <div class="col-md-12">
+                <h2 class="h3 mb-3 text-black">Coupon Code</h2>
+                <div class="p-3 p-lg-5 border">
+
+                  <!-- <% if(couponMessage === false) { %>
+                    <label style="color: rgb(199, 0, 0);" for="c_code" class="mb-3">There is no such coupon code</label>
+                    <div class="input-group w-75">
+                      <input style="border-color: rgb(199, 0, 0); color: rgb(199, 0, 0);" type="text" class="form-control" id="c_code"
+                      value="<%= couponCode %>" aria-label="Coupon Code" aria-describedby="button-addon2">
+                      <div class="input-group-append">
+                        <button type="submit" style="background-color: rgb(199, 0, 0);" class="coupon-apply btn btn-primary btn-sm" id="button-addon2">Apply</button>
+                      </div>
+                    </div>
+                  <% } else if(couponMessage === 'proceed') { %>
+                    <label style="color: rgb(0, 199, 0);" for="c_code" class="mb-3">A coupon Applied to your product</label>
+                    <div class="input-group w-75">
+                      <input style="border-color: rgb(0, 199, 0); color: rgb(0, 199, 0);" type="text" class="form-control" id="c_code"
+                      value="<%= couponCode %>" aria-label="Coupon Code" aria-describedby="button-addon2">
+                      <div class="input-group-append">
+                        <button style="background-color: rgb(0, 199, 0);" class="btn btn-primary btn-sm" id="button-addon2">Apply</button>
+                      </div>
+                    </div>
+                  <% } else if(couponMessage === 'higher_price') { %>
+                    <label style="color: rgb(199, 119, 0);" for="c_code" class="mb-3">
+                      Total price must be less than <%= coupondata[0] %>
+                    </label>
+                    <div class="input-group w-75">
+                      <input style="border-color: rgb(199, 119, 0); color: rgb(199, 119, 0);" type="text" class="form-control" id="c_code"
+                      value="<%= couponCode %>" aria-label="Coupon Code" aria-describedby="button-addon2">
+                      <div class="input-group-append">
+                        <button style="background-color: rgb(199, 119, 0);" class="btn btn-primary btn-sm" id="button-addon2">Apply</button>
+                      </div>
+                    </div>
+                  <% } else { %>
+                  <% } %> -->
+                
+                <label for="c_code" class="coupon_text text-black mb-3">Enter your coupon code if you have one</label>
+                <div class="input-group w-75">
+                  <input style="width: 8em" onclick="check()" name="couponCode" type="text" class="form-control input_coupon" id="c_code" placeholder="Coupon Code" 
+                  aria-label="Coupon Code" aria-describedby="button-addon2">
+                  <div class="input-group-append">
+                    <button onclick="call('<%= user %>')" class="btn btn-primary btn-sm coupon-apply" id="button-addon2">Apply</button>
+                  </div>
+                  <label style="margin-top: 2em;" for="">Select coupons</label>
+                  <select style="outline: none; width: 8em; margin-top: 2em; margin-left: 2em;" name="couponSelect" id="couponSelect">
+                    <option value="none">none</option>
+                    <% if(coupondata.length > 0) { %>
+                      <% coupondata.map(e => {  %>
+                        <option value="<%= e %>"><%= e %></option>
+                      <% }) %>
+                    <% } %>
+                  </select>
+                </div>
+              </div>
+            </div>
+            </div>
+            
+            <div class="row mb-5">
+              <div class="col-md-12">
+                <h2 class="h3 mb-3 text-black">Your Order</h2>
+                <div class="p-3 p-lg-5 border">
+                  <table class="table site-block-order-table mb-5">
+                    <thead>
+                      <th>Product</th>
+                      <th>Total</th>
+                    </thead>
+                    <tbody id="billing">
+                      <% for(let i of data) { %>
+                        <tr>
+                          <td><%= i.name %><strong class="mx-2">x</strong>   <%= i.count %></td>
+                          <td>$<%= i.price * i.count %></td>
+                        </tr>
+                      <% } %>
+                      <tr>
+                        <td class="text-black font-weight-bold"><strong>Cart Subtotal</strong></td>
+                        <td class="text-black">$<%= total %></td>
+                      </tr>
+                      <% if(couponCode !== '' && couponCode !== 'wrong') { %>
+                        <tr>
+                          <td class="text-black font-weight-bold"><strong>Coupon Offer</strong></td>
+                          <td class="text-black">- $<%= coupondata[2] %></td>
+                        </tr>
+                        <tr>
+                          <td class="text-black font-weight-bold"><strong>Order Total</strong></td>
+                          <td class="text-black font-weight-bold"><strong>$<%= total - coupondata[2] %></strong></td>
+                        </tr>
+                      <% } else { %>
+                        <tr>
+                          <td class="text-black font-weight-bold"><strong>Order Total</strong></td>
+                          <td class="text-black font-weight-bold mainprice"><strong>$<%= total %></strong></td>
+                        </tr>
+                      <% } %>
+                    </tbody>
+                  </table>
+                    <div class="form-check">
+                      <input  class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+                      <label class="form-check-label" for="flexRadioDefault1">
+                        Cash on Delivery
+                      </label>
+                    </div>
+                    <div class="form-check my-3">
+                      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                      <label class="form-check-labe paymentRadio" for="flexRadioDefault2">
+                        Razorpay
+                      </label>
+                    </div>
+                    <div class="form-check my-1">
+                      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
+                      <label class="form-check-labe paymentRadio" for="flexRadioDefault3">
+                        Wallet
+                      </label>
+                    </div>
+                  <form class="for-edit">
+                    <a href="/<%= user %>/success?price=<%= total %>"
+                      class="payButton btn btn-primary btn-lg py-3 btn-block">Place Order</a>
                     </form>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
-        <!-- <div class="show-address">
-            <% for(let i of data.address) { %>
-                <div class="address1">
-                    <label for=""><%= i.firstname %></label>
-                </div>
-            <% } %>
-        </div> -->
-        <form action="/<%= user %>/place_order" method="post">
-            <div class="other-and-address">
-                <div class="address-field">
-                    <div class="inner-address-field">
-                        <div class="inps div-1">
-                            <h1>Billing details</h1>
-                        </div>
-                        <div class="inps div-2">
-                            <div class="first">
-                                <label class="texts" for="">firstname</label>
-                                <input name="fname" class="fields" type="text">
-                            </div>
-                            <div class="second">
-                                <label class="texts" for="">secondname</label>
-                                <input name="lname" class="fields" type="text">
-                            </div>
-                        </div>
-                        <div class="inps div-3">
-                            <label class="texts" for="">country / region</label>
-                            <input name="region" style="height: 3em;" type="text">
-                        </div>
-                        <div class="inps div-4">
-                            <label class="texts" for="">address</label>
-                            <input name="address" style="height: 3em;" type="text">
-                        </div>
-                        <div class="inps div-5">
-                            <label class="texts" for="">postcode / zip</label>
-                            <input name="zip" style="height: 3em;" type="text">
-                        </div>
-                        <div class="inps div-6">
-                            <label class="texts" for="">town / city</label>
-                            <input name="city" style="height: 3em;" type="text">
-                        </div>
-                        <div class="inps div-7">
-                            <label class="texts" for="">phone</label>
-                            <input name="phone" style="height: 3em;" type="text">
-                        </div>
-                        <div class="inps div-8">
-                            <label class="texts" for="">email</label>
-                            <input name="email" style="height: 3em;" type="text">
-                        </div>
-                        <div class="inps div-9"></div>
-                    </div>
-                </div>
-                <div class="other-field">
-                    <div class="outer order-list">
-                        <label style="font-size: 1.4em; margin-left: 2em; margin-top: 1em;" for="">
-                            Your orders
-                        </label>
-                        <div class="products">
-                            <div class="prod-title">
-                                <label for="">Products</label>
-                                <label for="">Subtotal</label>
-                            </div>
-                            <% for(let i of products) { %>
-                                <div class="prod-list">
-                                    <label for="">
-                                        <% for(let j of i) { %>
-                                            <% if(typeof j === 'object') { %>
-                                                <%= j.name %>
-                                            <% } %>
-                                        <% } %>
-                                    </label>
-                                    <label style="margin-left: 7em;" for="">
-                                        <% for(let j of i) { %>
-                                            <% if(typeof j === 'number') { %>
-                                                <%= 'x' + j %>
-                                            <% } %>
-                                        <% } %>
-                                    </label>
-                                    <label for="">
-                                        <% for(let j of i) { %>
-                                            <% if(typeof j === 'object') { %>
-                                                <%= j.price %>
-                                            <% } %>
-                                        <% } %>
-                                    </label>
-                                </div>
-                            <% } %>
-                        </div>
-                    </div>
-                    <div class="outer payments">
-                        <label style="font-size: 1.4em; margin-left: 2em;" for="">
-                            Payment Options
-                        </label>
-                        <div class="choice pay1">
-                            <input type="radio" name="" id="">
-                            <label for="">cash on delivery</label>
-                        </div>
-                        <div class="choice pay2">
-                            <input type="radio" name="" id="paypal">
-                            <label for="">paypal</label>
-                        </div>
-                        <div class="choice pay3">
-                            <input type="radio" name="" id="razorpay">
-                            <label for="">razorpay</label>
-                        </div>
-                        <button class="apply-btn">Place Order</button>
-                    </div>
-                    <div class="payment-model">
-                        <a style="color: black;" href="">X</a>
-                    </div>
-                </div>
-            </div>
-        </form>
+      </div>
     </div>
+  </div>
+
+  <script src="/file5/js/jquery-3.3.1.min.js"></script>
+  <script src="/file5/js/jquery-ui.js"></script>
+  <script src="/file5/js/popper.min.js"></script>
+  <script src="/file5/js/bootstrap.min.js"></script>
+  <script src="/file5/js/owl.carousel.min.js"></script>
+  <script src="/file5/js/jquery.magnific-popup.min.js"></script>
+  <script src="/file5/js/aos.js"></script>
+
+  <script src="/file5/js/main.js"></script>
+
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script defer src="/js/fetch/checkoutFetch.js"></script>
+    <script src="/js/fetch/addressReq.js"></script>
+
+  <script>
+
+    const selectElement = document.getElementById('couponSelect');
+    const input_code = document.getElementById('c_code')
+
+    selectElement.addEventListener('change', async () => {
+
+      const selectedOption = selectElement.options[selectElement.selectedIndex]
+
+      const data = {
+        method: 'POST',
+        headers: {
+          'Content-type' : 'application/json'
+        },
+        body: JSON.stringify({
+          coupon : selectedOption.value
+        })
+      }
+
+      const post = await fetch('http://localhost:2000/<%= user %>/getcoupon/details', data)
+      const json = await post.json({})
+
+      input_code.value = json.code
+      console.log(json.code)
+
+    });
+
+  async function getdata() {
+    // let get = await fetch('http://localhost:2000/aria/orders/setpayment')
+    // let data = await get.json()
+    // alert('lwals')
+
+    const payForm = document.getElementsByClassName('for-edit')[0]
+    const formData = new FormData(payForm);
+
+    // console.log(formData)
+    // return
+
+    try {
+        const response = await fetch('/<%= user %>/checkout/auth_order', {
+            method: 'POST',
+            body: formData
+        })
+
+        if (response.ok) {
+            const res = await response.json();
+            if (res.success) {
+              var options = {
+              "key": ""+res.key_id+"",
+              "orderid": ""+res.orderid+"",
+              "status": ""+res.status+ "",
+              "amount": ""+res.totalprice+"",
+              "currency": "INR",
+              "firstname": ""+res.firstname+"",
+              "lastname": ""+res.lastname+"",
+              "phone": ""+res.phone+"",
+              "order": ""+res.order+"",
+              "payment": ""+res.payment+"",
+              "email": ""+res.email+"",
+              "town": ""+res.town+"",
+              "address": ""+res.address+"",
+
+              "handler": async function (response){
+                const request = {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify({message: 'success', data: res})
+                }
+                
+                const payment = await fetch(`http://localhost:2000/<%= user %>/success`, request)
+                // await fetch(`http://localhost:2000/<%= user %>/success?price=<%= total %>`)
+                
+                if(payment) {
+                  window.location.href = `/<%= user %>/success`
+                }
+              },
+              "prefill": {
+                "contact":""+res.phone+"",
+                "name": ""+res.firstname+"",
+                "email": ""+res.email+""
+              },
+              "notes" : {
+                "description":""+res.address+""
+              },
+              "theme": {
+                "color": "#2300a3"
+              }
+            };
+
+                const razorpayObject = new Razorpay(options);
+
+                razorpayObject.on('payment.failed', function (response){
+                    alert("Payment Failed")
+                });
+
+                razorpayObject.open();
+            }
+        } else {
+            console.error('Request failed with status:', response.status);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+  }
+
+  async function calling() {
+    const classData = 'payButton btn btn-primary btn-lg py-3 btn-block'
+    const data = document.getElementsByClassName('for-edit')[0]
+    const mainprice = document.getElementsByClassName('mainprice')
+    const total = mainprice[mainprice.length - 1].firstChild.textContent
+    let total_price = ''
+
+    for(let i = 1; i < total.length; i++) {
+      total_price += total[i]
+    }
+
+    while(data.firstChild) {
+      data.removeChild(data.firstChild)
+    }
+    let newChild = document.createElement('a')
+    newChild.textContent = 'Place Order'
+    newChild.setAttribute('class', classData)
+    newChild.setAttribute('onclick', 'getdata()')
+    newChild.style.color = 'red'
+
+    data.appendChild(newChild)
+
+    const jsonData = {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        price: Number(total_price)
+      })
+    }
+
+    await fetch('http://localhost:2000/<%= user %>/setprice', jsonData)
+  }
+
+  $(document).ready(() => {
+    $('#flexRadioDefault1').on('click', () => {
+      $.ajax({
+        type: 'POST',
+        url: '/<%= user %>/orders/setpayment',
+        data: {
+          payment: 'COD'
+        }
+      })
+    })
+  })
+
+  const billing = document.getElementById('billing')
+  const lastchildel = billing.lastElementChild.lastElementChild.textContent
+
+  const maindata = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      payment: 'Wallet',
+      amount: lastchildel
+    })
+  }
+
+  document.getElementById('flexRadioDefault3').addEventListener('click', async() => {
+    const data = await fetch('http://localhost:2000/<%= user %>/orders/setpayment', maindata)
+    const json = await data.json({})
+    
+    if(json.msg === 'no_wallet') {
+      alert('wallet price is low')
+      document.getElementById('flexRadioDefault1').checked = true
+    }
+    // console.log(lastchild)
+  })
+
+  $(document).ready(() => {
+    $('#flexRadioDefault2').on('click', () => {
+      calling()
+      // alert('lwalsing...')
+      $.ajax({
+        type: 'POST',
+        url: '/<%= user %>/orders/setpayment',
+        data: {
+          payment: 'Razorpay'
+        }
+      }).done((res) => {
+        // alert(res)
+        // if(res.key === 'Razorpay') {
+        // }
+    })
+    })
+  })
+
+
+
+
+
+  
+  </script>
+  
 </body>
 </html>

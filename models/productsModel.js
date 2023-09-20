@@ -4,7 +4,8 @@ const db = require('../config/db')
 const categoryModel = mongoose.Schema({
     name: String,
     stock: Number,
-    active: Boolean
+    active: Boolean,
+    image: String
 })
 
 const itemModel = mongoose.Schema({
@@ -16,7 +17,14 @@ const itemModel = mongoose.Schema({
     date: String,
     description: String,
     image: Array,
-    reviews: Array,
+    access: Boolean,
+    reviews: {
+        overall: {
+            type: Object,
+            default: {}
+        },
+        reviews: Array
+    },
     questions: Array
 })
 

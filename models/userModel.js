@@ -12,7 +12,8 @@ let UserSchema = mongoose.Schema({
     cart: Array,
     details: Object,
     wallet: Number,
-    coupons: Array
+    coupons: Array,
+    activeCoupon: String
 })
 
 module.exports = db.model('user', UserSchema)

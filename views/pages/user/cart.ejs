@@ -1,148 +1,270 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/css/home/cartStyle.css">
-        <title>Cart</title>
-        <script defer src="/js/addressPanel.js"></script>
-    </head>
-<body>
-    <%- include('../../layouts/header.ejs') %>
-    <div class="main-cart">
-        <div class="cart">
-            <% let total = 0 %>
-            <% let totalprice = 0 %>
-            <div class="cart-title">
-                <h1>Shopping Cart</h1>
-                <% if(data) { %>
-                    <% for(let i of data) { %>
-                        <% total += i[1] %>
+  <head>
+    <title>Shoppers &mdash; Colorlib e-Commerce Template</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,400,700"> 
+    <link rel="stylesheet" href="fonts/icomoon/style.css">
+
+    
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" 
+  integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ==" crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="/file5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/file5/css/magnific-popup.css">
+    <link rel="stylesheet" href="/file5/css/jquery-ui.css">
+    <link rel="stylesheet" href="/file5/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/file5/css/owl.theme.default.min.css">
+
+
+    <link rel="stylesheet" href="/file5/css/aos.css">
+    <link rel="stylesheet" href="/file5/css/style.css">
+
+    <script defer src="/js/fetch/cartFetch.js"></script>
+    
+  </head>
+  <body>
+    
+    <% if(data) { %>
+      <% let total = 0 %>
+      <% let totalprice = 0 %>
+      <% let color = 'white' %>
+      <% let response = true %>
+      <% let n = 0 %>
+  <div class="site-wrap">
+    <div class="site-section">
+        <div class="container">
+          <div class="row mb-5">
+            <form class="col-md-12" method="post">
+              <div class="site-blocks-table">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th class="product-thumbnail">Image</th>
+                      <th class="product-name">Product</th>
+                      <th class="product-price">Price</th>
+                      <th class="product-quantity">Quantity</th>
+                      <th class="product-total">Total</th>
+                      <th class="product-remove">Remove</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      <% for(let i = 0; i < data.length; i++) { %>     
+                        <% if(data[i][0].access === false) { %>
+                          <% color = '#d8d8d8' %>
+                          <% response = false %>
+                        <% } else { %>
+                          <% response = true %>
+                        <% } %>
+                        <% let variable = data[i][0]._id %>
+                        <tr style="background-color: <%= color %>;">
+                          <td class="product-thumbnail">
+                            <img src="<%= '/img/' + data[i][0].image[0]%>" alt="Image" class="img-fluid">
+                          </td>
+                          <td class="product-name">
+                            <h2 class="h5 text-black"><%= data[i][0].name%></h2>
+                          </td>
+                          <td>$<%= data[i][0].price%></td>
+                          <% if(response){ %>
+                            <td>
+                              <div class="input-group mb-3" style="max-width: 120px;">
+                                <div class="input-group-prepend">
+                                  <a onclick="inc('min', '<%= variable %>', '<%= user %>', '<%= n %>')"
+                                     class="btn btn-outline-primary js-btn-minus" type="button">&minus;</a>
+                                </div>
+                                <input type="text" class="form-control count_inp text-center" value="<%= data[i][1]%>"
+                                aria-label="Example text with button addon" aria-describedby="button-addon1">
+                                <div class="input-group-append">
+                                  <a onclick="inc('max', '<%= variable %>', '<%= user %>', '<%= n %>')" 
+                                    class="btn btn-outline-primary js-btn-plus" type="button">&plus;</a>
+                                </div>
+                              </div>
+                            </td>
+                          <% } else { %>
+                            <td>
+                              <div class="input-group mb-3" style="max-width: 120px;">
+                                <div class="input-group-prepend">
+                                  <button onclick="popup2()"
+                                     class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
+                                </div>
+                                <input type="text" class="form-control text-center" value="<%= data[i][1]%>"
+                                aria-label="Example text with button addon" aria-describedby="button-addon1">
+                                <div class="input-group-append">
+                                  <button onclick="popup2()"
+                                    class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
+                                </div>
+                              </div>
+                            </td>
+                          <% } %>
+                          <td class="each-total">$<%= data[i][0].price * data[i][1]%></td>
+                          <% totalprice += data[i][0].price * data[i][1] %>
+                          <td><a href="/<%= user %>/cart/remove?name=<%= data[i][0].name%>" class="btn btn-primary btn-sm">X</a></td>
+                        </tr>
+                        <% n++ %>
+                      <% } %>
+                    </tbody>
+                  </table>
+              </div>
+            </form>
+          </div>
+          <div class="row">
+            <div class="col-md-6" style="opacity: 0;">
+              <div class="row mb-5">
+                <div class="col-md-6 mb-3 mb-md-0">
+                  <a href="/<%= user %>/cart/clear" class="btn btn-primary btn-sm btn-block">Clear Cart</a>
+                </div>
+                <div class="col-md-6">
+                  <a class="btn btn-outline-primary btn-sm btn-block">Continue Shopping</a>
+                </div>
+              </div>
+              <form method="post" action="/<%= user %>/apply_coupon" class="row">
+                <div class="col-md-12">
+                  <label class="text-black h4" for="coupon">Coupon</label>
+                  <% if(couponMessage) { %>
+                    <% if(totalprice <= coupondata[0]) { %>
+                      <p style="color: rgb(0, 199, 0);" >A coupon Applied to your product</p>
+                      <% } else { %>
+                        <p style="color: rgb(199, 119, 0);" >
+                          Total price must be less than <%= coupondata[0] %>
+                        </p>
                     <% } %>
-                    <h1><%= total + ' items' %></h1>
-                <% } else { %>
-                    <h1>0 items</h1>
-                <% } %>
-            </div>
-            <hr style="margin-top: 1em; width: 55em; border-color: rgb(0, 0, 0);">
-            <div class="cart-list">
-                <div class="cart-inner-title">
-                    <label style="padding-right: 13em;">PRODUCT DETAILS</label>
-                    <label>QUANTITY</label>
-                    <label>PRICE</label>
-                    <label>TOTAL</label>
+                  <% } else { %>
+                    <p>Enter your coupon code if you have one.</p>
+                  <% } %>
                 </div>
-                <% if(data) { %>
-                    <% for(let i = 0; i < data.length; i++) { %>                
-                        <div class="cart-inner-content">
-                            <div class="prod-details">
-                                <div class="prod-pic">
-                                    <img src="<%= '/img/' + data[i][0].image[0]%>" alt="" style="width: 100%; height: 100%;">
-                                </div>
-                                <div class="prod-other">
-                                    <label for=""><%= data[i][0].name%></label>
-                                    <label style="color: navy;" for=""><%= data[i][0].category%></label>
-                                    <a style="color: red;" class="remove-item" href="/<%= user %>/cart/remove?name=<%= data[i][0].name%>">
-                                        remove
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="prod-pricing">
-                                <div class="prod-quantity">
-                                    <a href="/<%= user %>/cart/countcart?item=<%= data[i][0]._id %>&num=min">-</a>
-                                    <label><%= data[i][1]%></label>
-                                    <a href="/<%= user %>/cart/countcart?item=<%= data[i][0]._id %>&num=max">+</a>
-                                </div>
-                                <label>$<%= data[i][0].price%></label>
-                                <label>$<%= data[i][0].price * data[i][1]%></label>
-                                <% totalprice += data[i][0].price * data[i][1] %>
-                            </div>
-                        </div>
-                    <% } %>
-                <% } else { %>
-                    <h1 class="no-it">No items</h1>
-                <% } %>
-            </div>
-        </div>
-        <div class="summary">
-            <div class="summary-field">
-                <div class="summary-title">
-                    <h1>Order summary</h1>
-                </div>
-                <hr style="margin-top: 2.3em; width: 20em; border-color: rgb(0, 0, 0);">
-                <div class="total-price">
-                    <label>ITEMS <%= total %></label>
-                    <label>$<%= totalprice %></label>
-                </div>
-                <div class="inp-fields">
-                    <label for="">SHIPPING</label>
-                    <select name="" class="control">
-                        <option value="">Cash on delivery</option>
-                        <option value="">Paypal</option>
-                        <option value="">Razorpay</option>
-                    </select>
-                    <label for="">PROMO CODE</label>
-                    <input class="control" type="text">
-                    <button class="control ap-btn">APPLY</button>
-                </div>
-                <div class="total-cost">
-                    <div class="last-total">
-                        <label for="">TOTAL COST</label>
-                        <label for="">$<%= totalprice %></label>
-                    </div>
-                    <% if(data) { %>
-                        <a href="/<%= user %>/checkout?details=<%= data %>" class="checkout-btn">CHECKOUT</a>
+                <div class="col-md-8 mb-3 mb-md-0">
+                  <% if(couponCode) { %>
+                    <% if(totalprice <= coupondata[0]) { %>
+                      <input style="color: rgb(0, 199, 0);" value="<%= couponCode %>" name="couponCode"
+                      type="text" class="form-control py-3" id="coupon" placeholder="Coupon Code">
                     <% } else { %>
-                        <button onclick="adding(<%= false %>)" class="checkout-btn">CHECKOUT</button>
+                      <input style="color: rgb(199, 119, 0);" value="<%= couponCode %>" name="couponCode"
+                      type="text" class="form-control py-3" id="coupon" placeholder="Coupon Code">
                     <% } %>
-                    <div id="checkout-error">
-                        <label for="">You cannot order</label>
-                        <div class="ch-er-control">
-                            <a class="homepage" href="/<%= user %>/home">home</a>
-                            <a class="ok" href="">ok</a>
-                        </div>
-                    </div>
-                    <div style="display: <%= visible %>;" class="add-address-checkout">
-                        <button class="close-btn" onclick="closeAdd()">X</button>
-                        <a class="ad-add-btn" href="/<%= user%>/address?type=checkout">
-                            <% if(address[0] === 'add') { %>
-                                <div class="main-checkout-address">
-                                    <label for="">Address1</label>
-                                    <p>
-                                        <%= address[1] %>
-                                    </p>
-                                </div>
-                                <form action="/<%= user %>/orders/place_order?data=<%= address[1]%>&price=<%= totalprice %>" method="post">
-                                    <button class="place-order-btn">Place order</button>
-                                </form> 
-                                <% } else { %>
-                                    add address
-                                    <a href="">
-                                    </a>
-                                    <button onclick="noAddress()" class="place-order-btn">Place order</button>
-                            <% } %>
-                        </a>
-                    </div>
-                    <div class="no-address-panel">
-                        <label for="">please select a address</label>
-                        <button onclick="adding(<%= true %>)">Ok</button>
-                    </div>
-                    
-                    <% if(popup === 'true') { %>
-                        <div class="place-order-label">
-                            <img src="/img/icons/3500833.png" alt="">
-                            <h1>Youre Order Placed</h1>
-                            <div class="order-control-btns">
-                                <form action="/<%= user %>/orders">
-                                    <button class="show-order" href="">show orders</button>
-                                </form>
-                                <button class="order-ok" onclick="order(event, 'ent')">ok</button>
-                            </div>
-                        </div>
-                    <% } %>
+                  <% } else { %>
+                    <input name="couponCode" type="text" class="form-control py-3" id="coupon" placeholder="Coupon Code">
+                  <% } %>
                 </div>
+                <div class="col-md-4">
+                  <% if(couponCode) { %>
+                    <% if(totalprice <= coupondata[0]) { %>
+                      <button style="background-color: rgb(0, 199, 0);" class="btn btn-sm">Apply Coupon</button>
+                      <% } else { %>
+                        <button style="background-color: rgb(199, 119, 0);" class="btn btn-sm">Apply Coupon</button>
+                      <% } %>
+                    <% } else { %>
+                    <button class="btn btn-primary btn-sm">Apply Coupon</button>
+                  <% } %>
+                </div>
+              </form>
             </div>
+            <div class="col-md-6 pl-5">
+              <div class="row justify-content-end">
+                <div class="col-md-7">
+                  <div class="row">
+                    <div class="col-md-12 text-right border-bottom mb-5">
+                      <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <span class="text-black">Subtotal</span>
+                    </div>
+                    <div class="col-md-6 text-right">
+                      <strong class="text-black sub-total">$<%= totalprice %></strong>
+                    </div>
+                  </div>
+                  
+                  <% if(couponMessage) { %>
+                    <div class="row mb-3">
+                      <div class="col-md-6">
+                        <span class="text-black">Coupon</span>
+                      </div>
+                      <div class="col-md-6 text-right">
+                        <strong class="text-black">- $<%= coupondata[2] %></strong> 
+                      </div>
+                    </div>
+                  <% } %>
+
+                  <div class="row mb-5">
+                    <div class="col-md-6">
+                      <span class="text-black">Total</span>
+                    </div>
+                    <div class="col-md-6 text-right">
+                      <strong class="text-black total">
+                        <% if(couponMessage === false) { %>
+                          $<%= totalprice %>
+                        <% } else { %>
+                          $<%= totalprice - coupondata[2] %>
+                        <% } %>
+                      </strong>
+                    </div>
+                  </div>
+                  <% if(popup !== '') { %>
+                    <h1 class="message">Out of Product</h1>
+                  <% } %>
+                  <% if(response) { %>
+                    <div class="row">
+                      <form action="/<%= user + '/checkout' %>" class="col-md-12">
+                        <button class="btn btn-primary btn-lg py-3 btn-block">
+                          Proceed To Checkout 
+                        </button>
+                      </form>
+                    </div>
+                  <% } else { %>
+                    <div class="row">
+                      <form class="col-md-12">
+                        <button onclick="popup()" class="btn btn-primary btn-lg py-3 btn-block">
+                          Proceed To Checkout 
+                        </button>
+                      </form>
+                    </div>
+                  <% } %>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-</body>
+    <% } else { %>
+      <%- include('../../layouts/header.ejs') %>
+      <div class="site-wrap">
+        <div class="site-section">
+          <div style="display: flex; justify-content: center; flex-direction: column; align-items: center;"
+           class="container">
+            <div class="row my-5">
+              <h1>No items here</h1>
+            </div>
+            <div class="row">
+              <a href="/<%= user %>/home">Back to home</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% } %>
+  
+  <script src="js/jquery-3.3.1.min.js"></script>
+  <script src="js/jquery-ui.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/jquery.magnific-popup.min.js"></script>
+  <script src="js/aos.js"></script>
+
+  <script src="js/main.js"></script>
+
+  <script>
+    function popup() {
+      alert('cannot but the disabled products')
+    }
+
+    function popup2() {
+      alert('cannot change the count of disabled product')
+    }
+  </script>
+    
+  </body>
 </html>

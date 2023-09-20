@@ -1,6 +1,6 @@
 
 
-const mainModel = document.getElementsByClassName('add-address')
+const mainModel = document.getElementsByClassName('main-model')
 const editmodel = document.getElementsByClassName('edit-address')
 const orderpanel = document.getElementsByClassName('place-order-label')
 const form = document.getElementsByClassName('edit_add_form')

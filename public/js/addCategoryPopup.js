@@ -15,6 +15,6 @@ function popup() {
     }).then(data => {
         return data.json()
     }).then(data => {
-        console.log('memes', data)
+        // console.log('memes', data)
     })
 }

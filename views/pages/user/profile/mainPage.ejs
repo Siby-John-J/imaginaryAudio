@@ -4,42 +4,106 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/user/userProfile.css">
+
+    <meta charset="utf-8" />
+	<link rel="apple-touch-icon" sizes="76x76" href="/assets/img/apple-icon.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="/assets/img/favicon.png">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+	<title>Paper Dashboard by Creative Tim</title>
+
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+    <!-- Animation library for notifications   -->
+    <link href="/assets/css/animate.min.css" rel="stylesheet"/>
+
+    <!--  Paper Dashboard core CSS    -->
+    <link href="/assets/css/paper-dashboard.css" rel="stylesheet"/>
+
+    <!--  CSS for Demo Purpose, don't include it in your project     -->
+    <link href="/assets/css/demo.css" rel="stylesheet" />
+
+    <!--  Fonts and icons     -->
+    <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
+    <link href="/assets/css/themify-icons.css" rel="stylesheet">
+    
     <title>Document</title>
 </head>
 <body>
-    <div class="main-win">
-        <div class="select">
-            <div class="profile-details">
-                <div class="profile-pic">
-                    
+    <style>
+        .main-nav {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .anchor {
+            display: flex;
+        }
+    </style>
+
+    <div class="wrapper">
+        <div class="row">
+            <div class="sidebar" data-background-color="white" data-active-color="danger">
+                <div class="sidebar-wrapper">
+                    <div class="logo">
+                        <a class="anchor" href="http://www.creative-tim.com" class="simple-text">
+                            Creative Tim
+                        </a>
+                    </div>
+                    <ul class="nav main-nav">
+                        <li class="active">
+                            <a class="anchor" href="/<%= user %>/profile">
+                                <i class="ti-user"></i>
+                                <p>User Profile</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="anchor" href="/<%= user %>/address?type=view">
+                                <i class="ti-view-list-alt"></i>
+                                <p>Address</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="anchor" href="/<%= user %>/orders">
+                                <i class="ti-text"></i>
+                                <p>orders</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="anchor" href="/<%= user %>/wallet">
+                                <i class="ti-bell"></i>
+                                <p>wallet</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="anchor" href="/logout">
+                                <i class="ti-pencil-alt2"></i>
+                                <p>logout</p>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-                <label id="name"><%= data.name %></label>
-                <label id="email"><%= data.email %></label>
-            </div>
-            <div class="select-fields">
-                <a href="/<%= data.name %>/profile">profile</a>
-                <a href="/<%= data.name %>/orders">orders</a>
-                <a href="/<%= data.name %>/address?type=view">address</a>
-                <a href="/<%= data.name %>/cart">cart</a>
-                <a href="/logout">logout</a>
             </div>
         </div>
-        
-        <div class="contents">
-            <%- include('./header.ejs')%>
-            <div class="details">
-                <% if(page === 'profile') { %>
-                    <%- include('./profile.ejs')%>
-                <% } else if(page === 'orders') { %>
-                    <%- include('./orders.ejs')%>
-                <% } else if(page === 'address') { %>
-                    <%- include('./address.ejs')%>
-                <% } else if(page === 'cart') { %>
-                    <%- include('../cart.ejs')%>
-                <% } else if(page === 'viewOrder') { %>
-                    <%- include('./viewOrder.ejs') %>
-                <% } %>
-            </div>  
+        <div class="main-panel">
+            <% if(page === 'profile') { %>
+                <%- include('./profile.ejs')%>
+            <% } else if(page === 'orders') { %>
+                <%- include('./orders.ejs')%>
+            <% } else if(page === 'address') { %>
+                <%- include('./address.ejs')%>
+            <% } else if(page === 'cart') { %>
+                <%- include('../cart.ejs')%>
+            <% } else if(page === 'viewOrder') { %>
+                <%- include('./viewOrder.ejs') %>
+            <% } else if(page === 'wallet') { %>
+                <%- include('./wallet.ejs') %>
+            <% } %>
         </div>
     </div>
 </body>

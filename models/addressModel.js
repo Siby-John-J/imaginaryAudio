@@ -4,6 +4,7 @@ const db = require('../config/db')
 let address = mongoose.Schema({
     firstname: String,
     lastname: String,
+    email: String,
     phone: Number,
     address: String,
     town: String,

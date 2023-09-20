@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/mediaQuery/homepageRes.css">
+    <link rel="stylesheet" href="/css/home/homeStyle.css">
+    <title>imaginaryAudio</title>
+</head>
+<body>
+    <%- include('../layouts/header.ejs') %>
+
+    <% if(page === 'products') { %>
+        <div class="main">
+            <div class="side"></div>
+            <img src="/img/adam-a7x.webp" alt="">
+        </div>
+        <div class="desc">
+            <p>Creativity <br> lies here</p>
+            <button class="shop-now">Shop now</button>
+        </div>
+    
+        <%- include('../pages/user/products.ejs') %>
+    <% } else if(page === 'checkout'){ %>
+        <%- include('../pages/user/checkout.ejs') %>
+    <% } else if(page === 'seperate') { %>
+        <%- include('../pages/user/products.ejs') %>
+    <% } else if(page === 'wallet') { %>
+        <%- include('../pages/user/walletAndCard.ejs') %>
+    <% } %>
+</body>
+</html>

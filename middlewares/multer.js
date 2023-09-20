@@ -2,10 +2,9 @@ const multer = require('multer')
 
 let storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'public/img')
+        cb(null, 'public/img/cropped/category')
     },
     filename: (req, file, cb) => {
-        console.log('lwals...')
         if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
             cb(null, file.originalname)
         } else {

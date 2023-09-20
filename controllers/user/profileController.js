@@ -4,29 +4,42 @@ const addressmodel = require('../../models/addressModel')
 
 module.exports.profile = async(req, res) => {
     try {
-        let data = await usermodel.findOne({name: req.session.username})
+        let dat1 = {}
+        let dat2 = {}
+        const data = await usermodel.findOne({name: req.session.username})
+
+        if(data !== null) {
+            dat1.place = data.details ? data.details.place : null
+            dat1.age = data.details ? data.details.age: null
+            dat1.dob = data.details ? data.details.dob : null
+            dat1.name = data.name
+            dat1.email = data.email
+            dat1.phone = data.phone
+        }
 
         if(req.query.type === 'edit') {
             res.render('pages/user/profile/mainPage', {page: 'profile', 
-            data: data, content: 'edit'})
+            dat1: dat1, content: 'edit', user: data.name})
         } else {
             res.render('pages/user/profile/mainPage', {page: 'profile', 
-            data: data, content: ''})
+            dat1: dat1, content: '', user: data.name})
         }
     } catch (error) {
-        
+        console.log(error)
     }
 }
 
 module.exports.editProfile = async(req, res) => {
-    let ph = Number(req.body.phone)
+    ph = ''
+    if(req.body.phone) {
+        ph = Number(req.body.phone)
+    }
 
     let set = await usermodel.updateOne(
-        {name: req.session.username},
+        { name: req.session.username },
         { $set: 
             {
-                name: req.body.name, 
-                phone: ph ,
+                phone: ph,
                 email: req.body.email,
                 details: {
                     place: req.body.place,
@@ -37,7 +50,7 @@ module.exports.editProfile = async(req, res) => {
         }
     )
     
-    req.session.username = req.body.name
+    // req.session.username = req.body.name
 
     res.redirect('/' + req.session.username + '/profile')
 }
@@ -75,6 +88,7 @@ module.exports.addAddress = async(req, res) => {
         const address = {
             firstname: req.body.firstname,
             lastname: req.body.lastname,
+            email: req.body.email,
             phone: Number(req.body.phone),
             address: req.body.address,
             town: req.body.town,
@@ -82,7 +96,7 @@ module.exports.addAddress = async(req, res) => {
             zip: Number(req.body.zip)
         }
 
-        let add_address = await usermodel.updateMany(
+        const add_address = await usermodel.updateMany(
             { name: req.session.username },
             { $push: { address: address } }
         )
@@ -113,33 +127,33 @@ let num = 0
 module.exports.editAddress = async(req, res) => {
     try {
         let data = await usermodel.findOne({name: req.session.username})
-        let index = Number(req.query.num)
+        // let index = Number(req.query.num)
 
-        if(index) {
-            num = index
-        }
+        // if(index) {
+        //     num = index
+        // }
         
-        const address = [
-            'firstname',
-            'lastname',
-            'phone',
-            'address',
-            'town',
-            'region',
-            'zip'
-        ]
+        // const address = [
+        //     'firstname',
+        //     'lastname',
+        //     'phone',
+        //     'address',
+        //     'town',
+        //     'region',
+        //     'zip'
+        // ]
         
-        if(req.query.func === 'show') {
-            res.render('pages/user/profile/mainPage', {page: 'address', 
-            data: data, user: req.session.username, type: 'view', form: address,
-            formdata: data.address[index]})
-        }
+        // if(req.query.func === 'show') {
+        //     res.render('pages/user/profile/mainPage', {page: 'address', 
+        //     data: data, user: req.session.username, type: 'view', form: address,
+        //     formdata: data.address[index]})
+        // }
 
         if(req.body.firstname) {
-
             const address = {
                 firstname: req.body.firstname,
                 lastname: req.body.lastname,
+                email: req.body.email,
                 phone: Number(req.body.phone),
                 address: req.body.address,
                 town: req.body.town,
@@ -147,9 +161,11 @@ module.exports.editAddress = async(req, res) => {
                 zip: Number(req.body.zip)
             }
 
+            console.log(address)
+
             let set = await usermodel.updateOne(
                 { name: req.session.username },
-                { $set: {['address.' + num]: address} }
+                { $set: {['address.' + req.body.num]: address} }
                 )
 
             res.redirect('/' + req.session.username + '/address')

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/admin/customerStyle.css">
+    <title>customers</title>
+</head>
+<body>
+    <div class="customers-main">
+        <div class="join">
+            <h1>Customers</h1>
+            <div class="search">
+                <input type="text" name="search">
+                <button>Search</button>
+            </div>
+        </div>
+
+        <div class="users-list">
+            <div class="title">
+                <label class="a1">id</label>
+                <label class="a2">Name</label>
+                <label class="a3">Email</label>
+                <label class="a4">Phone</label>
+                <label class="a5">Date Created</label>
+                <label class="a6">Address</label>
+            </div>
+            <div class="users">
+                <% for(let i = 0; i < content.length; i++) { %>
+                    <div class="user1">
+                        <p class="pp"><%= i %></p>
+                        <p class="pb"><%= content[i].name %></p>
+                        <p class="pb"><%= content[i].email %></p>
+                        <p class="pb">9299188237</p>
+                        <p class="pb">09/11/2000</p>
+                        <p class="p-l"><%= content[i].address %></p>
+                        <p >
+                            <% let color = ''%>
+                            <% let access = '' %>
+                            <% if(content[i].status) { %>
+                                    <% access = 'block' %>
+                                    <% color = 'green' %>
+                            <% } else { %>
+                                    <% access = 'unblock' %>
+                                    <% color = 'red' %>
+                            <% } %>
+                            <!-- Need to change the location as /admin/customers/block -->
+                            <a href="/admin/customers/block?user=<%= content[i].name %>&status=<%= content[i].status%>"
+                                style="background-color: <%= color %>; position: relative; color: white; font-size: 18px; right: 40px;">
+                                <%= access %>
+                            </a>
+                        </p>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

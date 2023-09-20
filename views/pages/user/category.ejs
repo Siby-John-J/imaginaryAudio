@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- ===============================================-->
+    <!--    Document Title-->
+    <!-- ===============================================-->
+    <title>Foodwagon | Responsive, Ecommerce &amp; Business Templatee</title>
+
+
+    <!-- ===============================================-->
+    <!--    Favicons-->
+    <!-- ===============================================-->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicons/favicon-16x16.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicons/favicon.ico">
+    <link rel="manifest" href="assets/img/favicons/manifest.json">
+    <meta name="msapplication-TileImage" content="assets/img/favicons/mstile-150x150.png">
+    <meta name="theme-color" content="#ffffff">
+
+  </head>
+  <body>
+    
+    <section class="py-4 overflow-hidden">
+      <div class="container">
+        <div class="row flex-center mb-6">
+          <div class="col-lg-7">
+            <h5 class="fw-bold fs-3 fs-lg-5 lh-sm text-center text-lg-start">Category</h5>
+          </div>
+          <div class="col-lg-4 text-lg-end text-center"><a class="btn btn-lg text-800 me-2" href="#" role="button">VIEW ALL <i class="fas fa-chevron-right ms-2"></i></a></div>
+          <div class="col-lg-auto position-relative">
+            <button class="carousel-control-prev s-icon-prev carousel-icon" type="button" data-bs-target="#carouselSearchByFood" data-bs-slide="prev"><span class="carousel-control-prev-icon hover-top-shadow" aria-hidden="true"></span><span class="visually-hidden">Previous</span></button>
+            <button class="carousel-control-next s-icon-next carousel-icon" type="button" data-bs-target="#carouselSearchByFood" data-bs-slide="next"><span class="carousel-control-next-icon hover-top-shadow" aria-hidden="true"></span><span class="visually-hidden">Next</span></button>
+          </div>
+        </div>
+        <% n = 4 %>
+        <div class="row flex-center">
+          <div class="col-12">
+            <div class="carousel slide" id="carouselSearchByFood" data-bs-touch="false" data-bs-interval="false">
+              <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="10000">
+                  <div class="row h-100 align-items-center">
+                    <% for(let i of cate) { %>
+                      <!-- <div><%= user %></div> -->
+                      <a href="/<%= user %>/products?cate=<%= i.name %>" class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+                        <% if(i.image) { %>
+                          <div class="card card-span h-100">
+                            <% if(n >= 7) { %>
+                              <% } %>
+                              <img class="img-fluid h-100 rounded-circle" src="/img/cropped/category/<%= i.image %>" alt="..." />
+                        <% } else { %>
+                          <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="/images/1-1.jpg" alt="..." />
+                        <% } %>
+                          <div class="card-body ps-0">
+                            <h5 class="text-center fw-bold text-1000 text-truncate mb-2"><%= i.name %></h5>
+                          </div>
+                        </div>
+                      </a>
+                      <% n++ %>
+                    <% } %>
+                  </div>
+                </div>
+                <!-- <div class="carousel-item" data-bs-interval="5000">
+                  <div class="row h-100 align-items-center">
+                    <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+                      <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="assets/img/gallery/search-pizza.png" alt="..." />
+                        <div class="card-body ps-0">
+                          <h5 class="text-center fw-bold text-1000 text-truncate mb-2">pizza</h5>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+                      <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="assets/img/gallery/burger.png" alt="..." />
+                        <div class="card-body ps-0">
+                          <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Burger</h5>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+                      <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="assets/img/gallery/noodles.png" alt="..." />
+                        <div class="card-body ps-0">
+                          <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Noodles</h5>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+                      <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="assets/img/gallery/sub-sandwich.png" alt="..." />
+                        <div class="card-body ps-0">
+                          <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Sub-sandwiches</h5>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+                      <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="assets/img/gallery/chowmein.png" alt="..." />
+                        <div class="card-body ps-0">
+                          <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Chowmein</h5>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+                      <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="assets/img/gallery/steak.png" alt="..." />
+                        <div class="card-body ps-0">
+                          <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Steak</h5>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="carousel-item" data-bs-interval="3000">
+                  <div class="row h-100 align-items-center">
+                    <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+                      <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="assets/img/gallery/search-pizza.png" alt="..." />
+                        <div class="card-body ps-0">
+                          <h5 class="text-center fw-bold text-1000 text-truncate mb-2">pizza</h5>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+                      <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="assets/img/gallery/burger.png" alt="..." />
+                        <div class="card-body ps-0">
+                          <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Burger</h5>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+                      <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="assets/img/gallery/noodles.png" alt="..." />
+                        <div class="card-body ps-0">
+                          <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Noodles</h5>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+                      <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="assets/img/gallery/sub-sandwich.png" alt="..." />
+                        <div class="card-body ps-0">
+                          <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Sub-sandwiches</h5>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+                      <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="assets/img/gallery/chowmein.png" alt="..." />
+                        <div class="card-body ps-0">
+                          <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Chowmein</h5>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+                      <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="assets/img/gallery/steak.png" alt="..." />
+                        <div class="card-body ps-0">
+                          <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Steak</h5>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <div class="row h-100 align-items-center">
+                    <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+                      <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="assets/img/gallery/search-pizza.png" alt="..." />
+                        <div class="card-body ps-0">
+                          <h5 class="text-center fw-bold text-1000 text-truncate mb-2">pizza</h5>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+                      <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="assets/img/gallery/burger.png" alt="..." />
+                        <div class="card-body ps-0">
+                          <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Burger</h5>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+                      <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="assets/img/gallery/noodles.png" alt="..." />
+                        <div class="card-body ps-0">
+                          <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Noodles</h5>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+                      <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="assets/img/gallery/sub-sandwich.png" alt="..." />
+                        <div class="card-body ps-0">
+                          <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Sub-sandwiches</h5>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+                      <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="assets/img/gallery/chowmein.png" alt="..." />
+                        <div class="card-body ps-0">
+                          <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Chowmein</h5>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-xl mb-5 h-100">
+                      <div class="card card-span h-100 rounded-circle"><img class="img-fluid rounded-circle h-100" src="assets/img/gallery/steak.png" alt="..." />
+                        <div class="card-body ps-0">
+                          <h5 class="text-center fw-bold text-1000 text-truncate mb-2">Steak</h5>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="vendors/@popperjs/popper.min.js"></script>
+    <script src="vendors/bootstrap/bootstrap.min.js"></script>
+    <script src="vendors/is/is.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+    <script src="vendors/fontawesome/all.min.js"></script>
+    <script src="assets/js/theme.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700;900&amp;display=swap" rel="stylesheet">
+  </body>
+
+</html>

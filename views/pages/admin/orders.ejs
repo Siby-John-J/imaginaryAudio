@@ -1,82 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/admin/orderStyle.css">
-    <script defer src="/js/editOrder.js"></script>
-    <title>Document</title>
-</head>
-<body>
-    <h1>Orders</h1>
-
-    <div class="main-order-window">
-        <div class="order-title">
-            <label for="">Customer</label>
-            <label for="">Name</label>
-            <label for="">Price</label>
-            <label for="">Payment</label>
-            <label for="">Status</label>
-            <label for="">Action</label>
-        </div>
-        <div class="order-content">
-            <% let num = 0 %>
-            <% for(let i of data) { %>
-                <div class="order1">
-                    <label for=""><%= i.user %></label>
-                    <label for="">
-                        <% if(i.products.length > 1) { %>
-                            <select style="border: none; outline: none;" name="" id="">
-                                <% for(let j of i.products) { %>
-                                    <option value=""><%= j %></option>
-                                <% } %>
-                            </select>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Purple Admin</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="/assets2/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="/assets2/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <link rel="stylesheet" href="/assets2/css/style.css">
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="/assets2/images/favicon.ico" />
+  </head>
+  <body>
+    <div class="row">
+      <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body" style="width: 82vw; margin-top: 1em;">
+            <h4 class="card-title">Orders</h4>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th> Id </th>
+                  <th> User name </th>
+                  <th> Status </th>
+                  <th> Amount </th>
+                  <th> Date </th>
+                  <th> Payment </th>
+                  <th> Update </th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for(let i of data) { %>
+                  <tr>
+                    <td class="py-1">
+                      <%= i.orderid %>
+                    </td>
+                    <td>
+                      <!-- <img src="../../assets/images/faces-clipart/pic-1.png" /> -->
+                       <%= i.user %> 
+                      </td>
+                    <td style="width: 15em;">
+                      <div class="progress">
+                        <% if(i.status === 'pending') { %>
+                          <div class="progress-bar bg-warning" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        <% } else if(i.status === 'processing') { %>
+                          <div class="progress-bar bg-primary" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                        <% } else if(i.status === 'delivered') { %>
+                          <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                         <% } else { %>
-                            <%= i.products[0] %>
+                          <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                         <% } %>
-                    </label>
-                    <label for="">$<%= i.price %></label>
-                    <label for=""><%= i.payment %></label>
-                    <% if(i.status === 'cancel') { %>
-                        <label style="background-color: red;" class="ord-proc" for=""><%= i.status %></label>
-                    <% } else if(i.status === 'pending') { %>
-                        <label style="background-color: yellow;" class="ord-proc" for=""><%= i.status %></label>
-                    <% } else if(i.status === 'delivered') { %>
-                        <label style="background-color: green;" class="ord-proc" for=""><%= i.status %></label>
-                    <% } else if(i.status === 'progress') { %>
-                        <label style="background-color: blue;" class="ord-proc" for=""><%= i.status %></label>
-                    <% } %>
-                    <label class="ord-edit" for="">
-                        <% if(i.status === 'cancel') { %>
-                            <button style="opacity: 0.6;" onclick="disable()">edit</button>
-                        <% } else { %>
-                            <button onclick="call(<%= num %>)">edit</button>
-                        <% } %>
-                    </label>
-                    <div id="no-edit">
-                        <label for="">You cannot edit this product</label>
-                        <a style="font-size: 20px;" href="">Ok</a>
-                    </div>
-                    <div class="ord-popup">
-                        <label for="">Edit order</label>
-                        <form action="/admin/orders/edit_order" method="post">
-                            <input style="display: none;" name="id" value="<%= i.orderid %>" type="text">
-                            <select name="status" id="">
-                                <option value="pending">Pending</option>
-                                <option value="progress">In progress</option>
-                                <option value="delivered">Delivered</option>
-                                <option value="cancel">Return</option>
-                            </select>
-                            <div style="margin-top: 1.5em;" class="action-btns">
-                                <a style="border-radius: 5px; background-color: red; font-size: 0.9em;" href="">Cancel</a>
-                                <button>Submit</button> 
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <% num++ %>
-            <% } %>
+                      </div>
+                    </td>
+                    <td> $ <%= i.price %> </td>
+                    <td> May 15, 2015 </td>
+                    <td> <%= i.payment %> </td>
+                    <td style="display: flex; flex-direction: row;">
+                      <form action="/admin/orders/edit_order" method="post">
+                        <input style="display: none;" name="status" value="<%= i.status %>" type="text">
+                        <input style="display: none;" name="orderid" value="<%= i.orderid %>" type="text">
+                        <button>
+                          Update
+                        </button>
+                      </form>
+                      <form action="/admin/orders/cancel_order" method="post">
+                        <input style="display: none;" name="status" value="cancel" type="text">
+                        <input style="display: none;" name="orderid" value="<%= i.orderid %>" type="text">
+                        <button>
+                          Cancel
+                        </button>
+                      </form>
+                    </td>
+                  </tr>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
         </div>
+      </div>
     </div>
-</body>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="/assets2/vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="/assets2/js/off-canvas.js"></script>
+    <script src="/assets2/js/hoverable-collapse.js"></script>
+    <script src="/assets2/js/misc.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <!-- End custom js for this page -->
+  </body>
 </html>

@@ -14,7 +14,7 @@
                 We will send to a four digit verification code
             </label>
             <input type="text" name="phoneNum" placeholder="phonenumber">
-            <button>Generate OTP</button>
+            <button onclick="countdown(59)">Generate OTP</button>
             <a href="/">Login with email</a>
             
         <% } else if(type === 'email') { %>
@@ -58,6 +58,30 @@
             <label for="">didn't get the email?
                 <a href="/email_resend">Resend</a> <!-- add the right router in href -->
             </label>
+        <% } else if(type === 'no_pass') { %>
+            <h1>Welcome Back</h1>
+            <label style="color: red;" for="">please enter the password</label>
+            <input type="email" name="email" placeholder="Email">
+            <input type="password" name="password" placeholder="Password">
+            <a href="/enter_email" class="forget-p">forgot Password?</a>
+            <button>Login</button>
+            <a href="/otp_auth">Login with OTP?</a>
+        <% } else if(type === 'no_email') { %>
+            <h1>Welcome Back</h1>
+            <label style="color: red;" for="">please enter the email</label>
+            <input type="email" name="email" placeholder="Email">
+            <input type="password" name="password" placeholder="Password">
+            <a href="/enter_email" class="forget-p">forgot Password?</a>
+            <button>Login</button>
+            <a href="/otp_auth">Login with OTP?</a>
+        <% } else if(type === 'none') { %>
+            <h1>Welcome Back</h1>
+            <label style="color: red;" for="">no users existed</label>
+            <input type="email" name="email" placeholder="Email">
+            <input type="password" name="password" placeholder="Password">
+            <a href="/enter_email" class="forget-p">forgot Password?</a>
+            <button>Login</button>
+            <a href="/otp_auth">Login with OTP?</a>
         <% } else { %>
             <h1>Enter new Password</h1>
             <!-- <input type="email" name="email" placeholder="Email"> -->
@@ -83,7 +107,8 @@
         }
         
         // document.getElementById('')
-        countdown(59)
+
+
     </script>
     <!-- <script defer href="/js/otpCountDown.js"></script> -->
 </body>

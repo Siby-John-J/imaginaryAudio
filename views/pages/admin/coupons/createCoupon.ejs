@@ -6,91 +6,321 @@
     <link rel="stylesheet" href="/css/admin/createCouponStyle.css">
     <script defer src="/js/couponCreate.js"></script>
     <title>Document</title>
+
+    <link rel="stylesheet" href="/assets9/css/simplebar.css">
+    <!-- Fonts CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Icons CSS -->
+    <link rel="stylesheet" href="/assets9/css/feather.css">
+    <link rel="stylesheet" href="/assets9/css/select2.css">
+    <link rel="stylesheet" href="/assets9/css/dropzone.css">
+    <link rel="stylesheet" href="/assets9/css/uppy.min.css">
+    <link rel="stylesheet" href="/assets9/css/jquery.steps.css">
+    <link rel="stylesheet" href="/assets9/css/jquery.timepicker.css">
+    <link rel="stylesheet" href="/assets9/css/quill.snow.css">
+    <!-- Date Range Picker CSS -->
+    <link rel="stylesheet" href="/assets9/css/daterangepicker.css">
+    <!-- App CSS -->
+    <link rel="stylesheet" href="/assets9/css/app-light.css" id="lightTheme">
+    <link rel="stylesheet" href="/assets9/css/app-dark.css" id="darkTheme" disabled>
+
+    <script defer src="/js/inputs/couponCreate.js"></script>
+    
 </head>
 <body>
     <div class="coupon-create-main">
-        <form class="prod-info" action="/admin/coupon/create/set" method="post">
-            <div class="coupon-name">
-                <label class="title" for="">coupon name</label>
-                <input name="couponName" class="field" type="text">
+        <form method="post" action="/admin/coupon/create/set" class="card-body">
+            <p class="mb-2"><strong>Create coupon</strong></p>
+            <div class="form-group mb-3">
+                <label for="example-number">Coupon Name</label>
+                <input class="form-control" id="example-number" type="text" name="coupon_name">
+              </div>
+            <div class="form-group mb-3">
+              <label for="example-time">Limit</label>
+              <input class="form-control timeControl" id="example-time" type="number" name="time_limit"" placeholder="00:00:00">
             </div>
-            <div class="gen-coupon">
-                <label class="title" for="">generate coupon</label>
-                <label style="font-size: 1.4em; margin-left: 1em; margin-right: 0.7em;" class="" for="">u8834uid</label>
-                <button>Generate</button>
+            <div class="form-group mb-3">
+              <label for="example-number">Min Purchase</label>
+              <input class="form-control" id="example-number" type="number" name="min_purchase">
             </div>
-            <div class="discount-type">
-                <label class="title" for="">Discout type</label>
-                <select class="field" name="discountType" id="">
-                    <option value="items">num of items</option>
-                    <option value="amount">amount</option>
+            <div class="form-group mb-3">
+                <label for="example-select">type</label>
+                <select name="coupon_type" class="form-control" id="example-select" onchange="setType()">
+                  <option value="amount">amount</option>
+                  <option id="value-per" value="percentage">persentage</option>
                 </select>
             </div>
-            <div class="discount-per">
-                <label class="title" for="">Discount values</label>
-                <select class="sel field" name="discountVal" id="">
-                    <option value="amount">amount</option>
-                    <option value="percentage">persentage</option>
-                </select>
-                <input class="sel field" type="number" name="discountValue" id="">
+            <div class="form-group mb-3">
+                <label for="example-number">Amount</label>
+                <input class="form-control" id="example-number-input" type="number" name="amount">
             </div>
-            <div class="min-purchase">
-                <label class="title" for="">Minimum Purchase</label>
-                <input class="field" type="number" name="minimum" id="">
-            </div>
-            <div class="discount-limit">
-                <label class="title" for="">Discount limit</label>
-                <select class="sel field" name="limit" id="">
-                    <option value="coupons">per coupons</option>
-                    <option value="user">per user</option>
-                </select>
-                <input class="sel field" type="number" name="limitNumber" id="">
-            </div>
-            <div class="submit-field other-fields">
-                <a href="/admin/coupon/create?type=cancel">Cancel</a>
-                <button>Submit</button>
-            </div>
-        </form>
-        <div class="prod-select">
-            <div class="main-field choose-prods">
-                <form action="/admin/coupon/create/action" method="post">
-                    <div class="navigation">
-                        <a href="/admin/coupon/create">All</a>
-                        <label for=""> / </label>
-                        <a href="">
-                            <% if(qname) { %>
-                                <%= qname %>
-                            <% } %>
-                        </a>
-                    </div>
-                    <div class="choosing">
-                        <% for(let i of data) { %>
-                            <% if(i._id) { %>
-                                <!-- <a href="/admin/coupon/create/select?select=<%= i.name %>"><%= i.name %></a> -->
-                                <div class="bind">
-                                    <label for=""><%= i.name %></label>
-                                    <input type="checkbox" name="addto" value="<%= i.name %>">
-                                </div>
-                            <% } else { %>
-                                <a href="/admin/coupon/create/select?name=<%= i.name %>"><%= i.name %></a>
-                            <% } %>
-                        <% } %>
-                    </div>
-                    <button onclick="wait()" class="add-btn">Add</button>
-                </form>
-            </div>
-            <div class="main-field display-prods">
-                <div class="choosing display-selected-fields">
-                    <% if(typeof fielddata === 'object') { %>
-                        <% for(let i of fielddata) { %>
-                            <label class="display-select-field" for="">
-                                <%= i %>
-                            </label>
-                        <% } %>
-                    <% } %>
-                </div>
-            </div>
+          <div class="form-group mb-3">
+            <label for="multi-select2">Multiple Select</label>
+            <select name="items" class="form-control select2-multi" id="multi-select2">
+              <% for(let i of products) { %>
+                <% let cate = Object.keys(i)[0] %>
+                <optgroup label="<%= cate %>">
+                  <% for(let j of i[cate]) { %>
+                    <option value="<%= j %>"><%= j %></option>
+                  <% } %>
+                </optgroup>
+              <% } %>
+            </select>
+          </div>
+          <div class="form-group mt-3" 
+          style="display: flex; justify-content: center; align-items: center; height: 4em; margin-top: 14em;">
+            <button class="my-3" style="padding: 1em 3em; background: none; border: 1px solid black;
+              border-radius: 5px;">
+              Save
+            </button>
+            <a style="margin-left: 2em; color: black; padding: 1em 3em; border: 1px solid black;" href="">
+              Cancel
+            </a>
         </div>
+      </form>
     </div>
+    
+    <script src="/assets9/js/jquery.min.js"></script>
+    <script src="/assets9/js/popper.min.js"></script>
+    <script src="/assets9/js/moment.min.js"></script>
+    <script src="/assets9/js/bootstrap.min.js"></script>
+    <script src="/assets9/js/simplebar.min.js"></script>
+    <script src='/assets9/js/daterangepicker.js'></script>
+    <script src='/assets9/js/jquery.stickOnScroll.js'></script>
+    <script src="/assets9/js/tinycolor-min.js"></script>
+    <script src="/assets9/js/config.js"></script>
+    <script src='/assets9/js/jquery.mask.min.js'></script>
+    <script src='/assets9/js/select2.min.js'></script>
+    <script src='/assets9/js/jquery.steps.min.js'></script>
+    <script src='/assets9/js/jquery.validate.min.js'></script>
+    <script src='/assets9/js/jquery.timepicker.js'></script>
+    <script src='/assets9/js/dropzone.min.js'></script>
+    <script src='/assets9/js/uppy.min.js'></script>
+    <script src='/assets9/js/quill.min.js'></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+    <script>
+      $('.select2').select2(
+      {
+        theme: 'bootstrap4',
+      });
+      $('.select2-multi').select2(
+      {
+        multiple: true,
+        theme: 'bootstrap4',
+      });
+      $('.drgpicker').daterangepicker(
+      {
+        singleDatePicker: true,
+        timePicker: false,
+        showDropdowns: true,
+        locale:
+        {
+          format: 'MM/DD/YYYY'
+        }
+      });
+      $('.time-input').timepicker(
+      {
+        'scrollDefault': 'now',
+        'zindex': '9999' /* fix modal open */
+      });
+      /** date range picker */
+      if ($('.datetimes').length)
+      {
+        $('.datetimes').daterangepicker(
+        {
+          timePicker: true,
+          startDate: moment().startOf('hour'),
+          endDate: moment().startOf('hour').add(32, 'hour'),
+          locale:
+          {
+            format: 'M/DD hh:mm A'
+          }
+        });
+      }
+      var start = moment().subtract(29, 'days');
+      var end = moment();
+
+      function cb(start, end)
+      {
+        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+      }
+      $('#reportrange').daterangepicker(
+      {
+        startDate: start,
+        endDate: end,
+        ranges:
+        {
+          'Today': [moment(), moment()],
+          'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+          'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+          'This Month': [moment().startOf('month'), moment().endOf('month')],
+          'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        }
+      }, cb);
+      cb(start, end);
+      $('.input-placeholder').mask("00/00/0000",
+      {
+        placeholder: "__/__/____"
+      });
+      $('.input-zip').mask('00000-000',
+      {
+        placeholder: "____-___"
+      });
+      $('.input-money').mask("#.##0,00",
+      {
+        reverse: true
+      });
+      $('.input-phoneus').mask('(000) 000-0000');
+      $('.input-mixed').mask('AAA 000-S0S');
+      $('.input-ip').mask('0ZZ.0ZZ.0ZZ.0ZZ',
+      {
+        translation:
+        {
+          'Z':
+          {
+            pattern: /[0-9]/,
+            optional: true
+          }
+        },
+        placeholder: "___.___.___.___"
+      });
+      // editor
+      var editor = document.getElementById('editor');
+      if (editor)
+      {
+        var toolbarOptions = [
+          [
+          {
+            'font': []
+          }],
+          [
+          {
+            'header': [1, 2, 3, 4, 5, 6, false]
+          }],
+          ['bold', 'italic', 'underline', 'strike'],
+          ['blockquote', 'code-block'],
+          [
+          {
+            'header': 1
+          },
+          {
+            'header': 2
+          }],
+          [
+          {
+            'list': 'ordered'
+          },
+          {
+            'list': 'bullet'
+          }],
+          [
+          {
+            'script': 'sub'
+          },
+          {
+            'script': 'super'
+          }],
+          [
+          {
+            'indent': '-1'
+          },
+          {
+            'indent': '+1'
+          }], // outdent/indent
+          [
+          {
+            'direction': 'rtl'
+          }], // text direction
+          [
+          {
+            'color': []
+          },
+          {
+            'background': []
+          }], // dropdown with defaults from theme
+          [
+          {
+            'align': []
+          }],
+          ['clean'] // remove formatting button
+        ];
+        var quill = new Quill(editor,
+        {
+          modules:
+          {
+            toolbar: toolbarOptions
+          },
+          theme: 'snow'
+        });
+      }
+      // Example starter JavaScript for disabling form submissions if there are invalid fields
+      (function()
+      {
+        'use strict';
+        window.addEventListener('load', function()
+        {
+          // Fetch all the forms we want to apply custom Bootstrap validation styles to
+          var forms = document.getElementsByClassName('needs-validation');
+          // Loop over them and prevent submission
+          var validation = Array.prototype.filter.call(forms, function(form)
+          {
+            form.addEventListener('submit', function(event)
+            {
+              if (form.checkValidity() === false)
+              {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+              form.classList.add('was-validated');
+            }, false);
+          });
+        }, false);
+      })();
+    </script>
+    <script>
+      var uptarg = document.getElementById('drag-drop-area');
+      if (uptarg)
+      {
+        var uppy = Uppy.Core().use(Uppy.Dashboard,
+        {
+          inline: true,
+          target: uptarg,
+          proudlyDisplayPoweredByUppy: false,
+          theme: 'dark',
+          width: 770,
+          height: 210,
+          plugins: ['Webcam']
+        }).use(Uppy.Tus,
+        {
+          endpoint: 'https://master.tus.io/files/'
+        });
+        uppy.on('complete', (result) =>
+        {
+          console.log('Upload complete! We’ve uploaded these files:', result.successful)
+        });
+      }
+    </script>
+
+    <script>
+
+    </script>
+
+    <script src="js/apps.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-56159088-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag()
+      {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'UA-56159088-1');
+    </script> 
 </body>
 </html>

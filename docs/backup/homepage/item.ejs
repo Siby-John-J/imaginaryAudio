@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/home/itemStyle.css">
+    <title>Sus</title>
+</head>
+<body>
+    <%- include('../../layouts/header.ejs') %>
+    <div class="mainpg">
+        <div class="pics">
+            <div class="img">
+                <img src="/img/<%= data.image[0]%>" alt="">
+            </div>
+            <div class="imgs">
+                <% if(data.image.length > 1) { %>
+                    <% for(let i = 1; i < data.image.length; i++) { %>
+                        <img src="/img/<%= data.image[i] %>" alt="">
+                    <% } %>
+                <% } %>
+                <img src="/img/interface-header.jpg" alt="">
+                <img src="/img/interface-header.jpg" alt="">
+            </div>
+        </div>
+        <div class="contents">
+            <div class="part-1">
+                <h2><%= data.name%></h2>
+                <div class="star"></div>
+                <label for=""><%= data.category%></label>
+                <p class="desc">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                    Laborum sequi vel voluptas? Ut unde sed saepe, earum repellat eos dolorem.
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                </p>
+            </div>
+            <div class="part-2">
+                <div class="price-left">
+                    <h1 class="price">$<%= data.price%></h1>
+                    <label for="">
+                        <% if(data.status !== 'in stock') { %>
+                            <%= 'out of stock'%>
+                        <% } else if(data.stock < 5) { %>
+                            <%= 'only ' + data.stock + ' items left' %>
+                        <% } %>
+                    </label>
+                </div>
+                <div class="btns">
+                    <a href="" class="wishlist">Add to Wishlist</a>
+                    <a href="<%= '/' + user + '/cart/addtocart?name='%><%= data.name%>" class="cart">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

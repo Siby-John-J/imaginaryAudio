@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .main {
+            width: 100vw;
+        }
+        .title {
+            /* background-color: rgb(124, 97, 150); */
+            margin-top: 4em;
+        }
+
+        .content {
+            /* background-color: red; */
+            height: 80vh;
+            width: 85vw;
+        }
+
+        .content .select-banner {
+            height: 30%;
+            width: 100%;
+            background-color: #2ec799;
+            /* border: 3px solid black; */
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-top-left-radius: 1.4em;
+            border-top-right-radius: 1.4em;
+            margin-bottom: 1em;
+        }
+
+        .content .set-banner {
+            height: 68%;
+            width: 100%;
+            /* border: 3px solid black; */
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #259f7a;
+            border-bottom-left-radius: 1.4em;
+            border-bottom-right-radius: 1.4em;
+        }
+
+        .select-banner button {
+            padding: 10px 54px;
+            margin-top: 2em;
+            border: none;
+            border-radius: 1em;
+            box-shadow: -2px 3px 0px;
+        }
+
+        .select-banner button:hover {
+            transition: 0.8s;
+            box-shadow: -2px 3px 0px white;
+            background-color: black;
+            color: white;
+        }
+
+        .select-banner {
+            height: 40vh;
+        }
+
+        table {
+            width: 50em;
+            height: 15em;
+            /* background-color: gray; */
+        }
+        
+        ul {
+            list-style: none;
+        }
+
+        td .action {
+            padding: 0.4em 1em;
+            /* background-color: #a70000; */
+            border-radius: 9px;
+            color: white;
+            border: none;
+        }
+
+        td .select {
+            background-color: green;
+        }
+        
+        td .delete {
+            background-color: tomato;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="title">
+            <h1>Banners</h1>
+        </div>
+        <div class="content">
+            <form action="/admin/banner/set" method="post" class="child select-banner" enctype="multipart/form-data">
+                <h2>set banner</h2>
+                <input type="file" name="img">
+                <button>Set</button>
+            </form>
+            <div class="child set-banner">
+                <h2>select banner</h2>
+                <table>
+                    <tr>
+                        <th>Num</th>
+                        <th>Image</th>
+                        <th>Control</th>
+                    </tr>
+                    <% data.map((item, n) => { %>
+                        <tr>
+                            <td><%= n+1 %></td>
+                            <td>
+                                <img style="height: 3em;" src="/img/cropped/category/<%= item.image %>" alt="..">
+                            </td>
+                            <td>
+                                <button class="action select" onclick="setLabel('<%= item._id %>')">Select</button>
+                                <button class="action delete" onclick="deleteLabel('<%= item._id %>')">delete</button>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    async function setLabel(id) {
+        const data = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: id
+            })
+        }
+        const set = await fetch('/admin/banner/select', data)
+        const json = await set.json({})
+    }
+
+    async function deleteLabel(id) {
+        const data = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: id
+            })
+        }
+
+        const res = await fetch('/admin/banner/delete', data)
+
+        try {
+            const json = await res.json({})
+            if(json.msg === 'no_delete') {
+                alert('cannot delete selected banner')
+            }
+        } catch (error) {
+            if(error) {
+                window.location.href = '/admin/banner'
+            }
+        }
+
+        // res.redirected('')
+        // console.log(json)
+
+    }
+</script>
+</html>

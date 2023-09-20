@@ -61,13 +61,13 @@ module.exports.checkEmail = (req, res) => {
 }
 
 module.exports.auth = (req, res) => {
-    console.log(req.body)
     if(req.body.email && req.body.password) {
         usermodel.findOne({
             email: req.body.email
         }).then(data => {
             if(data === null) {
-                res.redirect('/')
+                res.render('pages/login', {type: 'none'})
+                // console.log('mans...')
             } else {
                 bcrypt.compare(req.body.password, data.password, (err, dat) => {
                     if(dat) {
@@ -81,13 +81,19 @@ module.exports.auth = (req, res) => {
             }
         })
     } else if(req.body.email) {
-        email = req.body.email
-        subject = 'Password reset link from imaginaryAudio'
-        html = 'click here to reset password http://localhost:2000/reset_password'
-        
-        authEmail(email, subject, html)
-        
-        res.render('pages/login', {type: 'check-email', email: req.body.email})
+        if(req.body.password === '') {
+            // res.json({data: 'no password'})
+            res.render('pages/login', {type: 'no_pass'})
+            // res.redirect('/?pass=false')
+        } else {
+            email = req.body.email
+            subject = 'Password reset link from imaginaryAudio'
+            html = 'click here to reset password http://localhost:2000/reset_password'
+            
+            // authEmail(email, subject, html)
+            
+            res.render('pages/login', {type: 'check-email', email: req.body.email})
+        }
     } else if('password' in req.body && typeof req.body.password === 'object'){
         if(req.body.password[0] === req.body.password[1]) {
             bcrypt.hash(req.body.password[0], 10).then(dat1 => {
@@ -95,7 +101,6 @@ module.exports.auth = (req, res) => {
                     {email: email}, 
                     {$set: { password: dat1 }}
                 ).then(data => {
-                    console.log(data)
                     res.redirect('/')
                 })
             })
@@ -104,10 +109,9 @@ module.exports.auth = (req, res) => {
         }
     } else if(req.body.phoneNum) {
         // OTP verification
-
         ph = req.body.phoneNum
         req.session.number = ph
-
+        
         usermodel.findOne({phone: Number(ph)}).then(data => {
             if(data) {
                 let min = 1000
@@ -115,12 +119,10 @@ module.exports.auth = (req, res) => {
                 
                 let randomNumber = Math.floor(Math.random() * (max - min + 1)) + min
                 otp = randomNumber
-                console.log(otp, 'is this')
                 sendSMS(ph, otp + ' is your otp from imaginaryAudio')
                 
                 res.render('pages/login', {type: 'enter-otp', ph: ph})
             } else {
-                // alert('wrong password')
                 res.redirect('/')
             }
         })
@@ -141,7 +143,7 @@ module.exports.auth = (req, res) => {
             res.send('wrong otp')
         }
     } else {
-        res.send('this password is not existed..')
+        res.render('pages/login', {type: 'no_email'})
     }
 }
 

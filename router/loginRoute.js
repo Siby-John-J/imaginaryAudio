@@ -11,8 +11,8 @@ const { loginEmailControl,
         } = require("../controllers/loginController")
 const router = Router()
 
-router.get('/', usermiddleware ,loginEmailControl)
-router.get('/otp_auth', usermiddleware, loginOTPControl)
+router.get('/' ,loginEmailControl)
+router.get('/otp_auth', loginOTPControl)
 
 router.post('/auth', auth)
 router.get('/enter_email', enterEmail)

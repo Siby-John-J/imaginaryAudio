@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/user/userProfile.css">
+    <script src="/js/changePassword.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div style="align-items: center; display: flex; flex-direction: row; justify-content: space-between;" class="profile-title">
+        <h1>Profile</h1>
+        <button onclick="password()" style="margin-right: 3em ;">Change Password</button>
+    </div>
+    <form action="/<%= data.name %>/profile" method="post">
+        <div class="profile-contents">
+            <% if(content === 'edit') { %>
+                <div class="content1">
+                    <label for="">name</label>
+                    <input type="text" value="<%= data.name %>" name="name">
+                </div>
+                <div class="content1">
+                    <label for="">email</label>
+                    <input type="text" value="<%= data.email %>" name="email">
+                </div>
+                <div class="content1">
+                    <label for="">phone</label>
+                    <input type="text" value="<%= data.phone %>" name="phone">
+                </div>
+                <div class="content1">
+                    <label for="">location</label>
+                    <input type="text" value="<%= data.details ? data.details.place : 'none' %>" name="place">
+                </div>
+                <div class="content1">
+                    <label for="">age</label>
+                    <input type="text" value="<%= data.details ? data.details.age : 'none' %>" name="age">
+                </div>
+                <div class="content1">
+                    <label for="">DOB</label>
+                    <input type="text" value="<%= data.details ? data.details.dob : 'none' %>" name="dob">
+                </div>
+                <button class="profile-edit-btn">Save</button>
+            <% } else { %>
+                <div class="content1">
+                    <label for="">name</label>
+                    <label for="" class="label"><%= data.name %></label>
+                </div>
+                <div class="content1">
+                    <label for="">email</label>
+                    <label for="" class="label"><%= data.email %></label>
+                </div>
+                <div class="content1">
+                    <label for="">phone</label>
+                    <label for="" class="label"><%= data.phone%></label>
+                </div>
+                <div class="content1">
+                    <label for="">location</label>
+                    <label for="" class="label"><%= data.details ? data.details.place : 'none' %></label>
+                </div>
+                <div class="content1">
+                    <label for="">age</label>
+                    <label for="" class="label"><%= data.details ? data.details.age : 'none' %></label>
+                </div>
+                <div class="content1">
+                    <label for="">DOB</label>
+                    <label for="" class="label"><%= data.details ? data.details.dob : 'none' %></label>
+                </div>
+            <% } %>
+        </div>
+    </form>
+    <% if(content === 'edit') { %>
+        
+    <% } else { %>
+        <a class="profile-edit-btn-2" href="<%= '/' + data.name + '/profile?type=edit' %>">Edit</a>
+    <% } %>
+</body>
+</html>

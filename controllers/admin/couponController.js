@@ -9,13 +9,27 @@ let id = ''
 
 module.exports.couponList = async(req, res) => {
     let data = await couponmodel.find({})
+    let users = await usermodel.find({}, {name: 1})
+    let listcate = await categorymodel.find({}, {name: 1, _id: 0})
+
+    let products = []
+
+    for(let i of listcate) {
+        let item = await itemmodel.find({category: i.name}, {name: 1})
+        let cat = i.name
+        let prod = []
+        for(let j of item) {    
+            prod.push(j.name)
+        }
+        products.push({[cat]: prod})
+    }
 
     if(req.query.id) {
         id = req.query.id
     }
 
     res.render('pages/admin/mainPage', {page: 'coupon', cPage: 'list-coupon', 
-    data: data, type: req.query.type})
+    data: data, type: req.query.type, users: users, products: products})
 }
 
 module.exports.couponPurchase = async(req, res) => {
@@ -25,8 +39,6 @@ module.exports.couponPurchase = async(req, res) => {
 }
 
 module.exports.couponCreate = async(req, res) => {
-    let listcate = await categorymodel.find({}, {name: 1, _id: 0})
-
     if(req.query.name) {
         let listname = await itemmodel.find({category: req.query.name}, {name: 1, _id: 1})
         res.render('pages/admin/mainPage', {page: 'coupon', cPage: 'create-coupon',
@@ -50,11 +62,12 @@ module.exports.couponCreate = async(req, res) => {
 
 module.exports.couponSet = async(req, res) => {
     
-    let discount = Number(req.body.discountValue)
+    let discount = Number(req.body.amount)
     let position = ''
     let color = ''
 
-    if(req.body.discountVal === 'amount') {
+
+    if(req.body.coupon_type === 'amount') {
         if(discount <= 100) {
             position = 'low'
             color = 'linear-gradient(358deg, black, transparent);'
@@ -74,7 +87,7 @@ module.exports.couponSet = async(req, res) => {
             position = 'highest'
             color = 'linear-gradient(0deg, #0800ff, #12ff00);'
         }
-    } else if(req.body.discountVal === 'percentage') {
+    } else if(req.body.coupon_type === 'percentage') {
         if(discount <= 5) {
             position = 'low'
             color = 'linear-gradient(358deg, black, transparent);'
@@ -100,24 +113,44 @@ module.exports.couponSet = async(req, res) => {
     }
 
     function generateCouponCode(length) {
-        const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        let couponCode = "";
+        const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        let couponCode = ""
         
         for (let i = 0; i < length; i++) {
-          const randomIndex = Math.floor(Math.random() * charset.length);
-          couponCode += charset[randomIndex];
+          const randomIndex = Math.floor(Math.random() * charset.length)
+          couponCode += charset[randomIndex]
         }
         
-        return couponCode;
+        return couponCode
     }
+
+    function convertToTime(inputValue) {
+        // Parse the input value into hours, minutes, and seconds
+        const hours = parseInt(inputValue.substr(0, 2), 10);
+        const minutes = parseInt(inputValue.substr(2, 2), 10);
+        const seconds = parseInt(inputValue.substr(4, 2), 10);
+      
+        // Format each component to have two digits
+        const formattedHours = hours.toString().padStart(2, '0');
+        const formattedMinutes = minutes.toString().padStart(2, '0');
+        const formattedSeconds = seconds.toString().padStart(2, '0');
+      
+        // Concatenate the components to get the final time string
+        const timeString = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+        return timeString;
+      }
+      
+    const timeInString = convertToTime(req.body.time_limit)
     
-    let model = await couponmodel.insertMany([{
-        name: req.body.couponName,
+    let item = req.body.items ? req.body.items : 'all'
+    
+    const model = await couponmodel.insertMany([{
+        name: req.body.coupon_name,
         code: generateCouponCode(8),
-        type: req.body.discountType,
-        value: [req.body.discountVal, Number(req.body.discountValue)],
-        Purchase: Number(req.body.minimum),
-        limit: [req.body.limit, req.body.limitNumber],
+        type: req.body.coupon_type,
+        value: Number(req.body.min_purchase),
+        Purchase: Number(req.body.amount),
+        limit: timeInString,
         products: item,
         position: position,
         color: color
@@ -126,27 +159,32 @@ module.exports.couponSet = async(req, res) => {
     res.redirect('/admin/coupon/list')
 }
 
-module.exports.setCoupon = (req, res) => {
+module.exports.setCoupon = async(req, res) => {
     coupons = []
 
     if(typeof req.body.selected === 'string') {
-        coupons = [req.body.selected]
+        coupons.push(req.body.selected)
     } else {
-        coupons = [...req.body.selected]
+        coupons.push(...req.body.selected)
     }
 
-    res.redirect('/admin/coupon/purchase')
+    let model = await usermodel.updateOne(
+        {_id: id},
+        { $push: { coupons: { $each: coupons } } }
+    )
+    
+    res.redirect('/admin/coupon/list')
 }
 
 module.exports.sendCoupon = async(req, res) => {
-    let model = await usermodel.updateOne(
-        {_id: id},
-        { $push: { coupons: [...coupons] } }
-    )
-    
+    // let model = await usermodel.updateOne(
+    //     {_id: id},
+    //     { $push: { coupons: [...coupons] } }
+    // )
+
     // for(let i of coupons) {
     //     let couponmd = await couponmodel.deleteOne({_id: i})
     // }
     
-    res.redirect('/admin/coupon/purchase')
+    res.redirect('/admin/coupon/list')
 }

@@ -1,71 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/user/orderStyle.css">
-    <title>Document</title>
-    <script async src="/js/orderBar.js"></script>
-</head>
-<body>
-    <h1>Your Orders</h1>
-    <div class="main-order-panel">
-        <% if(cart.length > 0) { %>
-            <% for(let i of cart) { %>
-                <div class="order1">
-                    <div class="order-details">
-                        <input class="input-show" style="display: none;" type="text" value="<%= cart[0].status %>">
-                        <div class="od-con order-id">
-                            <label class="od-title" for="">order id</label>
-                            <label class="od-content" for=""><%= i.orderid %></label>
-                        </div>
-                        <div class="od-con order-date">
-                            <label class="od-title" for="">date purchased</label>
-                            <label class="od-content" for=""><%= i.purchase %></label>
-                        </div>
-                        <div class="od-con arrive-date">
-                            <label class="od-title" for="">date arriving</label>
-                            <label class="od-content" for=""><%= i.arriving %></label>
-                        </div>
-                        <a class="m-ord" href="/<%= user %>/orders/remove_order?id=<%= i.mainid %>">Cancel Order</a>
-                        <a href="/<%= user %>/orders/view_order?id=<%= i.mainid %>">View Order</a>
-                    </div>
-                    <div class="process-bar">
-                        <div class="process-graph">
-                            <div class="pending">
-                                <img id="img1" src="/img/icons/pngfind.com-check-mark-symbol-png-2546448.png" alt="" srcset="">
-                            </div>
-                            <div class="processing">
-                                <img id="img2" src="/img/icons/pngfind.com-check-mark-symbol-png-2546448.png" alt="" srcset="">
-                            </div>
-                            <div class="shipped">
-                                <img id="img3" src="/img/icons/pngfind.com-check-mark-symbol-png-2546448.png" alt="" srcset="">
-                            </div>
-                        </div>
-                        <div class="process-title">
-                            <label for="">Pending</label>
-                            <label for="">Processing</label>
-                            <label for="">Delivered</label>
-                        </div>
-                    </div>
-                    <div class="total-products">
-                        <% for(let j of i.details) { %>
-                            <div class="prod1">
-                                <div class="prod-pic">
-                                    <img src="/img/<%= j.img %>" alt="">
-                                </div>
-                                <div class="prod-contents">
-                                    <label for=""><%= j.name %></label>
-                                    <!-- <label for=""><%= i.price %></label> -->
-                                </div>
-                            </div>
-                            <% } %>
-                        </div>
-                    </div>
-                    <% } %>
-        <% } else { %>
-            <h1>No items</h1>
-        <% } %>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Purple Admin</title>
+    <!-- plugins:css -->
+    <script src="/js/viewOrder.js"></script>
+
+    <link rel="stylesheet" href="/assets2/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="/assets2/vendors/css/vendor.bundle.base.css">
+
+    <link rel="stylesheet" href="/assets2/css/style.css">
+    
+    <link rel="shortcut icon" href="/assets2/images/favicon.ico" />
+
+    <link rel="stylesheet" href="/assets3/css/tailwind.output.css" />
+    <script
+      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
+      defer
+    ></script>
+    <script src="/assets3/js/init-alpine.js"></script>
+    <!-- You need focus-trap.js to make the modal accessible -->
+    <script src="/assets3/js/focus-trap.js" defer></script>
+
+
+    <style>
+        .order-content {
+            margin-right: 6em;
+            margin-top: 7em;
+            height: 85vh;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="container-scroller" style="overflow: scroll ;">
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial -->
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-12 grid-margin">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Recent Tickets</h4>
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th> Payment </th>
+                          <th> Address </th>
+                          <th> Status </th>
+                          <th> Date </th>
+                          <th> Order ID </th>
+                          <th> Control</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% for(let i = 0; i < cart.length; i++) { %>
+                          <tr>
+                            <td>
+                              <!-- <img src="assets/images/faces/face4.jpg" class="me-2" alt="image"> -->
+                              <%= cart[i].payment %>
+                            </td>
+                            <td><%=  cart[i].address %></td>
+                            <td>
+                              <label class="statusMain badge badge-gradient-danger text-dark"><%= cart[i].status %></label>
+                            </td>
+                            <td><%= cart[i].purchase %></td>
+                            <td><%= cart[i].orderid %></td>
+                            <td style="display: flex; flex-direction: row;">
+                              <form class="px-4 py-2 bg-primary border-0 rounded-2 text-light" 
+                                style="margin-right: 1em;" action="/<%= user %>/orders/view_order" method="post">
+                                <input style="display: none;" name="id" value="<%= cart[i].orderid %>" type="text">
+                                <button style="color: rgb(255, 255, 255);">view</button>
+                              </form>
+                              <% if(cart[i].status !== 'cancel') { %>
+                                <form class="px-4 py-2 bg-danger border-0 rounded-2 text-light"
+                                  style="margin-right: 1em;" action="/<%= user %>/orders/cancel_order" method="post">
+                                  <input style="display: none;" name="id" value="<%= cart[i].orderid %>" type="text">
+                                  <button class="cancel-btn" style="color: rgb(255, 255, 255);">Cancel</button>
+                                </form>
+                              <% } %>
+                            </td>
+                          </tr>
+                        <% } %>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> 
+
+          <div class="">
+            <!-- Button trigger modal -->
+            <div style="height: 3em; display: flex; justify-content: center;">
+            </div>
+          <div
+            style="display: none; overflow-y: scroll;"
+            x-transition:enter="transition ease-out duration-150"
+            x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100"
+            x-transition:leave="transition ease-in duration-150"
+            x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0"
+            class="main-model fixed inset-0 z-30 flex items-end bg-black bg-opacity-50 sm:items-center sm:justify-center">
+
+          <div
+          style="max-width: 68vw; margin-left: 24em;"
+              x-show="isModalOpen"
+              x-transition:enter="transition ease-out duration-150"
+              x-transition:enter-start="opacity-0 transform translate-y-1/2"
+              x-transition:enter-end="opacity-100"
+              x-transition:leave="transition ease-in duration-150"
+              x-transition:leave-start="opacity-100"
+              x-transition:leave-end="opacity-0  transform translate-y-1/2"
+              @click.away="closeModal"
+              @keydown.escape="closeModal"
+              class="w-full px-6 py-4 bg-white rounded-t-lg dark:bg-gray-800 sm:rounded-lg sm:m-4 sm:max-w-xl"
+              role="dialog"
+              id="modal"
+            >
+              <!-- Remove header if you don't want a close icon. Use modal body to place modal tile. -->
+              <header class="flex justify-end">
+                <button
+                  class="inline-flex items-center justify-center w-6 h-6 text-gray-400 transition-colors duration-150 rounded dark:hover:text-gray-200 hover: hover:text-gray-700"
+                  aria-label="close"
+                  onclick="closeorder()"
+                >
+                  <svg
+                    class="w-4 h-4"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    role="img"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                      clip-rule="evenodd"
+                      fill-rule="evenodd"
+                    ></path>
+                  </svg>
+                </button>
+              </header>
+              
+              <div class="mt-4 mb-6">
+                <%- include('./viewOrder.ejs') %>
+              </div>
+            </div>
+          </div>
+          </div>
+          
+        </div>
+        <!-- main-panel ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
     </div>
-</body>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="/assets2/vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="/assets2/vendors/chart.js/Chart.min.js"></script>
+    <script src="/assets2/js/jquery.cookie.js" type="text/javascript"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="/assets2/js/off-canvas.js"></script>
+    <script src="/assets2/js/hoverable-collapse.js"></script>
+    <script src="/assets2/js/misc.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <script src="/assets2/js/dashboard.js"></script>
+    <script src="/assets2/js/todolist.js"></script>
+
+    <script src="/assets/vendor/libs/jquery/jquery.js"></script>
+    <!-- <script src="/assets/vendor/libs/jquery/jquery.js"></script> -->
+    <script src="/assets/vendor/libs/popper/popper.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
+    <script src="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+
+    <script src="/assets/vendor/js/menu.js"></script>
+
+    <script src="/assets/js/main.js"></script>
+
+    <script src="/assets5/js/main.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+  </body>
 </html>

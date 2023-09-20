@@ -1,91 +1,223 @@
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/user/userProfile.css">
-    <script src="/js/changePassword.js"></script>
-    <title>Document</title>
+	<meta charset="utf-8" />
+	<link rel="apple-touch-icon" sizes="76x76" href="/assets/img/apple-icon.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="/assets/img/favicon.png">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+	<title>Paper Dashboard by Creative Tim</title>
+
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+    <!-- Animation library for notifications   -->
+    <link href="/assets/css/animate.min.css" rel="stylesheet"/>
+
+    <!--  Paper Dashboard core CSS    -->
+    <link href="/assets/css/paper-dashboard.css" rel="stylesheet"/>
+
+    <!--  CSS for Demo Purpose, don't include it in your project     -->
+    <link href="/assets/css/demo.css" rel="stylesheet" />
+
+    <!--  Fonts and icons     -->
+    <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
+    <link href="/assets/css/themify-icons.css" rel="stylesheet">
+
 </head>
 <body>
-    <!-- <div class="change-password-panel">
-        <div class="enter-pass-inp">
-            <label for="">Enter the password</label>
-            <input type="text">
-            <a href="">Enter</a>
+    <style>
+        .main-nav {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .anchor {
+            display: flex;
+        }
+    </style>
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle">
+                <!-- <span class="sr-only">Toggle navigation</span> -->
+            </button>
+            <a class="navbar-brand" href="#">User Profile</a>
         </div>
-        <div class="change-pass-inp">
-            <label for="">Enter the new password</label>
-            <input type="text">
-            <label for="">Config the password</label>
-            <input type="text">
-            <a href="">Enter</a>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="ti-panel"></i>
+                        <p>Stats</p>
+                    </a>
+                </li>
+                <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="ti-bell"></i>
+                            <p class="notification">5</p>
+                            <p>Notifications</p>
+                            <b class="caret"></b>
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li><a href="#">Notification 1</a></li>
+                        <li><a href="#">Notification 2</a></li>
+                        <li><a href="#">Notification 3</a></li>
+                        <li><a href="#">Notification 4</a></li>
+                        <li><a href="#">Another notification</a></li>
+                      </ul>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="ti-settings"></i>
+                        <p>Settings</p>
+                    </a>
+                </li>
+            </ul>
         </div>
-    </div> -->
-    <div style="align-items: center; display: flex; flex-direction: row; justify-content: space-between;" class="profile-title">
-        <h1>Profile</h1>
-        <button onclick="password()" style="margin-right: 3em ;">Change Password</button>
     </div>
-    <form action="/<%= data.name %>/profile" method="post">
-        <div class="profile-contents">
-            <% if(content === 'edit') { %>
-                <div class="content1">
-                    <label for="">name</label>
-                    <input type="text" value="<%= data.name %>" name="name">
+</nav>
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4 col-md-5">
+                <div class="card card-user">
+                    <div class="image">
+                        <!-- <img src="/assets/img/background.jpg" alt="..."/> -->
+                    </div>
+                    <div class="content">
+                        <div class="author">
+                          <img class="avatar border-white" src="/assets/img/faces/face-2.jpg" alt="..."/>
+                          <h4 class="title"><%= dat1.name %><br />
+                             <a href="#"><small><%= dat1.email %></small></a>
+                          </h4>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="text-center">
+                        <div class="row">
+                            <div class="col-md-3 col-md-offset-1">
+                                <h5><small>Age</small><br><%= dat1.age %></h5>
+                            </div>
+                            <div class="col-md-4">
+                                <h5><small>DOB</small><br><%= dat1.dob %></h5>
+                            </div>
+                            <div class="col-md-3" style="width: 32%;">
+                                <h5><small>Place</small><br><%= dat1.place %></h5>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="content1">
-                    <label for="">email</label>
-                    <input type="text" value="<%= data.email %>" name="email">
+            </div>
+            <div class="col-lg-8 col-md-7">
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">Edit Profile</h4>
+                    </div>
+                    <div class="content">
+                        <form method="post" action="/<%= user %>/profile">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Username</label>
+                                        <input type="text" class="form-control border-input" placeholder="Username" value="<%= dat1.name %>">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Email address</label>
+                                        <input value="<%= dat1.email %>" type="email" name="email" class="form-control border-input" placeholder="Email">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>First Name</label>
+                                        <input type="text" name="fname" class="form-control border-input" placeholder="First Name" value="Chet">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Last Name</label>
+                                        <input type="text" name="lname" class="form-control border-input" placeholder="Last Name" value="Faker">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Address</label>
+                                        <input type="text" name="address" class="form-control border-input" placeholder="Home Address" value="Melbourne, Australia">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>City</label>
+                                        <input type="text" name="city" class="form-control border-input" placeholder="City" value="Melbourne">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Country</label>
+                                        <input type="text" name="country" class="form-control border-input" placeholder="Country" value="Australia">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Phone</label>
+                                        <input value="<%= dat1.phone %>" name="phone" type="number" class="form-control border-input" placeholder="ph">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button class="btn btn-info btn-fill btn-wd">Update Profile</button>
+                            </div>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
                 </div>
-                <div class="content1">
-                    <label for="">phone</label>
-                    <input type="text" value="<%= data.phone %>" name="phone">
-                </div>
-                <div class="content1">
-                    <label for="">location</label>
-                    <input type="text" value="<%= data.details ? data.details.place : 'none' %>" name="place">
-                </div>
-                <div class="content1">
-                    <label for="">age</label>
-                    <input type="text" value="<%= data.details ? data.details.age : 'none' %>" name="age">
-                </div>
-                <div class="content1">
-                    <label for="">DOB</label>
-                    <input type="text" value="<%= data.details ? data.details.dob : 'none' %>" name="dob">
-                </div>
-                <button class="profile-edit-btn">Save</button>
-            <% } else { %>
-                <div class="content1">
-                    <label for="">name</label>
-                    <label for="" class="label"><%= data.name %></label>
-                </div>
-                <div class="content1">
-                    <label for="">email</label>
-                    <label for="" class="label"><%= data.email %></label>
-                </div>
-                <div class="content1">
-                    <label for="">phone</label>
-                    <label for="" class="label"><%= data.phone%></label>
-                </div>
-                <div class="content1">
-                    <label for="">location</label>
-                    <label for="" class="label"><%= data.details ? data.details.place : 'none' %></label>
-                </div>
-                <div class="content1">
-                    <label for="">age</label>
-                    <label for="" class="label"><%= data.details ? data.details.age : 'none' %></label>
-                </div>
-                <div class="content1">
-                    <label for="">DOB</label>
-                    <label for="" class="label"><%= data.details ? data.details.dob : 'none' %></label>
-                </div>
-            <% } %>
+            </div>
+
+
         </div>
-    </form>
-    <% if(content === 'edit') { %>
-        
-    <% } else { %>
-        <a class="profile-edit-btn-2" href="<%= '/' + data.name + '/profile?type=edit' %>">Edit</a>
-    <% } %>
+    </div>
+</div>
+
 </body>
+
+    <!--   Core JS Files   -->
+    <script src="/assets/js/jquery-1.10.2.js" type="text/javascript"></script>
+	<script src="/assets/js/bootstrap.min.js" type="text/javascript"></script>
+
+	<!--  Checkbox, Radio & Switch Plugins -->
+	<script src="/assets/js/bootstrap-checkbox-radio.js"></script>
+
+	<!--  Charts Plugin -->
+	<script src="/assets/js/chartist.min.js"></script>
+
+    <!--  Notifications Plugin    -->
+    <script src="/assets/js/bootstrap-notify.js"></script>
+
+    <!--  Google Maps Plugin    -->
+    <script type="/assets/text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+
+    <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
+	<script src="/assets/js/paper-dashboard.js"></script>
+
+	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
+	<script src="/assets/js/demo.js"></script>
+
 </html>
+

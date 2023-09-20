@@ -5,9 +5,9 @@ const couponSchema = mongoose.Schema({
     name: String,
     code: String,
     type: String,
-    value: Array,
+    value: Number,
     Purchase: Number,
-    limit: Array,
+    limit: String,
     products: Array,
     position: String,
     color: String

@@ -7,7 +7,14 @@ let orderSchema = mongoose.Schema({
     userid: Object,
     totalprice: Number,
     payment: String,
-    order: Array
+    order: Array,
+    address: String,
+    firstname: String,
+    lastname: String,
+    phone: Number,
+    town: String,
+    email: String,
+    coupon: Object
 })
 
 let order = db.model('orders', orderSchema)

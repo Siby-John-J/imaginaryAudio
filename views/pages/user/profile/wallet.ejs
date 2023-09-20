@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <title>Wallet and Coupon System</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>My Wallet</h2>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card" style="width: 69em;">
+              <div class="card-body">
+                <h5 class="card-title">Balance</h5>
+                <p class="card-text">$<%= data.wallet === undefined ? 0 : data.wallet %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container mt-5">
+        <h2>Available Coupons</h2>
+        <div class="row">
+          <% if(coupons[0] === null || coupons.length <= 0) { %>
+            <div class="col-md-4">
+              <label for="">No Coupons</label>
+            </div>
+            <% } else { %>
+              <% for(let i of coupons) { %>
+                <div class="col-md-4">
+                  <div class="card">
+                    <div style="background: <%= i.color %>" class="card-body">
+                      <h5 style="color: white; font-weight: 800;" class="card-title"><%= i.name %></h5>
+                      <p style="color: white;" class="card-text"><%= i.code %></p>
+                      <p style="color: white;">
+                        <% if(i.type === 'amount') { %>
+                          <%= i.Purchase + ' $ OFF' %>
+                      <% } else if(i.type === 'percentage') { %>
+                          <%= i.Purchase + ' % OFF' %>
+                      <% } %>
+                      </p>
+                      <% if(i.products[0] === 'all') { %>
+                        <label style="color: white; margin-right: 2.7em;" class="type coupon-details" for="">Any Products</label>
+                    <% } else { %>
+                        <select id="" style="outline: none; margin-left: 0em; color: white; border: none; background: none; width: 8em;">
+                            <% for(let j of i.products) { %>
+                                <option style="color: black; background: none;"><%= j %></option>
+                            <% } %>
+                        </select>
+                    <% } %>
+                      <a style="border: none;" href="#" class="btn btn-primary">Use Coupon</a>
+                    </div>
+                  </div>
+                </div>
+              <% } %>
+          <% } %>
+        </div>
+      </div>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

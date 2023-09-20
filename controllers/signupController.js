@@ -27,7 +27,8 @@ module.exports.signupAuth = (req, res) => {
             email: email,
             password: data,
             phone: Number(req.body.phnum),
-            status: true
+            status: true,
+            wallet: 0
         }]).then(data => {})
     })
     
@@ -35,4 +36,22 @@ module.exports.signupAuth = (req, res) => {
     authEmail(email, subject, html)
     
     res.render('pages/login', {type: 'check-email', email: req.body.email})
+}
+
+module.exports.signupCheck = async(req, res) => {
+    if(req.body.type === 'name') {
+        const matchUser = await usermodel.findOne({name: req.body.data})
+        if(matchUser !== null) {
+            res.json({msg: 'name'})
+        } else {
+            res.json({msg: matchUser})
+        }
+    } else if(req.body.type === 'email') {
+        const matchUser = await usermodel.findOne({email: req.body.data})
+        if(matchUser !== null) {
+            res.json({msg: 'email'})
+        } else {
+            res.json({msg: matchUser})
+        }
+    }
 }

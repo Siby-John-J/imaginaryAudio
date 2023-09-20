@@ -1,18 +1,14 @@
 
 const usermodel = require('../../models/userModel')
+const salesmodel = require('../../models/salesModel')
 const { categorymodel, itemmodel } = require('../../models/productsModel')
 const { ConversationListInstance } = require('twilio/lib/rest/conversations/v1/conversation')
 
+const sharp = require('sharp')
+const fs = require('fs')
+
 module.exports.mainpage = (req, res) => {
     res.render('pages/admin/mainpage')
-}
-
-module.exports.dashboard = (req, res) => {
-    if(req.session.isAdminLogin) {
-        res.render('pages/admin/mainpage', {page: "dashboard"})
-        // res.redirect('/admin/login')
-    } else {
-    }
 }
 
 module.exports.category = async(req, res) => {
@@ -20,64 +16,94 @@ module.exports.category = async(req, res) => {
         res.redirect('/admin/login')
     } else {
         try {
-            const catPromise = categorymodel.find({})
-            const itemPromise = itemmodel.aggregate([
-              { $group: { _id: '$category', totalStock: { $sum: '$stock' } } },
-              { $project: { _id: 0, totalStock: 1 } }
+            const totalStock = await itemmodel.aggregate([
+                { $group: { _id: '$category', totalStock: { $sum: '$stock' } } }
             ])
-      
-            const [cat, item] = await Promise.all([catPromise, itemPromise])
             
-            let j = 0;
-            await render();
-    
-            async function render() {
-              for (let i of cat) {
-                // console.log(item)
-                // categorymodel.findOneAndUpdate(
-                //   { name: i.name },
-                //   { $set: { stock: item[j].stock } }
-                // )
-                j++;
-              }
+            for(let i of totalStock) {
+                let update = await categorymodel.findOneAndUpdate(
+                    { name: i._id },
+                    { $set: { stock: i.totalStock } }
+                )
             }
-
             
-            categorymodel.find({}).then(data => {
-                res.render('pages/admin/mainpage', { page: "category", data: data})
-            })
-      
+            const catPromise = await categorymodel.find({})
+
+            res.render('pages/admin/mainpage', { page: "category", data: catPromise})
+            
           } catch (error) {
-            // console.error(error)
-            // Handle the error accordingly, such as displaying an error page or sending an error response
+            console.log(error.message)
         }
     }
 }
 
-module.exports.blockCategory = (req, res) => {
-    if(req.query.active === 'enable') {
-        categorymodel.findOneAndUpdate(
-            { name: req.query.name },
-            { $set: { active: false } }
-            ).then(dat => {})
-    } else if(req.query.active === 'disable'){
-        categorymodel.findOneAndUpdate(
-            { name: req.query.name },
-            { $set: { active: true } }
-        ).then(dat => {})
+module.exports.blockCategory = async(req, res) => {
+    try {        
+        if(req.query.active === 'enable') {
+            const update = await categorymodel.findOneAndUpdate(
+                { name: req.query.name },
+                { $set: { active: false } }
+                )
+        } else if(req.query.active === 'disable') {
+            const update = await categorymodel.findOneAndUpdate(
+                { name: req.query.name },
+                { $set: { active: true } }
+            )
+        }
+    
+        const category = await categorymodel.findOne({name: req.query.name})
+        
+        if(category.active === false) {
+            const products = await itemmodel.updateMany(
+                { category: [category.name] },  
+                { $set: { access: false } }
+            )
+        } else {
+            const products = await itemmodel.updateMany(
+                { category: [category.name] },  
+                { $set: { access: true } }
+            )
+        }
+    
+        res.redirect('/admin/category')
+    } catch (error) {
+        console.log(error.message)
     }
+}
 
-    res.redirect('/admin/category')
+module.exports.editCategory = async(req, res) => {
+    try {
+        const cateData = await categorymodel.findOne({_id: req.body.id})
+        
+        const setName = await categorymodel.findOneAndUpdate(
+            { name: cateData.name },
+            { $set: { name: req.body.addcat } }
+        )
+        
+        if(req.file) {
+            const setImg = await categorymodel.findOneAndUpdate(
+                { name: cateData.name },
+                { $set: { image: req.file.originalname } }
+            )
+        }
+        
+        res.redirect('/admin/category')
+    } catch (error) {
+        console.log(error.message)
+    }
+}
+
+module.exports.showEdit = async(req, res) => {
+    const category = await categorymodel.findOne({name: req.query.name})
+    res.render('pages/admin/mainpage', { page: "edit-category", data: category })
 }
 
 module.exports.setCategory = (req, res) => {
     if(!req.body.addcat) {
         if(req.body.addcat === '') {
-            // res.redirect('/admin/category')
         } else if(req.body.action || req.body.control) {
             if(req.body.action) {
-                const [item, count] = req.body.action.split(',')
-                
+                const [item, count] = req.body.action.split(',') 
                 if(count === 'min') {
                     categorymodel.findOneAndUpdate(
                         {name: item},
@@ -122,7 +148,6 @@ module.exports.setCategory = (req, res) => {
             if(data) {
                 res.redirect('/admin/category')
             } else {
-                console.log('<UWU>')
                 if(req.body.addcat === '') {
                     // res.redirect('/admin/category')
                 } else if(req.body.action || req.body.control) {
@@ -157,12 +182,26 @@ module.exports.setCategory = (req, res) => {
                     categorymodel.findOne({
                         name: req.body.addcat
                     }).then(data => {
-                        if(data === null) {
-                            categorymodel.insertMany([{
-                                name: req.body.addcat,
-                                stock: 1,
-                                active: true
-                            }])
+                        try {                            
+                            if(data === null) {
+                                if(req.file) {
+                                    sharp(req.file.path).resize(1000, 1000)
+                                    .toFile('public\\img\\cropped\\category\\' + req.file.originalname, (err, data) => {
+                                        if(err) {
+                                            console.log(err.message)
+                                        }
+                                    })
+                                }
+                                
+                                categorymodel.insertMany([{
+                                    name: req.body.addcat,
+                                    stock: 1,
+                                    active: true,
+                                    image: req.file ? req.file.originalname : ''
+                                }])
+                            }
+                        } catch (error) {
+                            
                         }
                     })
                     res.redirect('/admin/category')

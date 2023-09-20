@@ -12,42 +12,63 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="full-prod">
-        <% if(page !== 'seperate') { %>
-            <div class="types">
-                <a href="">monitors</a>
-                <a href="">monitors</a>
-                <a href="">monitors</a>
-                <a href="">monitors</a>
-                <a href="">monitors</a>
-            </div>
-        <% } %>
-        <div class="products">
-            <% for(let i in data) { %>
-                <% if(data[i].length !== 0) { %>
-                    <div class="session-1">
-                        <% for(let j of data[i]) { %>
-                            <div class="pro">
-                                <a href="/<%= user + '/' + j['name']%>" class="prod-content">
-                                    <img class="pro-img"
-                                    src="/img/<%= j['image'][0] %>" alt="no img found">
-                                    <label class="name"><%= j['name'] %></label>
-                                    <label class="pr"><%= '$' + j['price'] %></label>
-                                    <div class="show-details">
-                                        <label for="">show details</label>
-                                    </div>
-                                </a>
+    <section style="padding: 0;" id="products">
+      <div class="container py-3">
+          <div class="row">
+            <h1 style="font-family: sans-serif;">All items</h1>
+          </div>
+          <div class="row">
+            <% for(let i of data) { %>
+              <div style="width: 18em;" class="col-lg-3 col-md-6 col-sm-10 offset-md-0 offset-sm-1 pt-lg-4 pt-4">
+                  <div class="card"> <img style="height: 250px; width: 250px;" class="card-img-top" src="<%= '/img/' + i.image[0] %>">
+                      <div class="card-body">
+                          <h3 class="font-weight-bold pt-1"><%= i.name %></h3>
+                          <div class="text-muted description"><%= i.category %></div>
+                          <div class="d-flex align-items-center product">
+                              <span class="fa fa-star"></span>
+                              <span class="fa fa-star"></span>
+                              <span class="fa fa-star"></span> 
+                              <span class="fa fa-star"></span>
+                              <span class="text-none fa fa-star"></span> 
                             </div>
-                        <% } %>
-                    </div>
-                <% } %>
+                          <div class="d-flex align-items-center justify-content-between pt-3">
+                              <div class="d-flex flex-column">
+                                  <div style="font-size: 1em;" class="h6 font-weight-bold">$<%= i.price %></div>
+                                  <!-- <div class="text-muted rebate">48.56</div> -->
+                              </div>
+                              <% if(i.access) { %>
+                                <!-- <div class="btn btn-primary"> -->
+                                  <a class="btn btn-danger" href="/<%= user + '/' + i.name%>" role="button">
+                                    Show details
+                                  </a>
+                                <!-- </div> -->
+                              <% } else { %>
+                                <div style="background-color: gray;" class="btn btn-primary">Show more</div>
+                              <% } %>
+                          </div>
+                      </div>
+                  </div>
+              </div>
             <% } %>
-        </div>
-        <div>
-            <form action="/<%= user + '/list'%>" method="post">
-                <button class="show-more">Show More</button>
-            </form>
-        </div>
-    </div>
+          </div>
+      </div>
+  </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
+    <script src="vendors/@popperjs/popper.min.js"></script>
+    <script src="vendors/bootstrap/bootstrap.min.js"></script>
+    <script src="vendors/is/is.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+    <script src="vendors/fontawesome/all.min.js"></script>
+    <script src="assets/js/theme.js"></script>
+
+    <script>
+      function popup() {
+        alert('this product has been disabled')
+      }
+    </script>
+    
 </body>
 </html>

@@ -1,31 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/home/headerStyle.css">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+
+    <link href="/css/categoryStyle/theme.css" rel="stylesheet" />
+  <!-- <link href="/css/responsive.css" rel="stylesheet" /> -->
+    <link href="/css/font-awesome.min.css" rel="stylesheet" />
+
+  <title>Document</title>
 </head>
 <body>
-    <div class="main-header">
-        <div class="left-side">
-            <a href="">dropdown</a>
-            <a href="/logout">logout</a>
-            <a href="/<%= user + '/cart'%>">cart</a>
-            <a href="">contact</a>
-        </div>
-        
-        <div>
-            <input type="text" name="search-bar" placeholder="Search">
-        </div>
+  <header class="bg-dark header_section">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg custom_nav-container ">
+          <a class="navbar-brand" href="index.html">
+            <span>
+              ImaginaryAudio
+            </span>
+          </a>
+  
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class=""> </span>
+          </button>
+  
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav  mx-auto ">
+              <li class="nav-item active">
+                <a class="nav-link" href="/<%= user + '/home' %>">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/<%= user + '/products' %>">Products</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/<%= user + '/cart'%>">Cart</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/<%= user + '/wallet' %>">Wallet</a>
+              </li>
+            </ul>
+            <div class="user_option">
+              <a href="/<%= user + '/profile' %> " class="user_link">
+                <i class="fa fa-user" aria-hidden="true"></i>
+              </a>
+              <form class="form-inline">
+                <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
+                  <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+              </form>
+              <a href="" class="order_online">
+                Order Online
+              </a>
+            </div>
+          </div>
+        </nav>
+      </div>
+  </header>
 
-        <div class="right-side">
-            <a class="wal&car" href="/<%= user + '/wallet'%>">wallet&cards</a>
-            <a href="" class="message">message</a>
-            <a href="/<%= user + '/profile'%>">
-                <div class="profile"></div>
-            </a>
-        </div>
-    </div>
 </body>
 </html>

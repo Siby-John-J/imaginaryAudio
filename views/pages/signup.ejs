@@ -10,14 +10,14 @@
 <body>
     <form action="/signup_auth" method="post">
         <h1>Sign in</h1>
-        
-        <input id="name" type="text" name="fullname" placeholder="FullName">
-        <input id="email" type="email" name="email" placeholder="Email" style="margin-bottom: 0px;">
+        <label style="color: red;" id="warning"></label>
+        <input oninput="validate('name')" id="name" type="text" name="fullname" placeholder="FullName">
+        <input oninput="validate('email')" id="email" type="email" name="email" placeholder="Email" style="margin-bottom: 0px;">
         <input id="pass" type="password" name="password" placeholder="Password">
         <input id="pass-con" type="password" name="password" placeholder="Config password">
         <input id="ph" type="text" name="phnum" placeholder="Phone number">
         
-        <button onclick="checkVal(event)">Sign up</button>
+        <button id="create" onclick="checkVal(event)">Sign up</button>
         <label for="">already have an Account?
             <a href="/">Login</a>
         </label>

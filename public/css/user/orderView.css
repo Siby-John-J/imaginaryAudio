@@ -12,11 +12,11 @@
 
 .main-order-panel .order1 {
     /* background-color: rgb(212, 212, 212); */
-    overflow-y: scroll;
+    /* overflow-y: scroll;
     width: 76%;
     height: 95%;
     border: 0.5px solid;
-    margin-left: 9em;
+    margin-left: 9em; */
 }
 
 .order1 .order-details {

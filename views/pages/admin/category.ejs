@@ -1,77 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/admin/categoryStyle.css">
-    <!-- <script src="/js/addCategoryPopup.js"></script> -->
-    <title>Category</title>
+    <title>Flat Able - Premium Admin Template by Phoenixcoded</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="">
+    <meta name="author" content="Phoenixcoded" />
+    <!-- Favicon icon -->
+    <link rel="icon" href="/assets6/images/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/assets6/css/style.css">
+
 </head>
-<body>
-    <div class="cat-top">
-        <h1>Category</h1>
-        <div>
-            <form action="/admin/setcat" method="post">
-                <!-- <a id="click" href="/admin/category" value="addCategory">Add Category</a> -->
-                <input type="text" name="addcat">
-                <button value="adding">Add category</button>
-                <!-- <input type="text" value=""> -->
-            </form>
-        </div>
-    </div>
-    <div class="category-main">
-        <div class="category-title">
-            <label>#</label>
-            <label>Name</label>
-            <label>Total items</label>
-            <label>Status</label>
-            <label>Actions</label>
-        </div>
-        <% for(let i = 0; i < data.length; i++) { %>
-            <div class="category-lists">
-                <label><%= i %></label>
-                <label style="position: relative; right: 30px;"><%= data[i].name %></label>
-                <div class="stock-control">
-                    <form action="/admin/setcat" method="post">
-                        <!-- <button name="action" value="<%= [data[i].name,'min'] %>" value="min">-</button> -->
-                        <label><%= data[i].stock %></label>
-                        <!-- <button name="action" value="<%= [data[i].name, 'max'] %>">+</button> -->
-                    </form>
+<body class="">
+	<!-- [ Pre-loader ] start -->
+	<div class="loader-bg">
+		<div class="loader-track">
+			<div class="loader-fill"></div>
+		</div>
+	</div>
+<div style="margin-left: 9em; margin-top: 5em;" class="pcoded-main-container">
+    <div class="pcoded-content">
+        <div class="row">
+            <!-- prject ,team member start -->
+            <div style="width: 125vw;" class="col-xl-6 col-md-12">
+                <div class="card table-card">
+                    <div style="display: flex; flex-direction: 
+                    row; justify-content: space-between; align-items: center;"  
+                    class="card-header">
+                        <h5>Categorys</h5>
+                        <div class="btn-group card-option">
+                            <div class="">
+                                <!-- Button trigger modal -->
+                                <button
+                                  type="button"
+                                  class="btn btn-primary"
+                                  data-bs-toggle="modal"
+                                  data-bs-target="#modalCenter"
+                                >
+                                  Add Category
+                                </button>
+        
+                                <!-- Modal -->
+                                <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
+                                  <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="modalCenterTitle">Add Category</h5>
+                                      </div>
+                                      <div class="modal-body">
+                                        <%- include('./addCategory') %>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+                            <!-- <div class="btn-group card-option">
+                                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    add
+                                </button>
+                                <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+                                    <li class="dropdown-item full-card"><a href="#!"><span><i class="feather icon-maximize"></i> maximize</span><span style="display:none"><i class="feather icon-minimize"></i> Restore</span></a></li>
+                                    <li class="dropdown-item minimize-card"><a href="#!"><span><i class="feather icon-minus"></i> collapse</span><span style="display:none"><i class="feather icon-plus"></i> expand</span></a></li>
+                                    <li class="dropdown-item reload-card"><a href="#!"><i class="feather icon-refresh-cw"></i> reload</a></li>
+                                    <li class="dropdown-item close-card"><a href="#!"><i class="feather icon-trash"></i> remove</a></li>
+                                </ul>
+                            </div> -->
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div style="height: 40em; overflow-y: scroll;" class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Items</th>
+                                        <th>Due Date</th>
+                                        <th class="text-right">Control</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% let n = 0 %>
+                                    <% for(let i of data) { %>
+                                        <tr>
+                                            <td>
+                                                <div class="d-inline-block align-middle">
+                                                    <img src="/img/cropped/category/<%= i.image %>" alt="" class="img-radius wid-40 align-top m-r-15">
+                                                    <div class="d-inline-block">
+                                                        <h6><%= i.name %></h6>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><%= i.stock %></td>
+                                            <td>09 // 11 // 2000</td>
+                                            <td class="text-right">
+                                                <label class="badge">
+                                                <% let status = '' %>
+                                                <% let color = '' %>
+                                                
+                                                <% if(i.active === true) { %>
+                                                    <% status = 'enable' %>
+                                                    <% color = 'green' %>
+                                                <% } else { %>
+                                                    <% status = 'disable' %>
+                                                    <% color = 'red' %>
+                                                <% } %>
+                                                    <a style="border-radius: 10px; padding: 5px; color: white; font-size: 16px; background-color: <%= color%>;" 
+                                                        href="/admin/category/block?name=<%= i.name%>&active=<%= status %>">
+                                                        <%= status %>
+                                                    </a>
+                                                </label>
+                                                <% let editMainModel = `editModel${n}`%>
+                                                <% n++ %>
+                                                <a
+                                                    class="btn btn-primary"
+                                                    style="padding: 3px 22px; border-radius: 10px;"
+                                                    href="/admin/showedit?name=<%= i.name %>"
+                                                >
+                                                  Edit
+                                                </a>
+                                                
+                                            </td>
+                                        </tr>
+                                    <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-                <label class="staus">
-                    <% let status = '' %>
-                    <% let color = '' %>
-
-                    <% if(data[i].active) { %>
-                        <% status = 'enable' %>
-                        <% color = 'green' %>
-                    <% } else { %>
-                        <% status = 'disable' %>
-                        <% color = 'red' %>
-                    <% } %>
-                        <a style="border-radius: 10px; padding: 5px; color: white; font-size: 16px; background-color: <%= color%>;" 
-                            href="/admin/category/block?name=<%= data[i].name%>&active=<%= status %>">
-                            <%= status %>
-                        </a>
-                </label>
-                <label class="actions">
-                    <form action="/admin/setcat" method="post">
-                        <!-- <button name="control" value="<%= [data[i].name, 'edit'] %>" 
-                            class="cat-edit" style="font-size: 15px;">edit</button> -->
-                        <button name="control" value="<%= [data[i].name, 'delete'] %>" 
-                            class="cat-del" style="font-size: 15px;">del</button>
-                    </form>
-                    <!-- edit -->
-                </label>
             </div>
-        <% } %>
+        </div>
     </div>
-    <!-- <script defer>
-        const a = document.getElementById('click')
+</div>
+    <script src="/assets6/js/vendor-all.min.js"></script>
+    <script src="/assets6/js/plugins/bootstrap.min.js"></script>
+    <script src="/assets6/js/pcoded.min.js"></script>
+    <script>
+        
+    </script>
 
-        function popup() {
-            alert('hello world')
-        }
-    </script> -->
+<!-- Apex Chart -->
+<script src="/assets6/js/plugins/apexcharts.min.js"></script>
+
+
+<!-- custom-chart js -->
+<script src="/assets6/js/pages/dashboard-main.js"></script>
 </body>
+
 </html>

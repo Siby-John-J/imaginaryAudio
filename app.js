@@ -8,6 +8,8 @@ const signupRoute = require('./router/signupRoute')
 
 const adminMiddleware = require('./middlewares/adminMiddleware')
 const errorMiddleware = require('./middlewares/errorMiddleware')
+
+const timer = require('./controllers/timer')
 // const userMiddleware = require('./middlewares/userMiddleware')
 
 const app = express()
@@ -30,5 +32,7 @@ app.use('/:id', userRoute)
 
 // app.use(adminLoginMiddleware)
 app.use(errorMiddleware)
+
+// timer()
 
 app.listen(2000)

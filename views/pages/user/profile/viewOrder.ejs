@@ -1,109 +1,134 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/user/orderView.css">
-    <script defer src="/js/orderBar.js"></script>
-    <title>Document</title>
+  <title>Order View Page</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="/js/inputs/returnProduct.js"></script>
+  <style>
+    /* Your existing CSS styles here */
+
+    /* Additional custom style for product status */
+    .table td.status {
+      font-weight: bold;
+    }
+
+    .title-and-btn {
+      display: flex;
+      align-items: row;
+      justify-content: space-between;
+    }
+
+    .title-and-btn button {
+      width: 8em;
+      border: none;
+      background-color: #848484;
+      border-radius: 1em;
+      color: white;
+    }
+
+    .model {
+      border: 1px solid #363636;
+      height: 20em;
+      width: 29em;
+      position: absolute;
+      z-index: 1;
+      top: 8em;
+      left: 27em;
+      border-radius: 1em;
+      background-color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-evenly;
+    }
+  </style>
 </head>
 <body>
-    <h1>ORDER-ID: <%= cart[0].orderid %></h1>
-    <div class="main-order-panel">
-        <div class="order1">
-            <div class="order-details">
-                <input class="input-show" style="display: none;" type="text" value="<%= cart[0].status %>">
-                <div class="od-con order-id">
-                    <label class="od-title" for="">order id <%= cart[0].status %></label>
-                    <label class="od-content" for=""><%= cart[0].orderid %></label>
-                </div>
-                <div class="od-con order-date">
-                    <label class="od-title" for="">date purchased</label>
-                    <label class="od-content" for=""><%= cart[0].purchase %></label>
-                </div>
-                <div class="od-con arrive-date">
-                    <label class="od-title" for="">date arriving</label>
-                    <label class="od-content" for=""><%= cart[0].arriving %></label>
-                </div>
-            </div>
-            <div class="process-bar">
-                <div class="process-graph">
-                    <div class="pending">
-                        <img id="img1" src="/img/icons/pngfind.com-check-mark-symbol-png-2546448.png" alt="" srcset="">
-                    </div>
-                    <div class="processing">
-                        <img id="img2" src="/img/icons/pngfind.com-check-mark-symbol-png-2546448.png" alt="" srcset="">
-                    </div>
-                    <div class="shipped">
-                        <img id="img3" src="/img/icons/pngfind.com-check-mark-symbol-png-2546448.png" alt="" srcset="">
-                    </div>
-                </div>
-                <div class="process-title">
-                    <label for="">Pending</label>
-                    <label for="">Processing</label>
-                    <label for="">Delivered</label>
-                </div>
-            </div>
-            <div class="total-products">
-                <% for(let j of cart[0].details) { %>
-                    <div class="prod1">
-                        <div class="prod-pic">
-                            <img src="/img/<%= j.img %>" alt="">
-                        </div>
-                        <div class="prod-contents">
-                            <div class="pd-p1">
-                                <label for=""><%= j.name %></label>
-                                <label for=""><%= j.cate %></label>
-                            </div>
-                            <div class="pd-p1">
-                                <label style="font-size: 1.3em;" for="">$<%= j.price %></label>
-                                <label for="">Qty:<%= j.quan %></label>
-                            </div>
-                        </div>
-                    </div>
-                <% } %>
-            </div>
-            <div class="order-others">
-                <div class="cons payment-od">
-                    <label class="con-title" for="">Payment</label>
-                    <label for="">Cash on delivery</label>
-                </div>
-                <div class="cons address-od">
-                    <label class="con-title" for="">Delivery</label>
-                    <div style="text-align: start;" class="od-address-details">
-                        <label for="">Address</label>
-                        <div class="add-ord-details">
-                            <label for="">123 Main Street, Anytown, USA</label>
-                            <label for="">(555) 123-4567</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="cons need-help">
-                    <label class="con-title" for="">Need help?</label>
-                </div>
-                <div class="cons order-summary">
-                    <label class="con-title" style="font-size: 1.4em;" for="">Order summary</label>
-                    <div class="order-subtotal">
-                        <div class="ord-price order-sub-title">
-                            <label for="">Subtotal</label>
-                            <label for="">Discount</label>
-                            <label for="">Delivery</label>
-                            <label for="">Tax</label>
-                        </div>
-                        <div class="ord-price order-sub-content">
-                            <label for="">$3214</label>
-                            <label for="">(0%) - $0</label>
-                            <label for="">$0%</label>
-                            <label for="">+ $332.33</label>
-                        </div>
-                    </div>
-                    <div style="font-size: 24px;" class="order-total">
-                        <label for="">Total</label>
-                        <label for="">$3424</label>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <% let totalprice = 0 %>
+  <div class="container mt-4">
+    <h1>Order Details</h1>
+    <div class="row">
+      <div class="col-md-6">
+        <h3>Customer Information</h3>
+        <p><strong>Name:</strong> <%= address.fname + ' ' + address.lname %></p>
+        <p><strong>Email:</strong> <%= address.email %></p>
+        <p><strong>Phone:</strong> +91<%= address.ph %></p>
+        <p><strong>Coupon:</strong> <%= address.coupon %></p>
+      </div>
+      <div class="col-md-6">
+        <h3>Shipping Address</h3>
+        <p><strong>Address:</strong> <%= address.address %></p>
+        <p><strong>City:</strong> <%= address.town %></p>
+        <p><strong>Status:</strong> <%= address.status %></p>
+      </div>
     </div>
+    
+    <hr>
+    
+    <div class="title-and-btn">
+      <h3>Order items</h3>
+      <% if(address.status === 'delivered') { %>
+        <button onclick="activate()">Return</button>
+      <% } %>
+      <a href="/<%= user %>/orders/invoice?id=<%= address.mainid %>">Invoice</a>
+    </div>
+    <div style="display: none;" class="model">
+      <h4>return product</h4>
+      <div class="reasons">
+        <div class="res">
+          <input type="radio" value="wrong product" name="reason" id="" checked>
+          <label for="">wrong product</label>
+        </div>
+        <div class="res">
+          <input type="radio" value="wrong product" name="reason" id="">
+          <label for="">product damaged</label>
+        </div>
+        <div class="res">
+          <input type="radio" value="wrong product" name="reason" id="">
+          <label for="">late delivery</label>
+        </div>
+        <div class="res">
+          <input type="radio" value="wrong product" name="reason" id="">
+          <label for="">price drop</label>
+        </div>
+        <div class="res">
+          <input type="radio" value="wrong product" name="reason" id="">
+          <label for="">low perfomence</label>
+        </div>
+      </div>
+      <form class="controls" action="/<%= user %>/orders/return_order" method="post">
+        <input style="display: none;" name="id" value="<%= address.id %>" type="text">
+        <button onclick="deactivate(event)">Cancel</button>
+        <button>Send</button>
+      </form>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for(let i of items) { %>
+            <tr>
+              <td><%= i.name %></td>
+              <td><%= i.total %></td>
+              <td>$<%= i.price %></td>
+              <td>$<%= i.total * i.price %></td>
+              <% totalprice += i.total * i.price %>
+            </tr>
+        <% } %>
+      </tbody>
+    </table>
+    <div class="text-right">
+      <p><strong>Subtotal:</strong> $<%= totalprice %></p>
+      <p><strong>Tax:</strong> $7</p>
+      <p><strong>Total:</strong> $<%= totalprice %></p>
+    </div>
+  </div>
 </body>
 </html>

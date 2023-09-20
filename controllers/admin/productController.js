@@ -20,12 +20,11 @@ module.exports.products = async(req, res) => {
     if(req.session.isadminlogin) {
         res.redirect('/admin/login')
     } else {
-        let data = await itemmodel.find({}).limit(5)
+        let data = await itemmodel.find({}).limit(8)
         let data1 = await calculate()
         res.render('pages/admin/mainpage', {page: "products", data: data, 
-        countes: data1, category: category})
+        countes: data1, category: category, default_cate: ''})
     }
-
 }
 
 module.exports.addProduct = (req, res) => {
@@ -35,47 +34,62 @@ module.exports.addProduct = (req, res) => {
 }
 
 module.exports.editProduct = (req, res) => {
-    categorymodel.find({}, {name: 1}).then(data2 => {
+    categorymodel.find({}).then(data2 => {
         itemmodel.findOne({ name: req.query.prod }).then(data1 => {
-            res.render('pages/admin/addProduct', {data: data2, contents: data1, type: 'edit'})
+            res.render('pages/admin/editProduct', {data: data1, category: data2, type: 'edit'})
         })
     })
 }
 
 module.exports.editProductAuth = async(req, res) => {
     let img = []
-
-    await Promise.all(
-        req.files.map(file => {
-            img.push(file.originalname)
-        })
-    )
-
-    let date = new Date()
-    let newdate = date.getDay().toString() + '-' + date.getMonth().toString() 
-    + '-' + date.getFullYear().toString()
-
-    itemmodel.findOneAndUpdate(
-        { _id: req.query.id },
-        {
-            name: req.body.pname,
-            price: Number(req.body.pprice),
-            category: req.body.pcat,
-            image: img,
-            description: req.body.pdesc,
-            date: newdate,
-            stock: req.body.pstock,
-            status: 'in stock'
+    
+    try {
+        if(req.files.length !== 0) {
+            await Promise.all(
+                req.files.map(file => {
+                    img.push(file.originalname)
+                })
+            )
         }
-    ).then(data => {})
-    res.redirect('/admin/products')
+    
+        let date = new Date()
+        let newdate = date.getDay().toString() + '-' + date.getMonth().toString() 
+        + '-' + date.getFullYear().toString()
+    
+        await itemmodel.findOneAndUpdate(
+            { _id: req.body.id },
+            {
+                name: req.body.pname,
+                price: Number(req.body.pprice),
+                category: req.body.pcat.trim(),
+                description: req.body.pdesc,
+                date: newdate,
+                stock: req.body.pstock,
+            }
+        )
+    
+        if(img.length > 0) {
+            await itemmodel.findOneAndUpdate(
+                { _id: req.body.id },
+                { image: img }
+            )
+            console.log('imaggine...')
+        }
+        
+        res.redirect('/admin/products')
+        
+    } catch (error) {
+        console.log(error.message)
+    }
+
 }
 
 module.exports.deleteProduct = (req, res) => {
-    if(typeof req.body.check === 'string') {
-        itemmodel.deleteOne({name: req.body.check}).then(data => {})
+    if(typeof req.query.check === 'string') {
+        itemmodel.deleteOne({name: req.query.check}).then(data => {})
     } else {
-        for(let i of req.body.check) {
+        for(let i of req.query.check) {
             itemmodel.deleteOne({name: i}).then(data => {})
         }
     }
@@ -95,7 +109,7 @@ module.exports.authProduct = async(req, res, next) => {
             })
         )
         
-        await itemmodel.insertMany([{
+        let insert = await itemmodel.insertMany([{
             name: req.body.pname,
             price: Number(req.body.pprice),
             category: req.body.pcat,
@@ -103,7 +117,8 @@ module.exports.authProduct = async(req, res, next) => {
             description: req.body.pdesc,
             date: newdate,
             stock: req.body.pstock,
-            status: 'in stock'
+            status: 'in stock',
+            access: true
         }])
 
         res.redirect('/admin/products')
@@ -116,69 +131,89 @@ module.exports.authProduct = async(req, res, next) => {
 module.exports.traverse = async(req, res) => {
     try {
         let data1 = await calculate()
-        req.body.category ? cate = req.body.category : cate
+        req.query.category ? cate = req.query.category : cate
 
         if(req.body.searchbar) {
             search = req.body.searchbar
         } else {
             search = ''
         }
-        if(req.body.filter) {
+
+        if(req.query.filter) {
             filter = req.body.filter
         }
         if(req.body.searchbar) {
             search = req.body.searchbar
         }
-        if(req.body.sort === 'ascending') {
+        if(req.query.sort === 'ascending') {
             sort = 1
         } else {
             sort = -1
         }
         
         let category = await categorymodel.find({})
-        
         async function wrapAll() {
             if(cate === 'all' && filter !== 0) {
                 if(filter === 'all') {
                     let data = await itemmodel.find({})
+                                        
                     .limit(5).skip(steps)
                     res.render('pages/admin/mainpage', {page: "products",
                     data: data, countes: data1, category: category,
                     default_cate: cate})
                 } else {
-                    console.log('printed herer...')
-                    console.log(filter)
                     let data = await itemmodel.find({})
-                    .sort({[filter]: [sort]}).limit(5).skip(steps)
+                    .sort({[filter]: [sort]}).limit(8).skip(steps)
                     res.render('pages/admin/mainpage', {page: "products",
                     data: data, countes: data1, category: category,
                     default_cate: cate})
                 }
             } else if(cate === 'all' || search === '' && filter === 0){
+                // console.log('herer..', filter)
+
                 if(search !== '') {
-                    let data = await itemmodel.find({name: search}).limit(5).skip(steps)
+                    let data = await itemmodel.find({name: search}).limit(8).skip(steps)
                     res.render('pages/admin/mainpage', {page: "products",
                     data: data, countes: data1, category: category,
                     default_cate: cate})
                 } else {
-                    let data = await itemmodel.find({}).limit(5).skip(steps)
+                    let get = ''
+                    if(cate === '') {
+                        const data = await itemmodel.find({}).limit(8).skip(steps)
+                        get = data
+                    } else {
+                        const data = await itemmodel.find({category: cate}).limit(8).skip(steps)
+                        get = data
+                    }
+                    
                     res.render('pages/admin/mainpage', {page: "products",
-                    data: data, countes: data1, category: category,
+                    data: get, countes: data1, category: category,
                     default_cate: cate})
                 }
             } else {
+
                 if(search) {
-                    let data = await itemmodel.find({category: cate, name: search})
-                    .sort({[filter]: [sort]}).limit(5).skip(steps)
+                    let data = await itemmodel.find({name: search})
+                    .sort({[filter]: [sort]}).limit(8).skip(steps)
                     res.render('pages/admin/mainpage', {page: "products",
                     data: data, countes: data1, category: category,
                     default_cate: cate})
                 } else {
-                    let data = await itemmodel.find({category: cate})
-                    .sort({[filter]: [sort]}).limit(5).skip(steps)
-                    res.render('pages/admin/mainpage', {page: "products",
-                    data: data, countes: data1, category: category,
-                    default_cate: cate})
+                    
+                    if(cate) {
+                        let data = await itemmodel.find({category: cate})
+                        .sort({[filter]: [sort]}).limit(8).skip(steps)
+                        res.render('pages/admin/mainpage', {page: "products",
+                        data: data, countes: data1, category: category,
+                        default_cate: cate})
+                    } else {
+                        // console.log(filter, sort)
+                        let data = await itemmodel.find({})
+                        .sort({[req.query.filter]: [1]}).limit(8).skip(steps)
+                        res.render('pages/admin/mainpage', {page: "products",
+                        data: data, countes: data1, category: category,
+                        default_cate: cate})
+                    }
                 }
             }
         }
@@ -194,8 +229,8 @@ module.exports.traverse = async(req, res) => {
             return
         }
         wrapAll()
-
-    } catch (error) {
         
+    } catch (error) {
+        console.log(error.message)
     }
 }

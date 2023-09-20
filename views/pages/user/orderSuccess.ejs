@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Shoppers &mdash; Colorlib e-Commerce Template</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,400,700"> 
+    <link rel="stylesheet" href="fonts/icomoon/style.css">
+
+    <link rel="stylesheet" href="/file5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/file5/css/magnific-popup.css">
+    <link rel="stylesheet" href="/file5/css/jquery-ui.css">
+    <link rel="stylesheet" href="/file5/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/file5/css/owl.theme.default.min.css">
+    
+    <link rel="stylesheet" href="/file5/css/aos.css">
+    <link rel="stylesheet" href="/file5/css/style.css">
+  </head>
+  <body>
+  
+  <div class="site-wrap">
+    <div class="site-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <span class="icon-check_circle display-3 text-success"></span>
+            <h2 class="display-3 text-black">Thank you!</h2>
+            <p class="lead mb-5">You order was successfuly completed.</p>
+            <div class="orders-table">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Count</th>
+                    <th>Image</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% orders.map(item => { %>
+                    <tr class="order">
+                      <td><%= item.name %></td>
+                      <td><%= item.price %></td>
+                      <td><%= item.count %></td>
+                      <td><img alt=".." src="/img/<%= item.image %>"></td>
+                    </tr>
+                  <% }) %>
+                </tbody>
+              </table>
+            </div>            
+            <p><a href="shop.html" class="btn btn-sm btn-primary">Back to shop</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .orders-table {
+      max-width: 800px; /* Adjust the maximum width as needed */
+      margin: 0 auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2; /* Header background color */
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2; /* Alternate row background color */
+    }
+
+    tr:hover {
+      background-color: #e0e0e0; /* Hovered row background color */
+    }
+
+    img {
+      max-width: 100px; /* Adjust the maximum image width as needed */
+      height: auto;
+}
+  </style>
+
+  <script src="/file5/js/jquery-3.3.1.min.js"></script>
+  <script src="/file5/js/jquery-ui.js"></script>
+  <script src="/file5/js/popper.min.js"></script>
+  <script src="/file5/js/bootstrap.min.js"></script>
+  <script src="/file5/js/owl.carousel.min.js"></script>
+  <script src="/file5/js/jquery.magnific-popup.min.js"></script>
+  <script src="/file5/js/aos.js"></script>
+
+  <script src="/file5/js/main.js"></script>
+    
+  </body>
+</html>
