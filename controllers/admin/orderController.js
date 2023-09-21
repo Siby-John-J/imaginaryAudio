@@ -44,7 +44,6 @@ module.exports.orders = async(req, res) => {
         const data = []
     
         const orders = await ordermodel.find().sort({_id: -1})
-        
         for(let i of orders) {
             let user = await usermodel.findOne({ _id: i.userid })
             let prod = []
@@ -71,9 +70,7 @@ module.exports.orders = async(req, res) => {
                     payment: i.payment,
                 })
             }
-    
         }
-        
         res.render('pages/admin/mainPage', {page: 'orders', data: data})
     } catch (error) {
         console.log(error.message)

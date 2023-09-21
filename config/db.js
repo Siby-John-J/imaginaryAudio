@@ -1,3 +1,4 @@
 const mongoose = require('mongoose')
+require('dotenv').config()
 
-module.exports = mongoose.createConnection('mongodb://127.0.0.1:27017/imaginaryAudio')
+module.exports = mongoose.createConnection(process.env.MONGO_URL)
