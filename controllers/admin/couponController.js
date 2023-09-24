@@ -23,7 +23,7 @@ module.exports.couponList = async(req, res) => {
         }
         products.push({[cat]: prod})
     }
-
+    
     if(req.query.id) {
         id = req.query.id
     }

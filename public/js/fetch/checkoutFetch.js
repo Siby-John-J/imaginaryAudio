@@ -22,7 +22,7 @@ async function call(user) {
         })
     }
 
-    const fetchdata = await fetch(`http://localhost:2000/${user}/getcoupon`, message)
+    const fetchdata = await fetch(`/${user}/getcoupon`, message)
     const json = await fetchdata.json({})
 
     function wrongProduct() {
@@ -147,7 +147,7 @@ async function call(user) {
                     price: mainprice
                 })
             }
-    
+            
             await fetch(`http://localhost:2000/${user}/setcoupon`, data)
         } else if(json.message === null){
             couponParent[0].style.color = 'red'

@@ -6,7 +6,6 @@ const address = document.getElementsByClassName('flexCheckDefault')
 //     console.log('lwal')
 // })
 
-
 async function setAddress(count) {
     const request = {
         method: 'POST',

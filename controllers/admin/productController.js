@@ -82,7 +82,6 @@ module.exports.editProductAuth = async(req, res) => {
     } catch (error) {
         console.log(error.message)
     }
-
 }
 
 module.exports.deleteProduct = (req, res) => {
