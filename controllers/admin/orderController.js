@@ -71,7 +71,7 @@ module.exports.orders = async(req, res) => {
                 })
             }
         }
-        res.render('pages/admin/mainPage', {page: 'orders', data: data})
+        res.render('pages/admin/mainpage', {page: 'orders', data: data})
     } catch (error) {
         console.log(error.message)
     }

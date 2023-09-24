@@ -27,26 +27,26 @@ module.exports.couponList = async(req, res) => {
     if(req.query.id) {
         id = req.query.id
     }
-    
+
     console.log(data)
     console.log(req.query)
     console.log(users)
     console.log(products)
 
-    res.render('pages/admin/mainPage', {page: 'coupon', cPage: 'list-coupon', 
+    res.render('pages/admin/mainpage', {page: 'coupon', cPage: 'list-coupon', 
     data: data, type: req.query.type, users: users, products: products})
 }
 
 module.exports.couponPurchase = async(req, res) => {
     let data = await usermodel.find({}, {name: 1})
 
-    res.render('pages/admin/mainPage', {data: data, page: 'coupon', cPage: 'purchase-coupon'})
+    res.render('pages/admin/mainpage', {data: data, page: 'coupon', cPage: 'purchase-coupon'})
 }
 
 module.exports.couponCreate = async(req, res) => {
     if(req.query.name) {
         let listname = await itemmodel.find({category: req.query.name}, {name: 1, _id: 1})
-        res.render('pages/admin/mainPage', {page: 'coupon', cPage: 'create-coupon',
+        res.render('pages/admin/mainpage', {page: 'coupon', cPage: 'create-coupon',
         data: listname, qname: req.query.name, fielddata: ''})
     } else if(req.query.select) {
         res.redirect('/admin/coupon/create')
@@ -60,7 +60,7 @@ module.exports.couponCreate = async(req, res) => {
             res.redirect('/admin/coupon/create')
         }
     } else {
-        res.render('pages/admin/mainPage', {page: 'coupon', cPage: 'create-coupon',
+        res.render('pages/admin/mainpage', {page: 'coupon', cPage: 'create-coupon',
         data: listcate, qname: '', fielddata: ''})
     }
 }
