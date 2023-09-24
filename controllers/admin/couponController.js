@@ -27,7 +27,7 @@ module.exports.couponList = async(req, res) => {
     if(req.query.id) {
         id = req.query.id
     }
-
+    
     console.log(data)
     console.log(req.query)
     console.log(users)
