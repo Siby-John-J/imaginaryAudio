@@ -66,7 +66,7 @@ module.exports.filterReport = async(req, res) => {
 }
 
 module.exports.printReport = async(req, res) => {
-    res.sendFile(`F://ImaginaryAudio//output.pdf`)
+    res.sendFile(`/ImaginaryAudio/output.pdf`)
 }
 
 function generatePDF(data) {
@@ -91,8 +91,6 @@ function generatePDF(data) {
             prod += `${p.name}[${p.count}]\n`
           }
         }
-
-        console.log(prod.trim().length)
         
         dat.id = i.orderid,
         dat.purchase_date = i.date,
@@ -133,31 +131,6 @@ function generatePDF(data) {
       
       doc.moveDown(1.7)
       doc.fontSize(20).text('Total Price: ' + '$' + total , { align: 'start' })
-
-      
-      // doc.fontSize(14).text('Order id :   ' + invoice.orderid, { align: 'start' })
-      // doc.moveDown(0.3)
-      // doc.fontSize(14).text('Status :     ' + invoice.status, { align: 'start' })
-      // doc.moveDown(0.3)
-
-      // doc.fontSize(14).text('totalPrice : ' + invoice.totalprice, { align: 'start' })
-      // doc.moveDown(0.3)
-
-      // doc.fontSize(14).text('Address :    ' + invoice.address, { align: 'start' })
-      // doc.moveDown(0.3)
-
-      // doc.moveDown(0.5)
-      // doc.fontSize(24).text('Product-Details', { align: 'center' })
-      // doc.moveDown(0.5)
-
-      // const space = '       '
-
-      // orderItems.map(item => {
-      //     doc.fontSize(14).text('name : ' + String(item.name) + space + 
-      //     'price : ' + String(item.price) + space + 'count : ' + String(item.count) + space +
-      //     'total : ' + String(item.total),  {align: 'start'})
-      //     doc.moveDown(0.3)
-      // })
       
       doc.end()
 
