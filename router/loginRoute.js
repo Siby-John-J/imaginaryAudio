@@ -23,4 +23,8 @@ router.get('/otp_resend', resendOtp)
 router.get('/email_resend', checkEmail)
 router.get('/logout', usermiddleware, logout)
 
+router.get('/:id', (req, res) => {
+    res.render('pages/404')
+})
+
 module.exports = router

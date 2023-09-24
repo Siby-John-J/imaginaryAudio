@@ -7,7 +7,7 @@ module.exports = userMiddleware = async(req, res, next) => {
     res.setHeader('Cache-Control', 'no-store')
     res.setHeader('Pragma', 'no-cache')
     res.setHeader('Expires', '0')
-
+    
     const user = await usermodel.findOne({name: req.session.username})
     
     if(user !== null) {

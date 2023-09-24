@@ -73,4 +73,8 @@ router.get('/coupon/purchase', adminAccessMiddleware, couponPurchase)
 router.post('/coupon/set', adminAccessMiddleware, setCoupon)
 router.post('/coupon/send', adminAccessMiddleware, sendCoupon)
 
+router.get('/:id', (req, res) => {
+    res.render('pages/404')
+})
+
 module.exports = router

@@ -17,7 +17,7 @@ module.exports.signupAuth = (req, res) => {
     subject = 'Dear ' + req.body.fullname + ' welcome to imaginaryAudio'
     html = `
         <label>Go to Login Page</label>
-        <a href="http://localhost:2000">
+        <a href="www.imaginaudio.online">
             Click here
         </a>`
     

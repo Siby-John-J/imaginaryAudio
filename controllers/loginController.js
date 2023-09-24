@@ -88,9 +88,7 @@ module.exports.auth = (req, res) => {
         } else {
             email = req.body.email
             subject = 'Password reset link from imaginaryAudio'
-            html = 'click here to reset password http://localhost:2000/reset_password'
-            
-            // authEmail(email, subject, html)
+            html = 'click here to reset password www.imaginaudio.online/reset_password'
             
             res.render('pages/login', {type: 'check-email', email: req.body.email})
         }
@@ -105,7 +103,7 @@ module.exports.auth = (req, res) => {
                 })
             })
         } else {
-            res.send('incorrect password')
+            res.render('pages/404')
         }
     } else if(req.body.phoneNum) {
         // OTP verification
