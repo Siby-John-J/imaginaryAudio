@@ -47,7 +47,7 @@
                         <a href="#" class="card-link">Edit address</a>
                         <div class="form-check py-3">
                           <input class="form-check-input" type="checkbox"
-                          name="selectedAddress" value="<%= count %>" onclick="setAddress(<%= count %>)" class="addressCheck">
+                          name="selectedAddress" value="<%= count %>" onclick="setAddress(<%= count %>, '<%= user %>')" class="addressCheck">
                           <label class="form-check-label" for="addressCheck">
                             Select
                           </label>
@@ -288,7 +288,7 @@
         })
       }
 
-      const post = await fetch('http://localhost:2000/<%= user %>/getcoupon/details', data)
+      const post = await fetch('/<%= user %>/getcoupon/details', data)
       const json = await post.json({})
 
       input_code.value = json.code
@@ -340,7 +340,7 @@
                   body: JSON.stringify({message: 'success', data: res})
                 }
                 
-                const payment = await fetch(`http://localhost:2000/<%= user %>/success`, request)
+                const payment = await fetch(`/<%= user %>/success`, request)
                 // await fetch(`http://localhost:2000/<%= user %>/success?price=<%= total %>`)
                 
                 if(payment) {
@@ -408,7 +408,7 @@
       })
     }
 
-    await fetch('http://localhost:2000/<%= user %>/setprice', jsonData)
+    await fetch('/<%= user %>/setprice', jsonData)
   }
 
   $(document).ready(() => {
@@ -438,7 +438,7 @@
   }
 
   document.getElementById('flexRadioDefault3').addEventListener('click', async() => {
-    const data = await fetch('http://localhost:2000/<%= user %>/orders/setpayment', maindata)
+    const data = await fetch('/<%= user %>/orders/setpayment', maindata)
     const json = await data.json({})
     
     if(json.msg === 'no_wallet') {
@@ -465,12 +465,6 @@
     })
     })
   })
-
-
-
-
-
-  
   </script>
   
 </body>

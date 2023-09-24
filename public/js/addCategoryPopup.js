@@ -4,7 +4,7 @@ const a = document.getElementById('click')
 
 function popup() {
     const category = prompt("enter category: ")
-    fetch('http://localhost:2000/admin/category', {
+    fetch('/admin/category', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

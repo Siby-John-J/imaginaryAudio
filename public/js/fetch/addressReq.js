@@ -1,12 +1,8 @@
 
 const address = document.getElementsByClassName('flexCheckDefault')
 
-// console.log(address)
-// address[0].addEventListener('onclick', () => {
-//     console.log('lwal')
-// })
-
-async function setAddress(count) {
+async function setAddress(count, user) {
+    console.log(user)
     const request = {
         method: 'POST',
         headers: {
@@ -15,5 +11,5 @@ async function setAddress(count) {
         body: JSON.stringify({address: count})
     }
     
-    await fetch(`http://localhost:2000/aria/setaddress`, request)
+    await fetch(`/${user}/setaddress`, request)
 }

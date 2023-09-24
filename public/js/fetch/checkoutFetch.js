@@ -81,8 +81,6 @@ async function call(user) {
             json.data.map(item => {
                 totalprice += item.price * item.count
             })
-
-            console.log(totalprice)
     
             if(json.message.type === 'percentage') {
                 p = (json.message.Purchase / 100) * totalprice
@@ -148,7 +146,7 @@ async function call(user) {
                 })
             }
             
-            await fetch(`http://localhost:2000/${user}/setcoupon`, data)
+            await fetch(`/${user}/setcoupon`, data)
         } else if(json.message === null){
             couponParent[0].style.color = 'red'
             couponParent[0].style.borderColor = 'red'
@@ -192,7 +190,7 @@ async function call(user) {
                 })
             }
 
-            await fetch(`http://localhost:2000/${user}/setprice`, price)
+            await fetch(`/${user}/setprice`, price)
         }
     } else {
         if(lastchild === 'Final Price') {

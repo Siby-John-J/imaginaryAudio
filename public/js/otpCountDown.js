@@ -13,5 +13,3 @@ countdown(10);
 
 const el = document.getElementById('test')
 el.style.color = 'red'
-
-console.log('redssssssss')

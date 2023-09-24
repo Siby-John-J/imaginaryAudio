@@ -58,7 +58,7 @@ async function validate(content) {
         })
     }
 
-    const res = await fetch('http://localhost:2000/signup/data', data)
+    const res = await fetch('/signup/data', data)
     const json = await res.json()
 
     if(json.msg === 'email') {
