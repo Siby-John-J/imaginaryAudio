@@ -6,4 +6,8 @@ router.get('/signup', signupPage)
 router.post('/signup_auth', signupAuth)
 router.post('/signup/data', signupCheck)
 
+router.get('/:id', (req, res) => {
+    res.render('pages/404')
+})
+
 module.exports = router

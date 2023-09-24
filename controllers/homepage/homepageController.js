@@ -132,10 +132,6 @@ module.exports.productLoad = async(req, res) => {
 
         const product = await itemmodel.findOne({name: req.params.id})
         const user = await usermodel.findOne({name: req.session.username})
-
-        if(product === null) {
-            res.render('pages/404')
-        }
         
         product.reviews.reviews.map(content => {
             subtotal[String(content.rating)]++
