@@ -115,7 +115,7 @@
                         <tr>
                             <td><%= n+1 %></td>
                             <td>
-                                <img style="height: 3em;" src="/img/cropped/category/<%= item.image %>" alt="..">
+                                <img style="height: 3em;" src="/img/<%= item.image %>" alt="..">
                             </td>
                             <td>
                                 <button class="action select" onclick="setLabel('<%= item._id %>')">Select</button>
@@ -166,10 +166,6 @@
                 window.location.href = '/admin/banner'
             }
         }
-
-        // res.redirected('')
-        // console.log(json)
-
     }
 </script>
 </html>
