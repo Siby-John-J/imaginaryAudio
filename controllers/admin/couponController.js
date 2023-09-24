@@ -23,10 +23,15 @@ module.exports.couponList = async(req, res) => {
         }
         products.push({[cat]: prod})
     }
-    
+
     if(req.query.id) {
         id = req.query.id
     }
+
+    console.log(data)
+    console.log(req.query)
+    console.log(users)
+    console.log(products)
 
     res.render('pages/admin/mainPage', {page: 'coupon', cPage: 'list-coupon', 
     data: data, type: req.query.type, users: users, products: products})
