@@ -11,7 +11,7 @@ module.exports.viewReport = async(req, res) => {
 
     // console.log(list_report)
 
-    res.render('pages/admin/mainPage', {page: 'report',
+    res.render('pages/admin/mainpage', {page: 'report',
         data: list_report
     })
 }
@@ -42,7 +42,7 @@ module.exports.filterReport = async(req, res) => {
 
     if(dateData.length > 0) {
         printable = dateData
-        res.render('pages/admin/mainPage', {page: 'report',
+        res.render('pages/admin/mainpage', {page: 'report',
             data: dateData
         })
         generatePDF(generateData(dateData))
@@ -50,14 +50,14 @@ module.exports.filterReport = async(req, res) => {
         if(req.body.payment === 'all') {
             const list_report = await reportmodel.find({})
             printable = list_report
-            res.render('pages/admin/mainPage', {page: 'report',
+            res.render('pages/admin/mainpage', {page: 'report',
                 data: list_report
             })
             generatePDF(generateData(list_report))
         } else {
             const list_report = await reportmodel.find({payment: req.body.payment})
             printable = list_report
-            res.render('pages/admin/mainPage', {page: 'report',
+            res.render('pages/admin/mainpage', {page: 'report',
                 data: list_report
             })
             generatePDF(generateData(list_report))

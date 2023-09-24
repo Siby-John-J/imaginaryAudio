@@ -3,7 +3,7 @@ const bannermodel = require('../../models/bannerModel')
 module.exports.viewBanner = async(req, res) => {
     try {
         const bannerlist = await bannermodel.find({})
-        res.render('pages/admin/mainPage', {page: 'banner', data: bannerlist})
+        res.render('pages/admin/mainpage', {page: 'banner', data: bannerlist})
     } catch (error) {
         
     }
