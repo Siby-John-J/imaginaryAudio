@@ -66,7 +66,7 @@ module.exports.filterReport = async(req, res) => {
 }
 
 module.exports.printReport = async(req, res) => {
-    res.sendFile(`/ImaginaryAudio/output.pdf`)
+    res.sendFile(`/home/ubuntu/imaginaryAudio/output.pdf`)
 }
 
 function generatePDF(data) {
@@ -75,11 +75,6 @@ function generatePDF(data) {
     const outputStream = fs.createWriteStream(`output.pdf`)
     doc.pipe(outputStream)
 
-    // doc.fontSize(18).text(JSON.stringify(data), {
-    //   align: 'center',
-    // });
-
-    // console.log(data)
       const data1 = []
 
       for(let i of data) {
